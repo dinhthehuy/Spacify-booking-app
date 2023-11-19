@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/logIn">
+
+    <fragment
+        android:id="@+id/logIn"
+        android:name="com.example.hci_prototyp_ws23.Fragments.LogIn"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in">
+        <action
+            android:id="@+id/action_logIn_to_homepage"
+            app:destination="@id/homepage" />
+    </fragment>
+    <fragment
+        android:id="@+id/homepage"
+        android:name="com.example.hci_prototyp_ws23.Fragments.Homepage"
+        android:label="fragment_homepage"
+        tools:layout="@layout/fragment_homepage">
+        <action
+            android:id="@+id/action_homepage_to_searchResultList"
+            app:destination="@id/searchResultList" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.example.hci_prototyp_ws23.Fragments.UserProfile"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile">
+        <action
+            android:id="@+id/action_userProfile_to_homepage"
+            app:destination="@id/homepage" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultList"
+        android:name="com.example.hci_prototyp_ws23.Fragments.SearchResultList"
+        android:label="fragment_search_result_list"
+        tools:layout="@layout/fragment_search_result_list" >
+        <action
+            android:id="@+id/action_searchResultList_to_homepage"
+            app:destination="@id/homepage" />
+    </fragment>
+    <fragment
+        android:id="@+id/bottomNavigation"
+        android:name="com.example.hci_prototyp_ws23.Fragments.BottomNavigation"
+        android:label="fragment_bottom_navigation"
+        tools:layout="@layout/fragment_bottom_navigation" >
+        <action
+            android:id="@+id/action_bottomNavigation_to_homepage"
+            app:destination="@id/homepage" />
+        <action
+            android:id="@+id/action_bottomNavigation_to_searchResultList"
+            app:destination="@id/searchResultList" />
+        <action
+            android:id="@+id/action_bottomNavigation_to_userProfile"
+            app:destination="@id/userProfile" />
+    </fragment>
+</navigation>
