@@ -1,14 +1,16 @@
-**Naming Convention**:
+# Naming Convention
 
-**XML files**
-For activity:               activity_<NAME>.xml         E.g: activity_login.xml
-For dialog:                 dialog_<NAME>.xml           
-For fragment:               fragment_<NAME>.xml 
-for list item in ListView:  list_item_<NAME>.xml 
-for re-useable layout:      layout_<NAME>.xml 
-for custom animation:       <ANIMATION_NAME>.xml
-
-**Classes**:
+## XML files
+```
+For activity:               activity_<ACTIVITY_NAME>.xml        
+For dialog:                 dialog_<DIALOG_NAME>.xml        
+For fragment:               fragment_<FRAGMENT_NAME>.xml     
+For list item in ListView:  list_item_<LIST_NAME>.xml    
+For re-useable layout:      layout_<LAYOUT_NAME>.xml   
+For custom animation:       <ANIMATION_NAME>.xml   
+```
+## Classes
+```
 For Application class:          <NAME>Application.java  
 For activity class:             <NAME>Activity.java
 For adapter class:              <NAME>Adapter.java
@@ -19,17 +21,20 @@ For service class:              <NAME>Service.java
 For broadcast receiver class:   <NAME>Receiver.java
 For utility class:              <NAME>Utils.java
 For custom view class:          <NAME>.java
-
-**Component ID**:
-<Component_function>_<Component_short_name>
+```
+## Component ID
+```
+<FUNCTION>_<COMPONENT_SHORT_NAME>
 E.g: login_btn
-
-**Components in activity/fragment**:
-<ACTIVITY NAME>/<FRAGMENT_NAME>_<Component_short_name>_<Its function>
+```
+## Components in activity/fragment
+```
+<ACTIVITY_NAME>/<FRAGMENT_NAME>_<COMPONENT_SHORT_NAME>_< FUNCTION>
 E.g: activity_login_btn_login   
+```
 
-
-**Short names for Components**:
+## Short names for Components
+```
 Button:             btn
 EditText:           et
 TextView:           tv
@@ -43,11 +48,14 @@ ListView:           lv
 GalleryView:        gv
 LinearLayout:       ll
 RelativeLayout:     rl
-
-**Strings**:
-<string name="Component_<TITLE_NAME>"><Value></string>
+```
+## Strings:
+```
+<string name="Component_<TITLE_NAME>"><VALUE></string>
 E.g: <string name="Button_Login">Login</string>
+```
 
-References:
-https://github.com/TreyCai/AndroidNamingConvention
+
+### References:
+https://github.com/TreyCai/AndroidNamingConvention <br>
 https://github.com/futurice/android-best-practices#resources
