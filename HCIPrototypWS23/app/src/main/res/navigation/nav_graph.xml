@@ -41,19 +41,4 @@
             android:id="@+id/action_searchResultList_to_homepage"
             app:destination="@id/homepage" />
     </fragment>
-    <fragment
-        android:id="@+id/bottomNavigation"
-        android:name="com.example.hci_prototyp_ws23.Fragments.BottomNavigation"
-        android:label="fragment_bottom_navigation"
-        tools:layout="@layout/fragment_bottom_navigation" >
-        <action
-            android:id="@+id/action_bottomNavigation_to_homepage"
-            app:destination="@id/homepage" />
-        <action
-            android:id="@+id/action_bottomNavigation_to_searchResultList"
-            app:destination="@id/searchResultList" />
-        <action
-            android:id="@+id/action_bottomNavigation_to_userProfile"
-            app:destination="@id/userProfile" />
-    </fragment>
 </navigation>
