@@ -11,6 +11,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    Homepage homepage = new Homepage();
+    UserProfile userProfile = new UserProfile();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +21,16 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int menuItemId = item.getItemId();
-            Fragment fragment;
-
-            if(menuItemId == R.id.user_profile_item) {
-                fragment = new UserProfile();
-                navigateFromMenuItem(fragment);
+            navigateFromMenuItem(homepage);
+            if (menuItemId == R.id.user_profile_item) {
+                navigateFromMenuItem(userProfile);
                 return true;
             } else if(menuItemId == R.id.homepage) {
-                fragment = new Homepage();
-                navigateFromMenuItem(fragment);
+                navigateFromMenuItem(homepage);
+                return true;
+            } else if(menuItemId == R.id.favorite_item) {
+                return true;
+            } else if(menuItemId == R.id.booked_item) {
                 return true;
             }
             return true;
