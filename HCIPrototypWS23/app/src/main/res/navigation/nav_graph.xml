@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_log_in">
         <action
             android:id="@+id/action_logIn_to_homepage"
-            app:destination="@id/homepage" />
+            app:destination="@id/homepage"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/homepage"
@@ -21,7 +23,9 @@
         tools:layout="@layout/fragment_homepage">
         <action
             android:id="@+id/action_homepage_to_searchResultList"
-            app:destination="@id/searchResultList" />
+            app:destination="@id/searchResultList"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/userProfile"
@@ -30,7 +34,9 @@
         tools:layout="@layout/fragment_user_profile">
         <action
             android:id="@+id/action_userProfile_to_homepage"
-            app:destination="@id/homepage" />
+            app:destination="@id/homepage"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/searchResultList"
@@ -39,6 +45,8 @@
         tools:layout="@layout/fragment_search_result_list" >
         <action
             android:id="@+id/action_searchResultList_to_homepage"
-            app:destination="@id/homepage" />
+            app:destination="@id/homepage"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
     </fragment>
 </navigation>
