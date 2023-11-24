@@ -23,4 +23,6 @@
     <string name="number_of_people">Number of people</string>
     <string name="date">Date</string>
     <string name="city">City</string>
+    <string name="result_list">Result List</string>
+    <string name="back">Back</string>
 </resources>
