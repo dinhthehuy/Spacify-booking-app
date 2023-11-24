@@ -18,4 +18,9 @@
     <string name="favorite">Favorite</string>
     <string name="booked">Booked</string>
     <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="hi_user">Hi, User</string>
+    <string name="number_of_people">Number of people</string>
+    <string name="date">Date</string>
+    <string name="city">City</string>
 </resources>
