@@ -1,9 +1,12 @@
 # Tasks:
 - ~~Add more Fragments~~
-- Design the UI of UserProfile Fragment
-- Improve Search Result List UI
-- Improve Homepage UI
+- UI for UserProfile Fragment
+- Improve Search Result List Fragment's UI
+- Improve Homepage Fragment's UI
 - Sync BottomNavigationView with BackStack
+- UI for Your Bookings Fragment 
+- UI for Hotel Description Fragment
+- UI for Favorite List Fragment
 
 # Naming Convention
 
