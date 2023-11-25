@@ -1,3 +1,10 @@
+# Tasks:
+- Add more Fragments (Huy)
+- Design the UI of Profile Fragment
+- Improve Search Result List UI
+- Improve Homepage UI
+- Sync BottomNavigationView with BackStack
+
 # Naming Convention
 
 ## XML files
