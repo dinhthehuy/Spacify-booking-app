@@ -1,6 +1,6 @@
 # Tasks:
-- Add more Fragments (Huy)
-- Design the UI of Profile Fragment
+- ~~Add more Fragments~~
+- Design the UI of UserProfile Fragment
 - Improve Search Result List UI
 - Improve Homepage UI
 - Sync BottomNavigationView with BackStack
