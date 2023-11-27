@@ -3,7 +3,7 @@
 - UI for UserProfile Fragment
 - Improve Search Result List Fragment's UI
 - Improve Homepage Fragment's UI
-- Sync BottomNavigationView with BackStack
+- ~~Sync BottomNavigationView with BackStack~~
 - UI for Your Bookings Fragment 
 - UI for Hotel Description Fragment
 - UI for Favorite List Fragment
