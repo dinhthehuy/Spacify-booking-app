@@ -35,12 +35,14 @@ public class MainActivity extends AppCompatActivity {
             } else if(menuItemId == R.id.favorite_item) {
                 navigateFromMenuItem(favoriteList);
                 return true;
-            } else if(menuItemId == R.id.your_bookings) {
+            } else if(menuItemId == R.id.your_bookings_item) {
                 navigateFromMenuItem(yourBookings);
                 return true;
             }
             return true;
         });
+        bottomNavigationView.setOnItemReselectedListener(item -> {});
+
     }
 
     private void navigateFromMenuItem(Fragment fragment) {

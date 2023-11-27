@@ -33,6 +33,7 @@ public class Homepage extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.getMenu().getItem(0).setChecked(true);
         search_button.setOnClickListener(v -> NavHostFragment.findNavController(Homepage.this).navigate(R.id.action_homepage_to_searchResultList));
     }
 }

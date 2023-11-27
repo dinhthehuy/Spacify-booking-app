@@ -27,7 +27,8 @@ public class UserProfile extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        bottomNavigationView.setVisibility(View.VISIBLE);
         super.onViewCreated(view, savedInstanceState);
+        bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.getMenu().getItem(3).setChecked(true);
     }
 }

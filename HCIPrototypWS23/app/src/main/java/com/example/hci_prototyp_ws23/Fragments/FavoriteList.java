@@ -29,5 +29,6 @@ public class FavoriteList extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
     }
 }

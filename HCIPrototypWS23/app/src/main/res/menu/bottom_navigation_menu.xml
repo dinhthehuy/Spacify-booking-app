@@ -11,7 +11,7 @@
         android:title="@string/favorite" />
 
     <item
-        android:id="@+id/your_bookings"
+        android:id="@+id/your_bookings_item"
         android:enabled="true"
         android:title="@string/booked" />
 
