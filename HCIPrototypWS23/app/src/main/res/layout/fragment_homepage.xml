@@ -14,55 +14,101 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintVertical_bias="0.084" />
 
     <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="329dp"
+        android:id="@+id/destination_edt"
+        android:layout_width="352dp"
         android:layout_height="48dp"
         android:layout_marginTop="28dp"
-        android:ems="10"
+        android:textSize="20sp"
         android:inputType="text"
         android:minHeight="48dp"
         android:hint="@string/city"
+        android:importantForAutofill="no"
+        android:background="@drawable/gray_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/welcome_edt"
         app:layout_constraintTop_toBottomOf="@+id/welcome_edt" />
 
     <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="330dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/date"
-        android:inputType="date"
-        android:minHeight="48dp"
+        android:id="@+id/roomNumber_edt"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:hint="@string/rooms"
+        android:inputType="number"
+        android:importantForAutofill="no"
+        android:background="@drawable/gray_background"
         app:layout_constraintBottom_toTopOf="@+id/search_btn"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText"
+        app:layout_constraintStart_toStartOf="@+id/date_edt"
+        app:layout_constraintTop_toBottomOf="@+id/date_edt" />
+
+    <EditText
+        android:id="@+id/adultNumber_edt"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:hint="@string/adults"
+        android:importantForAutofill="no"
+        android:background="@drawable/gray_background"
+        app:layout_constraintBottom_toBottomOf="@+id/roomNumber_edt"
+        app:layout_constraintStart_toEndOf="@+id/roomNumber_edt"
+        app:layout_constraintTop_toTopOf="@+id/roomNumber_edt"
+        app:layout_constraintVertical_bias="0.0"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/childrenNumber_edt"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:hint="@string/children"
+        android:importantForAutofill="no"
+        android:background="@drawable/gray_background"
+        app:layout_constraintBottom_toBottomOf="@+id/adultNumber_edt"
+        app:layout_constraintEnd_toEndOf="@+id/date_edt"
+        app:layout_constraintTop_toTopOf="@+id/adultNumber_edt"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/date_edt"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:textSize="20sp"
+        android:hint="@string/date"
+        android:minHeight="48dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/gray_background"
+        app:layout_constraintBottom_toTopOf="@+id/search_btn"
+        app:layout_constraintEnd_toEndOf="@+id/destination_edt"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintStart_toStartOf="@+id/destination_edt"
+        app:layout_constraintTop_toBottomOf="@+id/destination_edt"
+        app:layout_constraintVertical_bias="0.114"
+        android:focusable="true" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="365dp" />
+        app:layout_constraintGuide_begin="381dp" />
 
     <Button
         android:id="@+id/search_btn"
-        android:layout_width="330dp"
-        android:layout_height="49dp"
+        android:layout_width="357dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button_background"
         android:text="@string/search"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="@+id/editTextDate"
-        app:layout_constraintStart_toStartOf="@+id/editTextDate" />
+        app:layout_constraintEnd_toEndOf="@+id/childrenNumber_edt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/roomNumber_edt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
