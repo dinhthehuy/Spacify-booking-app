@@ -25,4 +25,7 @@
     <string name="city">City</string>
     <string name="result_list">Result List</string>
     <string name="back">Back</string>
+    <string name="rooms">Rooms</string>
+    <string name="adults">Adults</string>
+    <string name="children">Children</string>
 </resources>
