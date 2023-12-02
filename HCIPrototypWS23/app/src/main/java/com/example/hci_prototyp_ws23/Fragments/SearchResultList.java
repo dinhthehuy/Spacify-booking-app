@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,6 @@ public class SearchResultList extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle("Search Result");
         toolbar.inflateMenu(R.menu.top_action_bar_search_result);
-
+        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(SearchResultList.this).navigate(R.id.action_searchResultList_to_homepage));
     }
 }
