@@ -28,4 +28,9 @@
     <string name="rooms">Rooms</string>
     <string name="adults">Adults</string>
     <string name="children">Children</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
+    <string name="saved">Saved</string>
+    <string name="your_bookings">Your Bookings</string>
+    <string name="bookings">Bookings</string>
 </resources>
