@@ -45,27 +45,16 @@ public class Homepage extends Fragment {
         search_button.setOnClickListener(v -> NavHostFragment.findNavController(Homepage.this).navigate(R.id.action_homepage_to_searchResultList));
         
         date_textView.setOnClickListener(v -> {
-//            final Calendar c = Calendar.getInstance();
-//            mYear = c.get(Calendar.YEAR);
-//            mMonth = c.get(Calendar.MONTH);
-//            mDay = c.get(Calendar.DAY_OF_MONTH);
-
-//            DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
-//                    (view1, year, monthOfYear, dayOfMonth) -> date_editText.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), mYear, mMonth, mDay);
-//            datePickerDialog.show();
             MaterialDatePicker.Builder<Pair<Long, Long>> materialDatePickerBuilder = MaterialDatePicker.Builder.dateRangePicker();
             materialDatePickerBuilder.setTitleText("Select a date range");
             MaterialDatePicker<Pair<Long, Long>> datePicker = materialDatePickerBuilder.build();
             datePicker.addOnPositiveButtonClickListener(selection -> {
                 Long startDate = selection.first;
                 Long endDate = selection.second;
-
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 String startDateString = sdf.format(new Date(startDate));
                 String endDateString = sdf.format(new Date(endDate));
-
                 String selectedDateRange = startDateString + " - " + endDateString;
-
                 date_textView.setText(selectedDateRange);
             });
 
