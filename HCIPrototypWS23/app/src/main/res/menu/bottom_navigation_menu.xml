@@ -6,14 +6,14 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/favorite_item"
+        android:id="@+id/saved_item"
         android:enabled="true"
-        android:title="@string/favorite" />
+        android:title="@string/saved" />
 
     <item
         android:id="@+id/your_bookings_item"
         android:enabled="true"
-        android:title="@string/booked" />
+        android:title="@string/bookings" />
 
     <item android:id="@+id/user_profile_item"
         android:enabled="true"
