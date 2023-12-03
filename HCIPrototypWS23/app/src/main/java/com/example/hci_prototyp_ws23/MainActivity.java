@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.example.hci_prototyp_ws23.Fragments.Homepage;
 import com.example.hci_prototyp_ws23.Fragments.SavedList;
 import com.example.hci_prototyp_ws23.Fragments.UserProfile;
-import com.example.hci_prototyp_ws23.Fragments.YourBookings;
+import com.example.hci_prototyp_ws23.Fragments.UserBookings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Homepage homepage = new Homepage();
     UserProfile userProfile = new UserProfile();
     SavedList favoriteList = new SavedList();
-    YourBookings yourBookings = new YourBookings();
+    UserBookings userBookings = new UserBookings();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
             } else if(menuItemId == R.id.saved_item) {
                 navigateFromMenuItem(favoriteList);
                 return true;
-            } else if(menuItemId == R.id.your_bookings_item) {
-                navigateFromMenuItem(yourBookings);
+            } else if(menuItemId == R.id.user_bookings_item) {
+                navigateFromMenuItem(userBookings);
                 return true;
             }
             return true;

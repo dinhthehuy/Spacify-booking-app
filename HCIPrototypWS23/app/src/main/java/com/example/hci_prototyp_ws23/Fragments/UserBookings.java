@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class YourBookings extends Fragment {
+public class UserBookings extends Fragment {
     View view;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
