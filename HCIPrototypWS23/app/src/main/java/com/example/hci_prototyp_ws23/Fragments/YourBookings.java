@@ -34,8 +34,6 @@ public class YourBookings extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(2).setChecked(true);
         toolbar.setVisibility(View.VISIBLE);
-        toolbar.setTitle("Bookings");
-        toolbar.setTitleMarginStart(425);
         toolbar.inflateMenu(R.menu.top_action_bar_bookings);
     }
 }

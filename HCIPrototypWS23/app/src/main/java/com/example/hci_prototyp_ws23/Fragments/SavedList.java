@@ -34,8 +34,6 @@ public class SavedList extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
         toolbar.setVisibility(View.VISIBLE);
-        toolbar.setTitle("Saved");
-        toolbar.setTitleMarginStart(450);
         toolbar.inflateMenu(R.menu.top_action_bar_saved);
     }
 }
