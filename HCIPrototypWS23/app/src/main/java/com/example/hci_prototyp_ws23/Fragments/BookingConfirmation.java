@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.hci_prototyp_ws23.R;
 
-public class BookingConfimation extends Fragment {
+public class BookingConfirmation extends Fragment {
     View view;
 
     @Override

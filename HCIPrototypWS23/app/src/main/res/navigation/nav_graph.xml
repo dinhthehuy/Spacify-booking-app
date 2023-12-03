@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookingConfimation"
-        android:name="com.example.hci_prototyp_ws23.Fragments.BookingConfimation"
+        android:name="com.example.hci_prototyp_ws23.Fragments.BookingConfirmation"
         android:label="fragment_booking_confimation"
         tools:layout="@layout/fragment_booking_confimation" >
         <action
