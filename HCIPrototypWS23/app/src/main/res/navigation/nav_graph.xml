@@ -47,5 +47,45 @@
         android:id="@+id/hotelDescription"
         android:name="com.example.hci_prototyp_ws23.Fragments.HotelDescription"
         android:label="fragment_hotel_description"
-        tools:layout="@layout/fragment_hotel_description" />
+        tools:layout="@layout/fragment_hotel_description" >
+        <action
+            android:id="@+id/action_hotelDescription_to_roomInformation"
+            app:destination="@id/roomInformation" />
+        <action
+            android:id="@+id/action_hotelDescription_to_searchResultList"
+            app:destination="@id/searchResultList" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomInformation"
+        android:name="com.example.hci_prototyp_ws23.Fragments.RoomInformation"
+        android:label="fragment_room_information"
+        tools:layout="@layout/fragment_room_information" >
+        <action
+            android:id="@+id/action_roomInformation_to_bookingOverview"
+            app:destination="@id/bookingOverview" />
+        <action
+            android:id="@+id/action_roomInformation_to_hotelDescription"
+            app:destination="@id/hotelDescription" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingOverview"
+        android:name="com.example.hci_prototyp_ws23.Fragments.BookingOverview"
+        android:label="fragment_booking_overview"
+        tools:layout="@layout/fragment_booking_overview" >
+        <action
+            android:id="@+id/action_bookingOverview_to_roomInformation"
+            app:destination="@id/roomInformation" />
+        <action
+            android:id="@+id/action_bookingOverview_to_bookingConfimation"
+            app:destination="@id/bookingConfimation" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingConfimation"
+        android:name="com.example.hci_prototyp_ws23.Fragments.BookingConfimation"
+        android:label="fragment_booking_confimation"
+        tools:layout="@layout/fragment_booking_confimation" >
+        <action
+            android:id="@+id/action_bookingConfimation_to_homepage"
+            app:destination="@id/homepage" />
+    </fragment>
 </navigation>
