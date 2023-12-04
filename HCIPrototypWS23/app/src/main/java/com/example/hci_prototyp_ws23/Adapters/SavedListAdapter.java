@@ -3,6 +3,8 @@ package com.example.hci_prototyp_ws23.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,19 +28,24 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
 
     @Override
     public void onBindViewHolder(@NonNull SavedListAdapterViewHolder holder, int position) {
-        // Implementation needed
+        holder.nameView.setText(hotelList.get(position).getHotelName());
+        String Address = hotelList.get(position).getHotelAddress().getCountry() + hotelList.get(position).getHotelAddress().getCity() +  hotelList.get(position).getHotelAddress().getStreetAddress() + hotelList.get(position).getHotelAddress().getPostalCode();
+        holder.addressView.setText(Address);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return hotelList.size();
     }
 
     public static class SavedListAdapterViewHolder extends RecyclerView.ViewHolder{
-        // Implementation needed
+        ImageView imageView;
+        TextView nameView, addressView;
         public SavedListAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Implementation needed
+            imageView = itemView.findViewById(R.id.savedList_iv);
+            nameView = itemView.findViewById(R.id.savedListHotelName_tv);
+            addressView = itemView.findViewById(R.id.savedListHotelAddress_tv);
         }
     }
 }
