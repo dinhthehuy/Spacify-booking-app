@@ -41,7 +41,9 @@
             app:exitAnim="@anim/slide_out" />
         <action
             android:id="@+id/action_searchResultList_to_hotelDescription"
-            app:destination="@id/hotelDescription" />
+            app:destination="@id/hotelDescription"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/hotelDescription"
@@ -50,10 +52,14 @@
         tools:layout="@layout/fragment_hotel_description" >
         <action
             android:id="@+id/action_hotelDescription_to_roomInformation"
-            app:destination="@id/roomInformation" />
+            app:destination="@id/roomInformation"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_hotelDescription_to_searchResultList"
-            app:destination="@id/searchResultList" />
+            app:destination="@id/searchResultList"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/roomInformation"
@@ -62,10 +68,14 @@
         tools:layout="@layout/fragment_room_information" >
         <action
             android:id="@+id/action_roomInformation_to_bookingOverview"
-            app:destination="@id/bookingOverview" />
+            app:destination="@id/bookingOverview"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_roomInformation_to_hotelDescription"
-            app:destination="@id/hotelDescription" />
+            app:destination="@id/hotelDescription"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/bookingOverview"
@@ -74,10 +84,14 @@
         tools:layout="@layout/fragment_booking_overview" >
         <action
             android:id="@+id/action_bookingOverview_to_roomInformation"
-            app:destination="@id/roomInformation" />
+            app:destination="@id/roomInformation"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
         <action
             android:id="@+id/action_bookingOverview_to_bookingConfimation"
-            app:destination="@id/bookingConfimation" />
+            app:destination="@id/bookingConfimation"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/bookingConfimation"
@@ -86,6 +100,8 @@
         tools:layout="@layout/fragment_booking_confimation" >
         <action
             android:id="@+id/action_bookingConfimation_to_homepage"
-            app:destination="@id/homepage" />
+            app:destination="@id/homepage"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
     </fragment>
 </navigation>
