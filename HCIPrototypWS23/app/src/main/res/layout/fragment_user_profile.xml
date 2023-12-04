@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:layout_marginBottom="90dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:orientation="vertical"
@@ -242,6 +243,13 @@
                 android:hint="@string/postal_code" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/save_changes_btn"
+            android:background="@drawable/rounded_button_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_changes"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
