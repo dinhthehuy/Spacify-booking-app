@@ -7,6 +7,7 @@ public class Hotel {
     private Address hotelAddress;
     private ArrayList<RoomType> roomTypeTypes;
     private String description;
+    private ArrayList<String> services;
     public String getHotelName() {
         return hotelName;
     }
