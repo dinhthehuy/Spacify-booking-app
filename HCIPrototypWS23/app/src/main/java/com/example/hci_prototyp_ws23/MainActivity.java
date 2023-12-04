@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Homepage homepage = new Homepage();
     UserProfile userProfile = new UserProfile();
-    SavedList favoriteList = new SavedList();
+    SavedList savedList = new SavedList();
     UserBookings userBookings = new UserBookings();
 
     @Override
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 navigateFromMenuItem(homepage);
                 return true;
             } else if(menuItemId == R.id.saved_item) {
-                navigateFromMenuItem(favoriteList);
+                navigateFromMenuItem(savedList);
                 return true;
             } else if(menuItemId == R.id.user_bookings_item) {
                 navigateFromMenuItem(userBookings);
