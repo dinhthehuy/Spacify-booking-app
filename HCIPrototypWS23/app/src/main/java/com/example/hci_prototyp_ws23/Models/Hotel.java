@@ -23,7 +23,7 @@ public class Hotel {
         return description;
     }
 
-    Hotel(String hotelName, Address hotelAddress, String description) {
+    public Hotel(String hotelName, Address hotelAddress, String description) {
         roomTypeTypes = new ArrayList<>();
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;

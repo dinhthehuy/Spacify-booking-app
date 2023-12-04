@@ -1,8 +1,11 @@
 package com.example.hci_prototyp_ws23.Adapters;
 
+import android.media.tv.AdRequest;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,21 +29,30 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
 
     @Override
     public void onBindViewHolder(@NonNull SearchResultListAdapter.SearchResultListAdapterViewHolder holder, int position) {
-        // Implementation needed
+        holder.nameView.setText(hotelList.get(position).getHotelName());
+        String Address = hotelList.get(position).getHotelAddress().getCountry() + hotelList.get(position).getHotelAddress().getCity() +  hotelList.get(position).getHotelAddress() + hotelList.get(position).getHotelAddress().getPostalCode();
+        holder.adressView.setText(Address);
+        //set Image Resource for the hotel
+        //holder.imageView.setImageResource();
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return hotelList.size();
     }
 
     public static class SearchResultListAdapterViewHolder extends RecyclerView.ViewHolder {
-        // Implementation needed
+        ImageView imageView;
+        TextView nameView, adressView;
 
         public SearchResultListAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Implementation needed
+            imageView = itemView.findViewById(R.id.resultlistimageview);
+            nameView = itemView.findViewById(R.id.hotelname);
+            adressView = itemView.findViewById(R.id.hoteladdress);
+            }
         }
     }
 
-}
+

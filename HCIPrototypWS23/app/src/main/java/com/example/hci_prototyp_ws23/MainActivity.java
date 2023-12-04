@@ -4,12 +4,18 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hci_prototyp_ws23.Fragments.Homepage;
 import com.example.hci_prototyp_ws23.Fragments.SavedList;
 import com.example.hci_prototyp_ws23.Fragments.UserProfile;
 import com.example.hci_prototyp_ws23.Fragments.UserBookings;
+import com.example.hci_prototyp_ws23.Models.Address;
+import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
