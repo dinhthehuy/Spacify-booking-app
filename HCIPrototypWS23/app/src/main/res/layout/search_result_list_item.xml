@@ -2,41 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
-    
+    android:layout_marginTop="10dp"
+    android:background="@drawable/gray_background">
+
     <ImageView
         android:layout_width="168dp"
         android:layout_height="168dp"
         android:layout_marginRight="12dp"
-        android:id="@+id/resultlistimageview"
-        />  
+        android:id="@+id/searchResultList_iv"
+        />
 
     <TextView
-        android:id="@+id/hotelname"
+        android:id="@+id/searchResultListHotelName_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/resultlistimageview"
-
+        android:layout_toEndOf="@+id/searchResultList_iv"
         android:text="TextView"
         android:textSize="46px"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/hoteladdress"
+        android:id="@+id/searchResultListHotelAddress_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/resultlistimageview"
+        android:layout_toEndOf="@+id/searchResultList_iv"
         android:textColor="@color/gray_with_opacity"
         android:textSize="34px"
-        android:layout_below="@+id/hotelname"
+        android:layout_below="@+id/searchResultListHotelName_tv"
         android:text="TextView" />
-
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="2dp"
-     android:layout_below="@id/resultlistimageview"
-     android:layout_marginTop="10dp"
-     android:background="#DAD8D8"
-     />
-
 </RelativeLayout>

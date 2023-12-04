@@ -27,21 +27,25 @@ public class SearchResultList extends Fragment {
     View view;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
+    RecyclerView recyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_search_result_list, container, false);
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
-        toolbar = view.findViewById(R.id.search_result_list_tb);
+        toolbar = view.findViewById(R.id.searchResultList_tb);
+        recyclerView = view.findViewById(R.id.searchResultList_rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecyclerView recyclerView = view.findViewById(R.id.result_list_rv);
-
-        List<Hotel> hotels = new ArrayList<Hotel>();
-
+        List<Hotel> hotels = new ArrayList<>();
+        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
+        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
+        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
+        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
+        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new SearchResultListAdapter(hotels));
         return view;
     }

@@ -1,6 +1,5 @@
 package com.example.hci_prototyp_ws23.Adapters;
 
-import android.media.tv.AdRequest;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +30,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
     public void onBindViewHolder(@NonNull SearchResultListAdapter.SearchResultListAdapterViewHolder holder, int position) {
         holder.nameView.setText(hotelList.get(position).getHotelName());
         String Address = hotelList.get(position).getHotelAddress().getCountry() + hotelList.get(position).getHotelAddress().getCity() +  hotelList.get(position).getHotelAddress().getStreetAddress() + hotelList.get(position).getHotelAddress().getPostalCode();
-        holder.adressView.setText(Address);
-        //set Image Resource for the hotel
-        //holder.imageView.setImageResource();
-
+        holder.addressView.setText(Address);
     }
 
     @Override
@@ -44,13 +40,12 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
 
     public static class SearchResultListAdapterViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView nameView, adressView;
-
+        TextView nameView, addressView;
         public SearchResultListAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.resultlistimageview);
-            nameView = itemView.findViewById(R.id.hotelname);
-            adressView = itemView.findViewById(R.id.hoteladdress);
+            imageView = itemView.findViewById(R.id.searchResultList_iv);
+            nameView = itemView.findViewById(R.id.searchResultListHotelName_tv);
+            addressView = itemView.findViewById(R.id.searchResultListHotelAddress_tv);
             }
         }
     }
