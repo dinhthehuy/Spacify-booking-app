@@ -1,17 +1,17 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.hci_prototyp_ws23.Adapters.SavedListAdapter;
 import com.example.hci_prototyp_ws23.Models.Address;
@@ -27,6 +27,7 @@ public class SavedList extends Fragment {
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
     RecyclerView recyclerView;
+    List<Hotel> hotels;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class SavedList extends Fragment {
         recyclerView = view.findViewById(R.id.savedList_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<Hotel> hotels = new ArrayList<>();
+        hotels = new ArrayList<>();
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
@@ -46,7 +47,9 @@ public class SavedList extends Fragment {
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
 
-        recyclerView.setAdapter(new SavedListAdapter(hotels));
+        SavedListAdapter savedListAdapter = new SavedListAdapter(hotels);
+        recyclerView.setAdapter(savedListAdapter);
+        savedListAdapter.setOnClickListener((position, hotel) -> NavHostFragment.findNavController(SavedList.this).navigate(R.id.action_savedList_to_hotelDescription));
         return view;
     }
 

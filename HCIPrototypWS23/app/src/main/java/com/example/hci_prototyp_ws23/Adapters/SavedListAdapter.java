@@ -15,7 +15,8 @@ import com.example.hci_prototyp_ws23.R;
 import java.util.List;
 
 public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.SavedListAdapterViewHolder> {
-    private List<Hotel> hotelList;
+    private final List<Hotel> hotelList;
+    private onClickListener onClickListener;
     public SavedListAdapter(List<Hotel> hotelList) {
         this.hotelList = hotelList;
     }
@@ -28,14 +29,26 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
 
     @Override
     public void onBindViewHolder(@NonNull SavedListAdapterViewHolder holder, int position) {
+        Hotel hotel = hotelList.get(position);
         holder.nameView.setText(hotelList.get(position).getHotelName());
         String Address = hotelList.get(position).getHotelAddress().getCountry() + hotelList.get(position).getHotelAddress().getCity() +  hotelList.get(position).getHotelAddress().getStreetAddress() + hotelList.get(position).getHotelAddress().getPostalCode();
         holder.addressView.setText(Address);
+        holder.itemView.setOnClickListener(v -> {
+            if(onClickListener != null) {
+                onClickListener.onClick(position, hotel);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return hotelList.size();
+    }
+    public void setOnClickListener(SavedListAdapter.onClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+    public interface onClickListener {
+        void onClick(int position, Hotel hotel);
     }
 
     public static class SavedListAdapterViewHolder extends RecyclerView.ViewHolder{
