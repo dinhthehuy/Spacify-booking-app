@@ -3,26 +3,14 @@ package com.example.hci_prototyp_ws23;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.hci_prototyp_ws23.Fragments.Homepage;
-import com.example.hci_prototyp_ws23.Fragments.SavedList;
-import com.example.hci_prototyp_ws23.Fragments.UserProfile;
-import com.example.hci_prototyp_ws23.Fragments.UserBookings;
-import com.example.hci_prototyp_ws23.Models.Address;
-import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    Homepage homepage = new Homepage();
-    UserProfile userProfile = new UserProfile();
-    SavedList savedList = new SavedList();
-    UserBookings userBookings = new UserBookings();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +21,16 @@ public class MainActivity extends AppCompatActivity {
             int menuItemId = item.getItemId();
             //navigateFromMenuItem(homepage);
             if (menuItemId == R.id.user_profile_item) {
-                navigateFromMenuItem(userProfile);
+                NavHostFragment.findNavController(Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))).navigate(R.id.userProfile);
                 return true;
             } else if(menuItemId == R.id.home_item) {
-                navigateFromMenuItem(homepage);
+                NavHostFragment.findNavController(Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))).navigate(R.id.homepage);
                 return true;
             } else if(menuItemId == R.id.saved_item) {
-                navigateFromMenuItem(savedList);
+                NavHostFragment.findNavController(Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))).navigate(R.id.savedList);
                 return true;
             } else if(menuItemId == R.id.user_bookings_item) {
-                navigateFromMenuItem(userBookings);
+                NavHostFragment.findNavController(Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))).navigate(R.id.userBookings);
                 return true;
             }
             return true;
@@ -50,11 +38,4 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemReselectedListener(item -> {});
     }
 
-    private void navigateFromMenuItem(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
 }
