@@ -50,4 +50,7 @@
     <string name="postal_code">Postal code</string>
     <string name="address">ADDRESS</string>
     <string name="save_changes">Save changes</string>
+    <string name="textview">TextView</string>
+    <string name="hotel_image">Hotel Image</string>
+    <string name="save">Save</string>
 </resources>
