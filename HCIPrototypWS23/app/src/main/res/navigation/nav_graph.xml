@@ -125,4 +125,18 @@
             android:id="@+id/action_userProfile_to_logIn"
             app:destination="@id/logIn"/>
     </fragment>
+    <fragment
+        android:id="@+id/savedList"
+        android:name="com.example.hci_prototyp_ws23.Fragments.SavedList"
+        android:label="fragment_saved_list"
+        tools:layout="@layout/fragment_saved_list">
+        <action
+            android:id="@+id/action_savedList_to_hotelDescription"
+            app:destination="@id/hotelDescription" />
+    </fragment>
+    <fragment
+        android:id="@+id/userBookings"
+        android:name="com.example.hci_prototyp_ws23.Fragments.UserBookings"
+        android:label="fragment_user_bookings"
+        tools:layout="@layout/fragment_your_bookings" />
 </navigation>
