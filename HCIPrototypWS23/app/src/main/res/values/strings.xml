@@ -54,4 +54,10 @@
     <string name="hotel_image">Hotel Image</string>
     <string name="save">Save</string>
     <string name="see_your_room_options">See your room options</string>
+    <string name="register_now">Register now</string>
+    <string name="register">Register</string>
+    <string name="login_now">Login now</string>
+    <string name="already_have_an_account_login_now">Already have an account ? Login now</string>
+    <string name="log_out">Log out</string>
+    <string name="sign_out">Sign out</string>
 </resources>

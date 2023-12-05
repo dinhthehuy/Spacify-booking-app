@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.LogIn">
+    tools:context=".Fragments.Register">
 
     <EditText
-        android:id="@+id/loginEmail_et"
+        android:id="@+id/registerEmail_et"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
@@ -32,15 +32,15 @@
         android:layout_height="48dp"
         android:layout_marginTop="37dp"
         android:background="@drawable/rounded_button_background"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/loginPassword_et"
-        app:layout_constraintStart_toStartOf="@+id/loginPassword_et"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword_et" />
+        app:layout_constraintEnd_toEndOf="@+id/registerPassword_et"
+        app:layout_constraintStart_toStartOf="@+id/registerPassword_et"
+        app:layout_constraintTop_toBottomOf="@+id/registerPassword_et" />
 
     <EditText
-        android:id="@+id/loginPassword_et"
+        android:id="@+id/registerPassword_et"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="9dp"
@@ -54,16 +54,16 @@
         android:textSize="14sp"
         android:textColor="@android:color/black"
         android:importantForAutofill="no"
-        app:layout_constraintEnd_toEndOf="@+id/loginEmail_et"
-        app:layout_constraintStart_toStartOf="@+id/loginEmail_et"
-        app:layout_constraintTop_toBottomOf="@+id/loginEmail_et" />
+        app:layout_constraintEnd_toEndOf="@+id/registerEmail_et"
+        app:layout_constraintStart_toStartOf="@+id/registerEmail_et"
+        app:layout_constraintTop_toBottomOf="@+id/registerEmail_et" />
 
     <TextView
-        android:id="@+id/registerNow_tv"
+        android:id="@+id/loginNow_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/gray"
-        android:text="@string/register_now"
+        android:text="@string/already_have_an_account_login_now"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

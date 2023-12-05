@@ -19,24 +19,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LogIn extends Fragment {
+public class Register extends Fragment {
     View view;
-    Button loginBtn;
+    Button registerButton;
     BottomNavigationView bottomNavigationView;
-    EditText loginEmailEditText, loginPasswordEditText;
-    TextView registerNowTextView;
+    EditText registerEmailEditText, registerPasswordEditText;
+    TextView loginNowTextView;
     FirebaseAuth mAuth;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_log_in, container, false);
-        mAuth = FirebaseAuth.getInstance();
-        loginBtn = view.findViewById(R.id.register_btn);
+        view = inflater.inflate(R.layout.fragment_register, container, false);
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
-        loginEmailEditText = view.findViewById(R.id.loginEmail_et);
-        loginPasswordEditText = view.findViewById(R.id.loginPassword_et);
-        registerNowTextView = view.findViewById(R.id.registerNow_tv);
+        mAuth = FirebaseAuth.getInstance();
+        registerEmailEditText = view.findViewById(R.id.registerEmail_et);
+        registerPasswordEditText = view.findViewById(R.id.registerPassword_et);
+        loginNowTextView = view.findViewById(R.id.loginNow_tv);
+        registerButton = view.findViewById(R.id.register_btn);
         return view;
     }
 
@@ -46,7 +46,7 @@ public class LogIn extends Fragment {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_homepage);
+            NavHostFragment.findNavController(Register.this).navigate(R.id.action_register_to_logIn);
         }
     }
 
@@ -54,9 +54,9 @@ public class LogIn extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.GONE);
-        loginBtn.setOnClickListener(v -> {
-            final String email = loginEmailEditText.getText().toString();
-            final String password = loginPasswordEditText.getText().toString();
+        registerButton.setOnClickListener(v -> {
+            final String email = String.valueOf(registerEmailEditText.getText());
+            final String password = String.valueOf(registerPasswordEditText.getText());
             if(email.isEmpty()) {
                 Toast.makeText(getContext(), "Enter your email", Toast.LENGTH_SHORT).show();
                 return;
@@ -67,18 +67,17 @@ public class LogIn extends Fragment {
                 return;
             }
 
-            mAuth.signInWithEmailAndPassword(email, password)
+            mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                            NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_homepage);
+                            Toast.makeText(getContext(), "New Account created", Toast.LENGTH_SHORT).show();
+                            NavHostFragment.findNavController(Register.this).navigate(R.id.action_register_to_logIn);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     });
         });
-
-        registerNowTextView.setOnClickListener(v -> NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_register));
+        loginNowTextView.setOnClickListener(v -> NavHostFragment.findNavController(Register.this).navigate(R.id.action_register_to_logIn));
     }
 }
