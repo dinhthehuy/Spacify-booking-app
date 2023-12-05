@@ -53,4 +53,5 @@
     <string name="textview">TextView</string>
     <string name="hotel_image">Hotel Image</string>
     <string name="save">Save</string>
+    <string name="see_your_room_options">See your room options</string>
 </resources>
