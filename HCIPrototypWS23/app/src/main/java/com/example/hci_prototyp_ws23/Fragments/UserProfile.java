@@ -10,7 +10,6 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.hci_prototyp_ws23.MainActivity;
@@ -47,11 +46,6 @@ public class UserProfile extends Fragment {
         bottomNavigationView.getMenu().getItem(3).setChecked(true);
         signOutButton.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            for(int i = 0; i < fragmentManager.getBackStackEntryCount(); ++i) {
-                fragmentManager.popBackStack();
-            }
-
             Intent intent = new Intent(getActivity(), MainActivity.class);
             getActivity().finish();
             startActivity(intent);
