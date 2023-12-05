@@ -25,6 +25,7 @@ public class Hotel {
     }
 
     public Hotel(String hotelName, Address hotelAddress, String description) {
+        services = new ArrayList<>();
         roomTypeTypes = new ArrayList<>();
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
