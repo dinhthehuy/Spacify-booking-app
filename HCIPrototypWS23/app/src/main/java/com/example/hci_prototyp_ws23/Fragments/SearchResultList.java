@@ -46,7 +46,9 @@ public class SearchResultList extends Fragment {
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
 
-        recyclerView.setAdapter(new SearchResultListAdapter(hotels));
+        SearchResultListAdapter searchResultListAdapter = new SearchResultListAdapter(hotels);
+        recyclerView.setAdapter(searchResultListAdapter);
+        searchResultListAdapter.setOnClickListener((position, hotel) -> NavHostFragment.findNavController(SearchResultList.this).navigate(R.id.action_searchResultList_to_hotelDescription));
         return view;
     }
 

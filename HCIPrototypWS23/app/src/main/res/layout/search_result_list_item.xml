@@ -3,22 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:background="@drawable/gray_background">
+    android:focusable="true"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground">
 
     <ImageView
         android:layout_width="168dp"
         android:layout_height="168dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp"
         android:id="@+id/searchResultList_iv"
-        />
+        android:contentDescription="@string/hotel_image" />
 
     <TextView
         android:id="@+id/searchResultListHotelName_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/searchResultList_iv"
-        android:text="TextView"
-        android:textSize="46px"
+        android:text="@string/textview"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
@@ -27,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/searchResultList_iv"
         android:textColor="@color/gray_with_opacity"
-        android:textSize="34px"
+        android:textSize="12sp"
         android:layout_below="@+id/searchResultListHotelName_tv"
-        android:text="TextView" />
+        android:text="@string/textview" />
 </RelativeLayout>
