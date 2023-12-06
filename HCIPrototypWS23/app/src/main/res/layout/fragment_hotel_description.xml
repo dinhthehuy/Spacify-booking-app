@@ -22,7 +22,7 @@
                 android:id="@+id/hotelDescription_tb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
+                android:background="@color/white"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/seeYourOptions_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -142,6 +142,9 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/rounded_button_background"
-        android:text="@string/see_your_room_options"
+        android:text="@string/book"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
         android:paddingTop="10dp"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
