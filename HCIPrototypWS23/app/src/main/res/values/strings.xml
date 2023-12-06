@@ -60,4 +60,7 @@
     <string name="already_have_an_account_login_now">Already have an account ? Login now</string>
     <string name="log_out">Log out</string>
     <string name="sign_out">Sign out</string>
+    <string name="book">Book</string>
+    <string name="where_do_you_want_to_go">Where do you want to go ?</string>
+    <string name="destination">Destination</string>
 </resources>
