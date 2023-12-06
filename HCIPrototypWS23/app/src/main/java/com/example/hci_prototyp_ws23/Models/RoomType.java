@@ -9,6 +9,7 @@ public class RoomType {
     private int maxAdultNumber;
     private int maxChildrenNumber;
     private int numberOfAvailableRooms;
+    private ArrayList<String> services;
 
     public String getName() {
         return name;
@@ -33,8 +34,12 @@ public class RoomType {
     public Hotel getHotel() {
         return hotel;
     }
+    public ArrayList<String> getServices() {
+        return services;
+    }
 
     RoomType(String name, Hotel hotel, int size, int maxAdultNumber, int maxChildrenNumber, int numberOfAvailableRooms) {
+        services = new ArrayList<>();
         this.name = name;
         this.hotel = hotel;
         this.size = size;

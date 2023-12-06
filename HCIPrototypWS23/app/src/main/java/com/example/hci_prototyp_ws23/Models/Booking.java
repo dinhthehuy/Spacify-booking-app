@@ -12,6 +12,7 @@ public class Booking {
     private int childrenNumber;
     private double totalPrice;
     private PaymentMethod paymentMethod;
+    private State state;
 
     public User getUser() {
         return user;
@@ -85,10 +86,30 @@ public class Booking {
         this.paymentMethod = paymentMethod;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
     public enum PaymentMethod {
         PAYPAL, ONSITE, BANKING;
     }
-    public Booking(User user, Hotel hotel, RoomType roomType, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice) {
-
+    private enum State {
+        ENDED, BOOKED, CANCELED
+    }
+    public Booking(User user, Hotel hotel, RoomType roomType, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, PaymentMethod paymentMethod, State state) {
+        this.user = user;
+        this.hotel = hotel;
+        this.roomType = roomType;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.adultNumber = adultNumber;
+        this.childrenNumber = childrenNumber;
+        this.totalPrice = totalPrice;
+        this.paymentMethod = paymentMethod;
+        this.state = state;
     }
 }

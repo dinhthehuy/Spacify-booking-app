@@ -7,7 +7,7 @@ public class Hotel {
     private Address hotelAddress;
     private ArrayList<RoomType> roomTypeTypes;
     private String description;
-    private ArrayList<String> services;
+    private ArrayList<String> facilities;
     public String getHotelName() {
         return hotelName;
     }
@@ -24,8 +24,12 @@ public class Hotel {
         return description;
     }
 
+    public ArrayList<String> getFacilities() {
+        return facilities;
+    }
+
     public Hotel(String hotelName, Address hotelAddress, String description) {
-        services = new ArrayList<>();
+        facilities = new ArrayList<>();
         roomTypeTypes = new ArrayList<>();
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
