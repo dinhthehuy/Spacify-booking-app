@@ -59,6 +59,6 @@ public class SearchResultList extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle("Search Result");
         toolbar.inflateMenu(R.menu.top_action_bar_search_result);
-        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(SearchResultList.this).navigate(R.id.action_searchResultList_to_homepage));
+        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(SearchResultList.this).navigate(R.id.action_searchResultList_to_search));
     }
 }

@@ -19,7 +19,9 @@
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_logIn_to_register"
-            app:destination="@id/register" />
+            app:destination="@id/register"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/homepage"
@@ -27,8 +29,8 @@
         android:label="fragment_homepage"
         tools:layout="@layout/fragment_homepage">
         <action
-            android:id="@+id/action_homepage_to_searchResultList"
-            app:destination="@id/searchResultList"
+            android:id="@+id/action_homepage_to_search"
+            app:destination="@id/search"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
     </fragment>
@@ -38,15 +40,15 @@
         android:label="fragment_search_result_list"
         tools:layout="@layout/fragment_search_result_list" >
         <action
-            android:id="@+id/action_searchResultList_to_homepage"
-            app:destination="@id/homepage"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out" />
-        <action
             android:id="@+id/action_searchResultList_to_hotelDescription"
             app:destination="@id/hotelDescription"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_searchResultList_to_search"
+            app:destination="@id/search"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/hotelDescription"
@@ -114,16 +116,9 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_register_to_logIn"
-            app:destination="@id/logIn" />
-    </fragment>
-    <fragment
-        android:id="@+id/userProfile"
-        android:name="com.example.hci_prototyp_ws23.Fragments.UserProfile"
-        android:label="fragment_user_profile"
-        tools:layout="@layout/fragment_user_profile" >
-        <action
-            android:id="@+id/action_userProfile_to_logIn"
-            app:destination="@id/logIn"/>
+            app:destination="@id/logIn"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/savedList"
@@ -132,11 +127,38 @@
         tools:layout="@layout/fragment_saved_list">
         <action
             android:id="@+id/action_savedList_to_hotelDescription"
-            app:destination="@id/hotelDescription" />
+            app:destination="@id/hotelDescription"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.hci_prototyp_ws23.Fragments.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_searchResultList"
+            app:destination="@id/searchResultList"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_search_to_homepage"
+            app:destination="@id/homepage"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.example.hci_prototyp_ws23.Fragments.UserProfile"
+        android:label="UserProfile"
+        tools:layout="@layout/fragment_user_profile">
+        <action
+            android:id="@+id/action_userProfile_to_logIn"
+            app:destination="@id/logIn" />
     </fragment>
     <fragment
         android:id="@+id/userBookings"
         android:name="com.example.hci_prototyp_ws23.Fragments.UserBookings"
-        android:label="fragment_user_bookings"
+        android:label="fragment_your_bookings"
         tools:layout="@layout/fragment_your_bookings" />
 </navigation>
