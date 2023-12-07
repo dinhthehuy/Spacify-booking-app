@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:focusable="true"
     android:clickable="true"
-    android:background="?android:attr/selectableItemBackground">
+    android:orientation="vertical"
+    android:background="@drawable/rounded_button_background">
 
     <ImageView
-        android:layout_width="168dp"
-        android:layout_height="168dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:id="@+id/searchResultList_iv"
-        android:src="@color/gray"
+        android:background="@drawable/rounded_image"
         android:contentDescription="@string/hotel_image" />
 
     <TextView
@@ -21,16 +21,22 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/searchResultList_iv"
         android:text="@string/textview"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="15dp"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/searchResultListHotelAddress_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/searchResultList_iv"
-        android:textColor="@color/gray_with_opacity"
+        android:textColor="@color/white"
         android:textSize="12sp"
         android:layout_below="@+id/searchResultListHotelName_tv"
-        android:text="@string/textview" />
-</RelativeLayout>
+        android:text="@string/textview"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

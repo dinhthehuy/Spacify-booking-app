@@ -39,6 +39,7 @@
         android:text="@string/saved"
         android:textSize="20sp"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/savedList_tb"
         app:layout_constraintEnd_toEndOf="@+id/savedList_tb"
         app:layout_constraintStart_toStartOf="parent"
