@@ -3,6 +3,8 @@ package com.example.hci_prototyp_ws23.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +15,7 @@ import com.example.hci_prototyp_ws23.R;
 import java.util.List;
 
 public class UserBookingsAdapter extends RecyclerView.Adapter<UserBookingsAdapter.UserBookingAdapterViewHolder> {
-    List<Hotel> hotelList;
+    private final List<Hotel> hotelList;
     public UserBookingsAdapter(List<Hotel> hotelList) {
         this.hotelList = hotelList;
     }
@@ -26,19 +28,24 @@ public class UserBookingsAdapter extends RecyclerView.Adapter<UserBookingsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull UserBookingAdapterViewHolder holder, int position) {
-        // Implementation needed
+        holder.nameTextView.setText(hotelList.get(position).getHotelName());
+        String date = "20-21 Dez 2021";
+        holder.dateTextView.setText(date);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return hotelList.size();
     }
 
     public static class UserBookingAdapterViewHolder extends RecyclerView.ViewHolder {
-        // Implementation needed
+        ImageView imageView;
+        TextView nameTextView, dateTextView;
         public UserBookingAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Implementation needed
+            imageView = itemView.findViewById(R.id.userBookings_iv);
+            nameTextView = itemView.findViewById(R.id.userBookingsHotelName_tv);
+            dateTextView = itemView.findViewById(R.id.userBookingsHotelDate_tv);
         }
     }
 }

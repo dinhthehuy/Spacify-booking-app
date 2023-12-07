@@ -31,7 +31,7 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
     public void onBindViewHolder(@NonNull SavedListAdapterViewHolder holder, int position) {
         Hotel hotel = hotelList.get(position);
         holder.nameView.setText(hotelList.get(position).getHotelName());
-        String Address = hotelList.get(position).getHotelAddress().getCountry() + hotelList.get(position).getHotelAddress().getCity() +  hotelList.get(position).getHotelAddress().getStreetAddress() + hotelList.get(position).getHotelAddress().getPostalCode();
+        String Address = hotelList.get(position).getHotelAddress().getCountry() + " " + hotelList.get(position).getHotelAddress().getCity() + " " + hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getPostalCode();
         holder.addressView.setText(Address);
         holder.itemView.setOnClickListener(v -> {
             if(onClickListener != null) {

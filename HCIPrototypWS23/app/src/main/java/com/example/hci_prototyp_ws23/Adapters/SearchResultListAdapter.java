@@ -32,7 +32,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
     public void onBindViewHolder(@NonNull SearchResultListAdapter.SearchResultListAdapterViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Hotel hotel = hotelList.get(position);
         holder.nameView.setText(hotelList.get(position).getHotelName());
-        String Address =  hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getCity() +  "\n" + hotelList.get(position).getHotelAddress().getPostalCode() + ", " + hotelList.get(position).getHotelAddress().getCountry();
+        String Address =  hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getCity() +  " " + hotelList.get(position).getHotelAddress().getPostalCode() + ", " + hotelList.get(position).getHotelAddress().getCountry();
         holder.addressView.setText(Address);
         holder.itemView.setOnClickListener(v -> {
             if(onClickListener != null) {
