@@ -5,4 +5,5 @@
     <color name="gray_with_opacity">#80000000</color>
     <color name="gray">#C5C7C9</color>
     <color name="primaryColor">#007089</color>
+    <color name="slightGrayBackground">#f4f4f4</color>
 </resources>
