@@ -55,7 +55,7 @@ public class HotelDescription extends Fragment {
         hotelAddressTextView = view.findViewById(R.id.hotelAddress_tv);
         seeYourOptionsButton = view.findViewById(R.id.seeYourOptions_btn);
 
-        hotel = new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"Mecure offers a tranquil escape from the hustle and bustle of everyday life. Each room is thoughtfully designed to provide comfort and style.");
+        hotel = new Hotel("The Villa Britania Platnium House", new Address("United States", "New York", "123 Main St", 10001),"Mecure offers a tranquil escape from the hustle and bustle of everyday life. Each room is thoughtfully designed to provide comfort and style.");
         try {
             checkInDate = sdf.parse("12/10/2022");
             checkOutDate = sdf.parse("16/10/2022");
@@ -74,7 +74,7 @@ public class HotelDescription extends Fragment {
         toolbar.setTitle(hotel.getHotelName());
         toolbar.inflateMenu(R.menu.top_action_bar_hotel_description);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(HotelDescription.this).navigate(R.id.action_hotelDescription_to_searchResultList));
-        seeYourOptionsButton.setOnClickListener(v -> NavHostFragment.findNavController(HotelDescription.this).navigate(R.id.action_hotelDescription_to_roomInformation));
+        seeYourOptionsButton.setOnClickListener(v -> NavHostFragment.findNavController(HotelDescription.this).navigate(R.id.action_hotelDescription_to_userInfoOverview));
         hotelNameTextView.setText(hotel.getHotelName());
         checkInDateTextView.setText("Check-in" + "\n" + sdf.format(checkInDate));
         checkOutDateTextView.setText("Check-out" + "\n" + sdf.format(checkOutDate));
