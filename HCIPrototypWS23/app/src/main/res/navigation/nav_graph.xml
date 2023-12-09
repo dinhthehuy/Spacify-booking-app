@@ -67,24 +67,6 @@
             app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/roomInformation"
-        android:name="com.example.hci_prototyp_ws23.Fragments.RoomInformation"
-        android:label="fragment_room_information"
-        tools:layout="@layout/fragment_room_information" >
-        <action
-            android:id="@+id/action_roomInformation_to_userInfoOverview"
-            app:destination="@id/userInfoOverview"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out" />
-        <action
-            android:id="@+id/action_roomInformation_to_bookingConfimation"
-            app:destination="@id/bookingConfimation"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popUpTo="@id/homepage"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         android:id="@+id/bookingConfimation"
         android:name="com.example.hci_prototyp_ws23.Fragments.BookingConfirmation"
         android:label="fragment_booking_confimation"
@@ -160,9 +142,19 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out" />
         <action
-            android:id="@+id/action_userInfoOverview_to_roomInformation"
-            app:destination="@id/roomInformation"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out" />
+            android:id="@+id/action_userInfoOverview_to_bookingOverview"
+            app:destination="@id/bookingOverview" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingOverview"
+        android:name="com.example.hci_prototyp_ws23.Fragments.BookingOverview"
+        android:label="fragment_booking_overview"
+        tools:layout="@layout/fragment_booking_overview" >
+        <action
+            android:id="@+id/action_bookingOverview_to_bookingConfimation"
+            app:destination="@id/bookingConfimation" />
+        <action
+            android:id="@+id/action_bookingOverview_to_userInfoOverview"
+            app:destination="@id/userInfoOverview" />
     </fragment>
 </navigation>

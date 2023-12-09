@@ -35,6 +35,6 @@ public class UserInfoOverview extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(UserInfoOverview.this).navigate(R.id.action_userInfoOverview_to_hotelDescription));
-        userInfoButton.setOnClickListener(v -> NavHostFragment.findNavController(UserInfoOverview.this).navigate(R.id.action_userInfoOverview_to_roomInformation));
+        userInfoButton.setOnClickListener(v -> NavHostFragment.findNavController(UserInfoOverview.this).navigate(R.id.action_userInfoOverview_to_bookingOverview));
     }
 }
