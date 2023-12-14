@@ -60,5 +60,16 @@ public class SearchResultList extends Fragment {
         toolbar.setTitle("Search Result");
         toolbar.inflateMenu(R.menu.top_action_bar_search_result);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(SearchResultList.this).navigate(R.id.action_searchResultList_to_search));
+
+        if (getArguments() != null) {
+            String destination = SearchResultListFragmentArgs.fromBundle(getArguments()).getDestination();
+            String date = SearchResultListFragmentArgs.fromBundle(getArguments()).getDate();
+            int roomNumber = SearchResultListFragmentArgs.fromBundle(getArguments()).getRooms();
+            int adultNumber = SearchResultListFragmentArgs.fromBundle(getArguments()).getAdultsNumber();
+            int childrenNumber = SearchResultListFragmentArgs.fromBundle(getArguments()).getChildrenNumber();
+
+            // Now you have access to your received data
+            // Use it as needed
+        }
     }
 }

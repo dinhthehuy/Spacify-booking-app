@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.hci_prototyp_ws23.R;
@@ -29,6 +30,10 @@ public class Search extends Fragment {
     Button search_button;
     TextView date_textView;
     Toolbar toolbar;
+    EditText destinationEditText;
+    EditText roomNumberEditText;
+    EditText adultNumberEditText;
+    EditText childrenNumberEditText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +45,10 @@ public class Search extends Fragment {
         toolbar = view.findViewById(R.id.search_tb);
         search_button = view.findViewById(R.id.search_btn);
         date_textView = view.findViewById(R.id.date_edt);
+        destinationEditText = view.findViewById(R.id.destination_edt);
+        roomNumberEditText = view.findViewById(R.id.roomNumber_edt);
+        adultNumberEditText = view.findViewById(R.id.adultNumber_edt);
+        childrenNumberEditText = view.findViewById(R.id.childrenNumber_edt);
         return view;
     }
 
@@ -49,7 +58,18 @@ public class Search extends Fragment {
         bottomNavigationView.setVisibility(View.GONE);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(Search.this).navigate(R.id.action_search_to_homepage));
-        search_button.setOnClickListener(v -> NavHostFragment.findNavController(Search.this).navigate(R.id.action_search_to_searchResultList));
+        search_button.setOnClickListener(v -> {
+            String destination = destinationEditText.getText().toString();
+            String date = date_textView.getText().toString();
+            int roomNumber = Integer.parseInt(roomNumberEditText.getText().toString());
+            int adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
+            int childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
+
+            SearchFragmentDirections.ActionSearchToSearchResultList action =
+                    SearchFragmentDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
+
+            NavHostFragment.findNavController(Search.this).navigate(R.id.action_search_to_searchResultList);
+        });
 
         date_textView.setOnClickListener(v -> {
             MaterialDatePicker.Builder<Pair<Long, Long>> materialDatePickerBuilder = MaterialDatePicker.Builder.dateRangePicker();
