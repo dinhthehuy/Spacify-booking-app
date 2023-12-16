@@ -67,8 +67,7 @@ public class Search extends Fragment {
 
             SearchDirections.ActionSearchToSearchResultList action =
                     SearchDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
-
-            NavHostFragment.findNavController(Search.this).navigate(R.id.action_search_to_searchResultList);
+            NavHostFragment.findNavController(Search.this).navigate(action);
         });
 
         date_textView.setOnClickListener(v -> {
