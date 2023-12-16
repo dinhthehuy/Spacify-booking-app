@@ -1,6 +1,9 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,10 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.hci_prototyp_ws23.Adapters.SearchResultListAdapter;
 import com.example.hci_prototyp_ws23.Models.Address;
@@ -60,5 +59,16 @@ public class SearchResultList extends Fragment {
         toolbar.setTitle("Search Result");
         toolbar.inflateMenu(R.menu.top_action_bar_search_result);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(SearchResultList.this).navigate(R.id.action_searchResultList_to_search));
+
+        if (getArguments() != null) {
+            String destination = SearchResultListArgs.fromBundle(getArguments()).getDestinationArg();
+            String date = SearchResultListArgs.fromBundle(getArguments()).getDateArg();
+            int roomNumber = SearchResultListArgs.fromBundle(getArguments()).getRoomsArg();
+            int adultNumber = SearchResultListArgs.fromBundle(getArguments()).getAdultNumberArg();
+            int childrenNumber = SearchResultListArgs.fromBundle(getArguments()).getChildrenNumberArg();
+
+            // Now you have access to your received data
+            // Use it as needed
+        }
     }
 }
