@@ -65,8 +65,8 @@ public class Search extends Fragment {
             int adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
             int childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
 
-            SearchFragmentDirections.ActionSearchToSearchResultList action =
-                    SearchFragmentDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
+            SearchDirections.ActionSearchToSearchResultList action =
+                    SearchDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
 
             NavHostFragment.findNavController(Search.this).navigate(R.id.action_search_to_searchResultList);
         });
