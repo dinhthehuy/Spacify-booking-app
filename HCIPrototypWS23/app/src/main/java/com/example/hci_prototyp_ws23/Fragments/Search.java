@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -65,10 +66,11 @@ public class Search extends Fragment {
             int adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
             int childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
 
-            SearchDirections.ActionSearchToSearchResultList action =
-                    SearchDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
-
-            NavHostFragment.findNavController(Search.this).navigate(action);
+            if(!hasEmptyFields() && !hasInvalidFields()) {
+                SearchDirections.ActionSearchToSearchResultList action =
+                        SearchDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
+                NavHostFragment.findNavController(Search.this).navigate(action);
+            }
         });
 
         date_textView.setOnClickListener(v -> {
@@ -87,5 +89,46 @@ public class Search extends Fragment {
 
             datePicker.show(requireActivity().getSupportFragmentManager(), "Date");
         });
+    }
+
+    public boolean hasEmptyFields() {
+        if(destinationEditText.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Destination field is empty", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if(date_textView.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Date field is empty", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if(roomNumberEditText.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Room field is empty", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if(adultNumberEditText.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Destination is empty", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if(childrenNumberEditText.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Destination is empty", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasInvalidFields() {
+        if(Integer.parseInt(roomNumberEditText.getText().toString()) == 0) {
+            Toast.makeText(getContext(), "Invalid room value", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if(Integer.parseInt(adultNumberEditText.getText().toString()) == 0) {
+            Toast.makeText(getContext(), "Invalid room value", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 }

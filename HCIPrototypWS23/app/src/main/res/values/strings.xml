@@ -71,4 +71,6 @@
     <string name="personal_information">Personal information</string>
     <string name="next_step">Next step</string>
     <string name="what_is_the_purpose_of_your_trip">What is the purpose of your trip ?</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
 </resources>
