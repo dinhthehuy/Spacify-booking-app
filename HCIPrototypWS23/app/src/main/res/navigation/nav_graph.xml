@@ -22,6 +22,9 @@
             app:destination="@id/register"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
+        <argument
+            android:name="emailArg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/homepage"
@@ -33,6 +36,9 @@
             app:destination="@id/search"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
+        <argument
+            android:name="emailArg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchResultList"
@@ -49,7 +55,8 @@
             app:destination="@id/search"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out" />
-        <argument android:name="destinationArg"
+        <argument
+            android:name="destinationArg"
             app:argType="string" />
         <argument
             android:name="dateArg"
@@ -58,7 +65,7 @@
             android:name="roomsArg"
             app:argType="integer" />
         <argument
-            android:name="adultNumberArg"
+            android:name="adultsNumberArg"
             app:argType="integer" />
         <argument
             android:name="childrenNumberArg"
@@ -139,7 +146,8 @@
         <argument
             android:name="roomsArg"
             app:argType="integer" />
-        <argument android:name="adultNumberArg"
+        <argument
+            android:name="adultsNumberArg"
             app:argType="integer" />
         <argument
             android:name="childrenNumberArg"

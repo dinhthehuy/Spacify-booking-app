@@ -67,6 +67,7 @@ public class Search extends Fragment {
 
             SearchDirections.ActionSearchToSearchResultList action =
                     SearchDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
+
             NavHostFragment.findNavController(Search.this).navigate(action);
         });
 

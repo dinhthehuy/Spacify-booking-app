@@ -46,7 +46,7 @@ public class LogIn extends Fragment {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_homepage);
+//            NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_homepage);
         }
     }
 
@@ -70,8 +70,8 @@ public class LogIn extends Fragment {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                            NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_homepage);
+                            LogInDirections.ActionLogInToHomepage action = LogInDirections.actionLogInToHomepage(loginEmailEditText.getText().toString());
+                            NavHostFragment.findNavController(LogIn.this).navigate(action);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
