@@ -73,7 +73,7 @@ public class HotelDescription extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle(hotel.getHotelName());
         toolbar.inflateMenu(R.menu.top_action_bar_hotel_description);
-        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(HotelDescription.this).navigate(R.id.action_hotelDescription_to_searchResultList));
+        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(HotelDescription.this).popBackStack());
         seeYourOptionsButton.setOnClickListener(v -> NavHostFragment.findNavController(HotelDescription.this).navigate(R.id.action_hotelDescription_to_userInfoOverview));
         hotelNameTextView.setText(hotel.getHotelName());
         checkInDateTextView.setText("Check-in" + "\n" + sdf.format(checkInDate));

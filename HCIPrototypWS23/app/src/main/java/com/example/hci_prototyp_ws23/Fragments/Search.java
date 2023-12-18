@@ -1,14 +1,6 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.util.Pair;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.util.Pair;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -58,15 +57,14 @@ public class Search extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.GONE);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
-        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(Search.this).navigate(R.id.action_search_to_homepage));
+        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(Search.this).popBackStack());
         search_button.setOnClickListener(v -> {
-            String destination = destinationEditText.getText().toString();
-            String date = date_textView.getText().toString();
-            int roomNumber = Integer.parseInt(roomNumberEditText.getText().toString());
-            int adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
-            int childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
-
             if(!hasEmptyFields() && !hasInvalidFields()) {
+                String destination = destinationEditText.getText().toString();
+                String date = date_textView.getText().toString();
+                int roomNumber = Integer.parseInt(roomNumberEditText.getText().toString());
+                int adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
+                int childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
                 SearchDirections.ActionSearchToSearchResultList action =
                         SearchDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
                 NavHostFragment.findNavController(Search.this).navigate(action);
@@ -108,12 +106,12 @@ public class Search extends Fragment {
         }
 
         if(adultNumberEditText.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Destination is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Adult field is empty", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         if(childrenNumberEditText.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Destination is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Children field is empty", Toast.LENGTH_SHORT).show();
             return true;
         }
         return false;

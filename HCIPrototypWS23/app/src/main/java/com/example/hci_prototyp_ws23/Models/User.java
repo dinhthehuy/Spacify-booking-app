@@ -56,10 +56,10 @@ public class User {
     }
 
     public enum Gender {
-        MALE, FEMALE, OTHER;
+        MALE, FEMALE, OTHER
     }
 
-    User(String username, String firstName, String lastName, String email, String phoneNumber, Address userAddress, Date dateOfBirth, Gender gender) {
+    public User(String username, String firstName, String lastName, String email, String phoneNumber, Address userAddress, Date dateOfBirth, Gender gender) {
         this.userBookings = new ArrayList<>();
         this.savedBookings = new ArrayList<>();
         this.username = username;

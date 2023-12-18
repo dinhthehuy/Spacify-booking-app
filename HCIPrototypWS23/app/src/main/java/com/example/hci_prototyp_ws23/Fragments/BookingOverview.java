@@ -38,7 +38,7 @@ public class BookingOverview extends Fragment {
         bottomNavigationView.setVisibility(View.GONE);
         toolbar.setVisibility(View.VISIBLE);
         toolbar.inflateMenu(R.menu.top_action_bar_room_information);
-        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(BookingOverview.this).navigate(R.id.action_bookingOverview_to_userInfoOverview));
+        toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(BookingOverview.this).popBackStack());
         roomInfoButton.setOnClickListener(v -> NavHostFragment.findNavController(BookingOverview.this).navigate(R.id.action_bookingOverview_to_paymentMethod));
     }
 }

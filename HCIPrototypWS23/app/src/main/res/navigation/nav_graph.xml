@@ -50,11 +50,6 @@
             app:destination="@id/hotelDescription"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
-        <action
-            android:id="@+id/action_searchResultList_to_search"
-            app:destination="@id/search"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out" />
         <argument
             android:name="destinationArg"
             app:argType="string" />
@@ -76,11 +71,6 @@
         android:name="com.example.hci_prototyp_ws23.Fragments.HotelDescription"
         android:label="fragment_hotel_description"
         tools:layout="@layout/fragment_hotel_description" >
-        <action
-            android:id="@+id/action_hotelDescription_to_searchResultList"
-            app:destination="@id/searchResultList"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out" />
         <action
             android:id="@+id/action_hotelDescription_to_userInfoOverview"
             app:destination="@id/userInfoOverview"
@@ -132,11 +122,6 @@
             app:destination="@id/searchResultList"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
-        <action
-            android:id="@+id/action_search_to_homepage"
-            app:destination="@id/homepage"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out" />
         <argument
             android:name="destinationArg"
             app:argType="string" />
@@ -173,11 +158,6 @@
         android:label="fragment_user_info_overview"
         tools:layout="@layout/fragment_user_info_overview" >
         <action
-            android:id="@+id/action_userInfoOverview_to_hotelDescription"
-            app:destination="@id/hotelDescription"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out" />
-        <action
             android:id="@+id/action_userInfoOverview_to_bookingOverview"
             app:destination="@id/bookingOverview" />
     </fragment>
@@ -189,9 +169,6 @@
         <action
             android:id="@+id/action_bookingOverview_to_paymentMethod"
             app:destination="@id/paymentMethod" />
-        <action
-            android:id="@+id/action_bookingOverview_to_userInfoOverview"
-            app:destination="@id/userInfoOverview" />
     </fragment>
     <fragment
         android:id="@+id/paymentMethod"
@@ -201,9 +178,6 @@
         <action
             android:id="@+id/action_paymentMethod_to_bookingConfimation"
             app:destination="@id/bookingConfimation" />
-        <action
-            android:id="@+id/action_paymentMethod_to_bookingOverview"
-            app:destination="@id/bookingOverview" />
 
     </fragment>
 </navigation>
