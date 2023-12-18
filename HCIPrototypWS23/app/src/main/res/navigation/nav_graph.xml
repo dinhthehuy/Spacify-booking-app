@@ -187,10 +187,23 @@
         android:label="fragment_booking_overview"
         tools:layout="@layout/fragment_booking_overview" >
         <action
-            android:id="@+id/action_bookingOverview_to_bookingConfimation"
-            app:destination="@id/bookingConfimation" />
+            android:id="@+id/action_bookingOverview_to_paymentMethod"
+            app:destination="@id/paymentMethod" />
         <action
             android:id="@+id/action_bookingOverview_to_userInfoOverview"
             app:destination="@id/userInfoOverview" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMethod"
+        android:name="com.example.hci_prototyp_ws23.Fragments.PaymentMethod"
+        android:label="fragment_payment_method"
+        tools:layout="@layout/fragment_payment_method" >
+        <action
+            android:id="@+id/action_paymentMethod_to_bookingConfimation"
+            app:destination="@id/bookingConfimation" />
+        <action
+            android:id="@+id/action_paymentMethod_to_bookingOverview"
+            app:destination="@id/bookingOverview" />
+
     </fragment>
 </navigation>
