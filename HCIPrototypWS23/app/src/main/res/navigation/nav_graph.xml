@@ -22,6 +22,9 @@
             app:destination="@id/register"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
+        <argument
+            android:name="emailArg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/homepage"
@@ -33,6 +36,9 @@
             app:destination="@id/search"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
+        <argument
+            android:name="emailArg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchResultList"
@@ -49,6 +55,21 @@
             app:destination="@id/search"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out" />
+        <argument
+            android:name="destinationArg"
+            app:argType="string" />
+        <argument
+            android:name="dateArg"
+            app:argType="string" />
+        <argument
+            android:name="roomsArg"
+            app:argType="integer" />
+        <argument
+            android:name="adultsNumberArg"
+            app:argType="integer" />
+        <argument
+            android:name="childrenNumberArg"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/hotelDescription"
@@ -117,19 +138,19 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out" />
         <argument
-            android:name="destination"
+            android:name="destinationArg"
             app:argType="string" />
         <argument
-            android:name="date"
+            android:name="dateArg"
             app:argType="string" />
         <argument
-            android:name="rooms"
+            android:name="roomsArg"
             app:argType="integer" />
         <argument
-            android:name="adultsNumber"
+            android:name="adultsNumberArg"
             app:argType="integer" />
         <argument
-            android:name="childrenNumber"
+            android:name="childrenNumberArg"
             app:argType="integer" />
     </fragment>
     <fragment

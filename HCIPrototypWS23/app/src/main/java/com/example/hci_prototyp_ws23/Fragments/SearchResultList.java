@@ -38,6 +38,14 @@ public class SearchResultList extends Fragment {
         recyclerView = view.findViewById(R.id.searchResultList_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        if (getArguments() != null) {
+            String destination = SearchResultListArgs.fromBundle(getArguments()).getDestinationArg();
+            String date = SearchResultListArgs.fromBundle(getArguments()).getDateArg();
+            int roomNumber = SearchResultListArgs.fromBundle(getArguments()).getRoomsArg();
+            int adultNumber = SearchResultListArgs.fromBundle(getArguments()).getAdultsNumberArg();
+            int childrenNumber = SearchResultListArgs.fromBundle(getArguments()).getChildrenNumberArg();
+        }
+
         List<Hotel> hotels = new ArrayList<>();
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
         hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
@@ -61,15 +69,6 @@ public class SearchResultList extends Fragment {
         toolbar.inflateMenu(R.menu.top_action_bar_search_result);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(SearchResultList.this).navigate(R.id.action_searchResultList_to_search));
 
-        if (getArguments() != null) {
-            String destination = SearchResultListFragmentArgs.fromBundle(getArguments()).getDestination();
-            String date = SearchResultListFragmentArgs.fromBundle(getArguments()).getDate();
-            int roomNumber = SearchResultListFragmentArgs.fromBundle(getArguments()).getRooms();
-            int adultNumber = SearchResultListFragmentArgs.fromBundle(getArguments()).getAdultsNumber();
-            int childrenNumber = SearchResultListFragmentArgs.fromBundle(getArguments()).getChildrenNumber();
 
-            // Now you have access to your received data
-            // Use it as needed
-        }
     }
 }

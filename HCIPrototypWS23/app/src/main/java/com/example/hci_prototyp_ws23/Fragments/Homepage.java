@@ -33,8 +33,12 @@ public class Homepage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        String email = "User";
+        if(getArguments() != null) {
+            email = HomepageArgs.fromBundle(getArguments()).getEmailArg();
+        }
         toolbar.setVisibility(View.VISIBLE);
-        toolbar.setTitle("Where do you want to go, User?");
+        toolbar.setTitle("Hi " + email);
         toolbar.getMenu().getItem(0).setOnMenuItemClickListener(item -> {
             NavHostFragment.findNavController(Homepage.this).navigate(R.id.action_homepage_to_search);
             return true;
