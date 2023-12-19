@@ -1,6 +1,11 @@
 package com.example.hci_prototyp_ws23.Models;
 
-public class Address {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Address implements Parcelable {
     private String country;
     private String city;
     private String streetAddress;
@@ -12,6 +17,25 @@ public class Address {
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;
     }
+
+    protected Address(Parcel in) {
+        country = in.readString();
+        city = in.readString();
+        streetAddress = in.readString();
+        postalCode = in.readInt();
+    }
+
+    public static final Creator<Address> CREATOR = new Creator<Address>() {
+        @Override
+        public Address createFromParcel(Parcel in) {
+            return new Address(in);
+        }
+
+        @Override
+        public Address[] newArray(int size) {
+            return new Address[size];
+        }
+    };
 
     public String getCountry() {
         return country;
@@ -43,5 +67,18 @@ public class Address {
 
     public void setPostalCode(int postalCode) {
         this.postalCode = postalCode;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(country);
+        dest.writeString(city);
+        dest.writeString(streetAddress);
+        dest.writeInt(postalCode);
     }
 }
