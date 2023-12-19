@@ -144,12 +144,12 @@ public class Booking implements Parcelable {
     }
 
     public enum PaymentMethod {
-        PAYPAL, ONSITE, BANKING;
+        PAYPAL, ONSITE, BANKING
     }
     private enum State {
         ENDED, BOOKED, CANCELED
     }
-    public Booking(User user, Hotel hotel, RoomType roomType, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, PaymentMethod paymentMethod, State state) {
+    public Booking(User user, Hotel hotel, RoomType roomType, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, PaymentMethod paymentMethod) {
         this.user = user;
         this.hotel = hotel;
         this.roomType = roomType;
@@ -159,6 +159,6 @@ public class Booking implements Parcelable {
         this.childrenNumber = childrenNumber;
         this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
-        this.state = state;
+        this.state = State.BOOKED;
     }
 }

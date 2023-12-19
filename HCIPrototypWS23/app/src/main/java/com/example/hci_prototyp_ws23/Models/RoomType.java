@@ -15,6 +15,7 @@ public class RoomType implements Parcelable {
     private int maxChildrenNumber;
     private int numberOfAvailableRooms;
     private ArrayList<String> services;
+    private double pricePerNight;
 
     protected RoomType(Parcel in) {
         name = in.readString();
@@ -23,6 +24,7 @@ public class RoomType implements Parcelable {
         maxChildrenNumber = in.readInt();
         numberOfAvailableRooms = in.readInt();
         services = in.createStringArrayList();
+        setPricePerNight(in.readDouble());
     }
 
     public static final Creator<RoomType> CREATOR = new Creator<RoomType>() {
@@ -63,8 +65,11 @@ public class RoomType implements Parcelable {
     public ArrayList<String> getServices() {
         return services;
     }
+    public double getPricePerNight() { return pricePerNight; }
 
-    RoomType(String name, Hotel hotel, int size, int maxAdultNumber, int maxChildrenNumber, int numberOfAvailableRooms) {
+    public void setPricePerNight(double pricePerNight) { this.pricePerNight = pricePerNight; }
+
+    RoomType(String name, Hotel hotel, int size, int maxAdultNumber, int maxChildrenNumber, int numberOfAvailableRooms, double pricePerNight) {
         services = new ArrayList<>();
         this.name = name;
         this.hotel = hotel;
@@ -72,6 +77,7 @@ public class RoomType implements Parcelable {
         this.maxAdultNumber = maxAdultNumber;
         this.maxChildrenNumber = maxChildrenNumber;
         this.numberOfAvailableRooms = numberOfAvailableRooms;
+        this.pricePerNight = pricePerNight;
     }
 
     @Override
@@ -87,5 +93,6 @@ public class RoomType implements Parcelable {
         dest.writeInt(maxChildrenNumber);
         dest.writeInt(numberOfAvailableRooms);
         dest.writeStringList(services);
+        dest.writeDouble(pricePerNight);
     }
 }

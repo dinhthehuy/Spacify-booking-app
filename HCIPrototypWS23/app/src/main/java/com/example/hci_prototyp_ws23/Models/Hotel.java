@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class Hotel implements Parcelable {
     private String hotelName;
     private Address hotelAddress;
-    private ArrayList<RoomType> roomTypeTypes;
+    private ArrayList<RoomType> roomTypeList;
     private String description;
     private ArrayList<String> facilities;
 
     protected Hotel(Parcel in) {
         hotelName = in.readString();
         hotelAddress = in.readParcelable(Address.class.getClassLoader());
-        roomTypeTypes = in.createTypedArrayList(RoomType.CREATOR);
+        roomTypeList = in.createTypedArrayList(RoomType.CREATOR);
         description = in.readString();
         facilities = in.createStringArrayList();
     }
@@ -42,8 +42,8 @@ public class Hotel implements Parcelable {
         return hotelAddress;
     }
 
-    public ArrayList<RoomType> getRoomTypes() {
-        return roomTypeTypes;
+    public ArrayList<RoomType> getRoomTypeList() {
+        return roomTypeList;
     }
 
     public String getDescription() {
@@ -56,7 +56,7 @@ public class Hotel implements Parcelable {
 
     public Hotel(String hotelName, Address hotelAddress, String description) {
         facilities = new ArrayList<>();
-        roomTypeTypes = new ArrayList<>();
+        roomTypeList = new ArrayList<>();
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
         this.description = description;
@@ -71,7 +71,7 @@ public class Hotel implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(hotelName);
         dest.writeParcelable(hotelAddress, flags);
-        dest.writeTypedList(roomTypeTypes);
+        dest.writeTypedList(roomTypeList);
         dest.writeString(description);
         dest.writeStringList(facilities);
     }
