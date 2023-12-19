@@ -22,9 +22,6 @@
             app:destination="@id/register"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
-        <argument
-            android:name="emailArg"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/homepage"
@@ -39,6 +36,9 @@
         <argument
             android:name="emailArg"
             app:argType="string" />
+        <action
+            android:id="@+id/action_homepage_to_search2"
+            app:destination="@id/search" />
     </fragment>
     <fragment
         android:id="@+id/searchResultList"
@@ -54,9 +54,6 @@
             android:name="destinationArg"
             app:argType="string" />
         <argument
-            android:name="dateArg"
-            app:argType="string" />
-        <argument
             android:name="roomsArg"
             app:argType="integer" />
         <argument
@@ -65,6 +62,15 @@
         <argument
             android:name="childrenNumberArg"
             app:argType="integer" />
+        <argument
+            android:name="userArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.User" />
+        <argument
+            android:name="checkInDate"
+            app:argType="string" />
+        <argument
+            android:name="checkOutDate"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/hotelDescription"
@@ -76,6 +82,26 @@
             app:destination="@id/userInfoOverview"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
+        <argument
+            android:name="userArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.User" />
+        <argument android:name="hotelArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
+        <argument
+            android:name="roomsArg"
+            app:argType="integer" />
+        <argument
+            android:name="adultsNumberArg"
+            app:argType="integer" />
+        <argument
+            android:name="childrenNumberArg"
+            app:argType="integer" />
+        <argument
+            android:name="checkInDate"
+            app:argType="string" />
+        <argument
+            android:name="checkOutDate"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/bookingConfimation"
@@ -123,30 +149,14 @@
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
         <argument
-            android:name="destinationArg"
-            app:argType="string" />
-        <argument
-            android:name="dateArg"
-            app:argType="string" />
-        <argument
-            android:name="roomsArg"
-            app:argType="integer" />
-        <argument
-            android:name="adultsNumberArg"
-            app:argType="integer" />
-        <argument
-            android:name="childrenNumberArg"
-            app:argType="integer" />
+            android:name="userArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.User" />
     </fragment>
     <fragment
         android:id="@+id/userProfile"
         android:name="com.example.hci_prototyp_ws23.Fragments.UserProfile"
         android:label="UserProfile"
-        tools:layout="@layout/fragment_user_profile">
-        <action
-            android:id="@+id/action_userProfile_to_logIn"
-            app:destination="@id/logIn" />
-    </fragment>
+        tools:layout="@layout/fragment_user_profile"/>
     <fragment
         android:id="@+id/userBookings"
         android:name="com.example.hci_prototyp_ws23.Fragments.UserBookings"
@@ -159,7 +169,12 @@
         tools:layout="@layout/fragment_user_info_overview" >
         <action
             android:id="@+id/action_userInfoOverview_to_bookingOverview"
-            app:destination="@id/bookingOverview" />
+            app:destination="@id/bookingOverview"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
+        <argument
+            android:name="userArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.User" />
     </fragment>
     <fragment
         android:id="@+id/bookingOverview"
@@ -168,7 +183,9 @@
         tools:layout="@layout/fragment_booking_overview" >
         <action
             android:id="@+id/action_bookingOverview_to_paymentMethod"
-            app:destination="@id/paymentMethod" />
+            app:destination="@id/paymentMethod"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/paymentMethod"
