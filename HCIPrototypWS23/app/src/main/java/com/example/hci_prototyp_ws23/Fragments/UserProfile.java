@@ -10,7 +10,6 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.hci_prototyp_ws23.MainActivity;
 import com.example.hci_prototyp_ws23.R;
@@ -33,9 +32,9 @@ public class UserProfile extends Fragment {
         user = mAuth.getCurrentUser();
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
         signOutButton = view.findViewById(R.id.sign_out_btn);
-        if(user == null) {
-            NavHostFragment.findNavController(UserProfile.this).navigate(R.id.action_userProfile_to_logIn);
-        }
+//        if(user == null) {
+//            NavHostFragment.findNavController(UserProfile.this).navigate(R.id.action_userProfile_to_logIn);
+//        }
         return view;
     }
 

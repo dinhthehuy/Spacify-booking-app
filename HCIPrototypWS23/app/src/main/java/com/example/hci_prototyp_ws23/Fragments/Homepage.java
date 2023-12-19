@@ -56,7 +56,8 @@ public class Homepage extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle("Hi " + username + " !");
         toolbar.getMenu().getItem(0).setOnMenuItemClickListener(item -> {
-            NavHostFragment.findNavController(Homepage.this).navigate(R.id.action_homepage_to_search);
+            HomepageDirections.ActionHomepageToSearch action = HomepageDirections.actionHomepageToSearch(testUser);
+            NavHostFragment.findNavController(Homepage.this).navigate(action);
             return true;
         });
 

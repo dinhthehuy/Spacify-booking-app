@@ -16,6 +16,7 @@ import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -34,6 +35,13 @@ public class Search extends Fragment {
     EditText roomNumberEditText;
     EditText adultNumberEditText;
     EditText childrenNumberEditText;
+    User user;
+    String destination;
+    int roomNumber;
+    int adultNumber;
+    int childrenNumber;
+    String startDateString;
+    String endDateString;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +57,8 @@ public class Search extends Fragment {
         roomNumberEditText = view.findViewById(R.id.roomNumber_edt);
         adultNumberEditText = view.findViewById(R.id.adultNumber_edt);
         childrenNumberEditText = view.findViewById(R.id.childrenNumber_edt);
+        user = SearchArgs.fromBundle(getArguments()).getUserArg();
+        Toast.makeText(getContext(), user.getUsername() + " has arrived !", Toast.LENGTH_SHORT).show();
         return view;
     }
 
@@ -60,13 +70,12 @@ public class Search extends Fragment {
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(Search.this).popBackStack());
         search_button.setOnClickListener(v -> {
             if(!hasEmptyFields() && !hasInvalidFields()) {
-                String destination = destinationEditText.getText().toString();
-                String date = date_textView.getText().toString();
-                int roomNumber = Integer.parseInt(roomNumberEditText.getText().toString());
-                int adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
-                int childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
+                destination = destinationEditText.getText().toString();
+                roomNumber = Integer.parseInt(roomNumberEditText.getText().toString());
+                adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
+                childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
                 SearchDirections.ActionSearchToSearchResultList action =
-                        SearchDirections.actionSearchToSearchResultList(destination, date, roomNumber, adultNumber, childrenNumber);
+                        SearchDirections.actionSearchToSearchResultList(destination, roomNumber, adultNumber, childrenNumber, user, startDateString, endDateString);
                 NavHostFragment.findNavController(Search.this).navigate(action);
             }
         });
@@ -79,8 +88,8 @@ public class Search extends Fragment {
                 Long startDate = selection.first;
                 Long endDate = selection.second;
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                String startDateString = sdf.format(new Date(startDate));
-                String endDateString = sdf.format(new Date(endDate));
+                startDateString = sdf.format(new Date(startDate));
+                endDateString = sdf.format(new Date(endDate));
                 String selectedDateRange = startDateString + " - " + endDateString;
                 date_textView.setText(selectedDateRange);
             });

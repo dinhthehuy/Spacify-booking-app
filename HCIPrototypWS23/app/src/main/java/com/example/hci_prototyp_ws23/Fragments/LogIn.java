@@ -46,7 +46,7 @@ public class LogIn extends Fragment {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-//            NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_homepage);
+            FirebaseAuth.getInstance().signOut();
         }
     }
 
@@ -79,6 +79,9 @@ public class LogIn extends Fragment {
                     });
         });
 
-        registerNowTextView.setOnClickListener(v -> NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_register));
+        registerNowTextView.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_register);
+        });
     }
 }
