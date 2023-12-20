@@ -21,14 +21,14 @@ public class User implements Parcelable {
     private ArrayList<Hotel> savedHotels;
 
     protected User(Parcel in) {
-        username = in.readString();
-        firstName = in.readString();
-        lastName = in.readString();
-        email = in.readString();
-        phoneNumber = in.readString();
-        userAddress = in.readParcelable(Address.class.getClassLoader());
-        dateOfBirth = new Date(in.readLong());
-        gender = Gender.valueOf(in.readString());
+        setUsername(in.readString());
+        setFirstName(in.readString());
+        setLastName(in.readString());
+        setEmail(in.readString());
+        setPhoneNumber(in.readString());
+        setUserAddress(in.readParcelable(Address.class.getClassLoader()));
+        setDateOfBirth(new Date(in.readLong()));
+        setGender(Gender.valueOf(in.readString()));
         in.readTypedList(userBookings, Booking.CREATOR);
         in.readTypedList(savedHotels, Hotel.CREATOR);
     }
@@ -84,6 +84,37 @@ public class User implements Parcelable {
     public ArrayList<Hotel> getSavedHotels() {
         return savedHotels;
     }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setUserAddress(Address userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 
     @Override
     public int describeContents() {
@@ -111,13 +142,13 @@ public class User implements Parcelable {
     public User(String username, String firstName, String lastName, String email, String phoneNumber, Address userAddress, Date dateOfBirth, Gender gender) {
         this.userBookings = new ArrayList<>();
         this.savedHotels = new ArrayList<>();
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.userAddress = userAddress;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
+        this.setUsername(username);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setEmail(email);
+        this.setPhoneNumber(phoneNumber);
+        this.setUserAddress(userAddress);
+        this.setDateOfBirth(dateOfBirth);
+        this.setGender(gender);
     }
 }

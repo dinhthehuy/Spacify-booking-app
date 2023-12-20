@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class RoomType implements Parcelable {
     private String name;
-    private Hotel hotel;
     private int size;
     private int maxAdultNumber;
     private int maxChildrenNumber;
@@ -24,7 +23,7 @@ public class RoomType implements Parcelable {
         maxChildrenNumber = in.readInt();
         numberOfAvailableRooms = in.readInt();
         services = in.createStringArrayList();
-        setPricePerNight(in.readDouble());
+        pricePerNight = in.readDouble();
     }
 
     public static final Creator<RoomType> CREATOR = new Creator<RoomType>() {
@@ -59,9 +58,6 @@ public class RoomType implements Parcelable {
         return numberOfAvailableRooms;
     }
 
-    public Hotel getHotel() {
-        return hotel;
-    }
     public ArrayList<String> getServices() {
         return services;
     }
@@ -69,10 +65,9 @@ public class RoomType implements Parcelable {
 
     public void setPricePerNight(double pricePerNight) { this.pricePerNight = pricePerNight; }
 
-    RoomType(String name, Hotel hotel, int size, int maxAdultNumber, int maxChildrenNumber, int numberOfAvailableRooms, double pricePerNight) {
+    public RoomType(String name, int size, int maxAdultNumber, int maxChildrenNumber, int numberOfAvailableRooms, double pricePerNight) {
         services = new ArrayList<>();
         this.name = name;
-        this.hotel = hotel;
         this.size = size;
         this.maxAdultNumber = maxAdultNumber;
         this.maxChildrenNumber = maxChildrenNumber;
