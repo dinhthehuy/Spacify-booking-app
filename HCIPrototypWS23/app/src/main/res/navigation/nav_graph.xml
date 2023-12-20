@@ -54,7 +54,7 @@
             android:name="destinationArg"
             app:argType="string" />
         <argument
-            android:name="roomsArg"
+            android:name="numberOfRoomsArg"
             app:argType="integer" />
         <argument
             android:name="adultsNumberArg"
@@ -88,8 +88,8 @@
         <argument android:name="hotelArg"
             app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
         <argument
-            android:name="roomsArg"
-            app:argType="integer" />
+            android:name="roomTypeArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.RoomType" />
         <argument
             android:name="adultsNumberArg"
             app:argType="integer" />
@@ -102,6 +102,9 @@
         <argument
             android:name="checkOutDate"
             app:argType="string" />
+        <argument
+            android:name="numberOfRoomsArg"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/bookingConfimation"
@@ -115,6 +118,9 @@
             app:exitAnim="@anim/slide_out"
             app:popUpTo="@id/homepage"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="emailArg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/register"
@@ -175,6 +181,25 @@
         <argument
             android:name="userArg"
             app:argType="com.example.hci_prototyp_ws23.Models.User" />
+        <argument
+            android:name="hotelArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
+        <argument
+            android:name="roomTypeArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.RoomType" />
+        <argument
+            android:name="checkInDateArg"
+            app:argType="string" />
+        <argument
+            android:name="checkOutDateArg"
+            app:argType="string" />
+        <argument android:name="adultsNumberArg"
+            app:argType="integer" />
+        <argument android:name="childrenNumberArg"
+            app:argType="integer" />
+        <argument
+            android:name="numberOfRoomsArg"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/bookingOverview"
@@ -186,6 +211,30 @@
             app:destination="@id/paymentMethod"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
+        <argument
+            android:name="userArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.User" />
+        <argument
+            android:name="hotelArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
+        <argument
+            android:name="roomTypeArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.RoomType" />
+        <argument
+            android:name="checkInDateArg"
+            app:argType="string" />
+        <argument
+            android:name="checkOutDateArg"
+            app:argType="string" />
+        <argument
+            android:name="adultsNumberArg"
+            app:argType="integer" />
+        <argument
+            android:name="childrenNumberArg"
+            app:argType="integer" />
+        <argument
+            android:name="numberOfRoomsArg"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/paymentMethod"
@@ -195,6 +244,30 @@
         <action
             android:id="@+id/action_paymentMethod_to_bookingConfimation"
             app:destination="@id/bookingConfimation" />
+        <argument
+            android:name="userArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.User" />
+        <argument android:name="hotelArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
+        <argument
+            android:name="roomTypeArg"
+            app:argType="com.example.hci_prototyp_ws23.Models.RoomType" />
+        <argument android:name="checkInDateArg"
+            app:argType="string" />
+        <argument android:name="checkOutDateArg"
+            app:argType="string" />
+        <argument
+            android:name="adultsNumberArg"
+            app:argType="integer" />
+        <argument
+            android:name="childrenNumberArg"
+            app:argType="integer" />
+        <argument
+            android:name="totalPriceArg"
+            app:argType="float" />
+        <argument
+            android:name="numberOfRoomsArg"
+            app:argType="integer" />
 
     </fragment>
 </navigation>
