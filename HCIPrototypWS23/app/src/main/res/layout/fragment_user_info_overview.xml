@@ -19,7 +19,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-
         android:orientation="vertical"
         android:background="@drawable/rounded_slight_gray">
 
@@ -33,68 +32,110 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:minHeight="48dp"
-            android:hint="@string/first_name"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_overview_first_name_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
+            <EditText
+                android:id="@+id/user_overview_first_name_et"
+                android:minHeight="48dp"
+                android:hint="@string/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:minHeight="48dp"
-            android:hint="@string/last_name"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_overview_last_name_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
+            <EditText
+                android:id="@+id/user_overview_last_name_et"
+                android:minHeight="48dp"
+                android:hint="@string/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:minHeight="48dp"
-            android:hint="@string/email"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_overview_email_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
+            <EditText
+                android:id="@+id/user_overview_email_et"
+                android:minHeight="48dp"
+                android:hint="@string/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:minHeight="48dp"
-            android:hint="@string/street_address"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_overview_street_address_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
+            <EditText
+                android:id="@+id/user_overview_street_address_et"
+                android:minHeight="48dp"
+                android:hint="@string/street_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:minHeight="48dp"
-            android:hint="@string/city"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_overview_city_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
+            <EditText
+                android:id="@+id/user_overview_city_et"
+                android:minHeight="48dp"
+                android:hint="@string/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:minHeight="48dp"
-            android:hint="@string/country_region"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_overview_country_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
+            <EditText
+                android:id="@+id/user_overview_country_et"
+                android:minHeight="48dp"
+                android:hint="@string/country_region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
-            android:minHeight="48dp"
-            android:hint="@string/mobile_number"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_overview_mobile_number_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
+            <EditText
+                android:id="@+id/user_overview_mobile_number"
+                android:minHeight="48dp"
+                android:hint="@string/mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat

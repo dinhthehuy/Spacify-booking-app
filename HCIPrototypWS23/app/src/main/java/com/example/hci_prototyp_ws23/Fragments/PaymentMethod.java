@@ -10,6 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.fragment.NavHostFragment;
 import android.widget.Button;
+
+import com.example.hci_prototyp_ws23.Models.Hotel;
+import com.example.hci_prototyp_ws23.Models.RoomType;
+import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class PaymentMethod extends Fragment {
@@ -18,6 +22,12 @@ public class PaymentMethod extends Fragment {
     BottomNavigationView bottomNavigationView;
     Button roomInfoButton;
     Toolbar toolbar;
+    User user;
+    Hotel hotel;
+    RoomType roomType;
+    String checkInDate, checkOutDate;
+    int adultsNumber, childrenNumber, numberOfRooms;
+    double totalPrice;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,6 +36,16 @@ public class PaymentMethod extends Fragment {
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
         toolbar = view.findViewById(R.id.paymentMethod_tb);
         roomInfoButton = view.findViewById(R.id.paymentMethod_btn);
+
+        user = PaymentMethodArgs.fromBundle(getArguments()).getUserArg();
+        hotel = PaymentMethodArgs.fromBundle(getArguments()).getHotelArg();
+        roomType = PaymentMethodArgs.fromBundle(getArguments()).getRoomTypeArg();
+        checkInDate = PaymentMethodArgs.fromBundle(getArguments()).getCheckInDateArg();
+        checkOutDate = PaymentMethodArgs.fromBundle(getArguments()).getCheckOutDateArg();
+        adultsNumber = PaymentMethodArgs.fromBundle(getArguments()).getAdultsNumberArg();
+        childrenNumber = PaymentMethodArgs.fromBundle(getArguments()).getChildrenNumberArg();
+        numberOfRooms = PaymentMethodArgs.fromBundle(getArguments()).getNumberOfRoomsArg();
+        totalPrice = PaymentMethodArgs.fromBundle(getArguments()).getTotalPriceArg();
         return view;
     }
 
@@ -36,6 +56,9 @@ public class PaymentMethod extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
         toolbar.inflateMenu(R.menu.top_action_bar_room_information);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(PaymentMethod.this).popBackStack());
-        roomInfoButton.setOnClickListener(v -> NavHostFragment.findNavController(PaymentMethod.this).navigate(R.id.action_paymentMethod_to_bookingConfimation));
+        roomInfoButton.setOnClickListener(v -> {
+            PaymentMethodDirections.ActionPaymentMethodToBookingConfimation action = PaymentMethodDirections.actionPaymentMethodToBookingConfimation(user.getEmail());
+            NavHostFragment.findNavController(PaymentMethod.this).navigate(action);
+        });
     }
 }

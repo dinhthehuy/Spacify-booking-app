@@ -16,6 +16,7 @@ import com.example.hci_prototyp_ws23.R;
 public class BookingConfirmation extends Fragment {
     View view;
     Button bookingConfirmButton;
+    String email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,12 +24,16 @@ public class BookingConfirmation extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_booking_confimation, container, false);
         bookingConfirmButton = view.findViewById(R.id.bookingConfirm_btn);
+        email = BookingConfirmationArgs.fromBundle(getArguments()).getEmailArg();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bookingConfirmButton.setOnClickListener(v -> NavHostFragment.findNavController(BookingConfirmation.this).navigate(R.id.action_bookingConfimation_to_homepage));
+        bookingConfirmButton.setOnClickListener(v -> {
+            BookingConfirmationDirections.ActionBookingConfimationToHomepage action = BookingConfirmationDirections.actionBookingConfimationToHomepage(email);
+            NavHostFragment.findNavController(BookingConfirmation.this).navigate(action);
+        });
     }
 }

@@ -40,7 +40,6 @@
             android:layout_toEndOf="@+id/roomInfo_iv_iv"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:text="The Villa Britania Platnium House"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"/>
@@ -55,8 +54,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="15dp"
             android:textSize="12sp"
-            android:layout_below="@+id/roomInfo_ivHotelName_tv"
-            android:text="Educt street, Yogyakarta, Central" />
+            android:layout_below="@+id/roomInfo_ivHotelName_tv" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -70,7 +68,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="Checkout"
+            android:text="@string/checkout"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginStart="15dp"
@@ -80,28 +78,28 @@
             android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="Check-in date:"
+            android:id="@+id/booking_overview_checkIn_tv"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="Check-out date:"
+            android:id="@+id/booking_overview_checkOut_tv"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="Guests: "
+            android:id="@+id/booking_overview_guests_tv"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="Total"
+            android:id="@+id/booking_overview_total_tv"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginStart="15dp"
@@ -120,7 +118,7 @@
         android:background="@drawable/rounded_slight_gray">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="Apply coupons"
+            android:text="@string/apply_coupons"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginStart="15dp"
@@ -133,7 +131,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bookingOverview_btn"
-        android:text="Next step"
+        android:text="@string/next_step"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:layout_marginTop="20dp"

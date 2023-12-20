@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class UserProfile extends Fragment {
     View view;
     BottomNavigationView bottomNavigationView;
-    Button signOutButton;
+    Button signOutButton, saveChanges;
     FirebaseAuth mAuth;
     FirebaseUser user;
     @Override
@@ -32,9 +32,7 @@ public class UserProfile extends Fragment {
         user = mAuth.getCurrentUser();
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
         signOutButton = view.findViewById(R.id.sign_out_btn);
-//        if(user == null) {
-//            NavHostFragment.findNavController(UserProfile.this).navigate(R.id.action_userProfile_to_logIn);
-//        }
+        saveChanges = view.findViewById(R.id.save_changes_btn);
         return view;
     }
 
@@ -43,6 +41,10 @@ public class UserProfile extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(3).setChecked(true);
+        saveChanges.setOnClickListener(v -> {
+
+        });
+
         signOutButton.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getActivity(), MainActivity.class);

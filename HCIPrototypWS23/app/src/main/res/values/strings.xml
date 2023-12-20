@@ -73,4 +73,12 @@
     <string name="what_is_the_purpose_of_your_trip">What is the purpose of your trip ?</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
+    <string name="apply_coupons">Apply coupons</string>
+    <string name="checkout">Checkout</string>
+    <string name="paypal">Paypal</string>
+    <string name="debit_credit_card">Debit/Credit Card</string>
+    <string name="giropay">Giropay</string>
+    <string name="sepa_lastscrifft">SEPA- Lastscrifft</string>
+    <string name="payment_methods">Payment Methods</string>
+    <string name="book_now">Book now!</string>
 </resources>

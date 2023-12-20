@@ -20,7 +20,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Payment Methods"
+        android:text="@string/payment_methods"
         android:textSize="20sp"
         android:textStyle="bold"
         android:translationX="130dp" />
@@ -40,7 +40,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Paypal"
+            android:text="@string/paypal"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Debit/Credit Card"
+            android:text="@string/debit_credit_card"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="Giropay"
+            android:text="@string/giropay"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="SEPA- Lastscrifft"
+            android:text="@string/sepa_lastscrifft"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -117,7 +117,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/rounded_button_background"
-        android:text="Book now!"
+        android:text="@string/book_now"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:translationY="190dp" />

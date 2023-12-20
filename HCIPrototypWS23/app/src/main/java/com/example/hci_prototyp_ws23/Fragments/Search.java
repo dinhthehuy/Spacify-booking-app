@@ -31,17 +31,11 @@ public class Search extends Fragment {
     Button search_button;
     TextView date_textView;
     Toolbar toolbar;
-    EditText destinationEditText;
-    EditText roomNumberEditText;
-    EditText adultNumberEditText;
-    EditText childrenNumberEditText;
+    EditText destinationEditText, roomNumberEditText, adultNumberEditText, childrenNumberEditText;
     User user;
     String destination;
-    int roomNumber;
-    int adultNumber;
-    int childrenNumber;
-    String startDateString;
-    String endDateString;
+    int numberOfRooms, adultNumber, childrenNumber;
+    String checkInDate, checkOutDate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,11 +65,11 @@ public class Search extends Fragment {
         search_button.setOnClickListener(v -> {
             if(!hasEmptyFields() && !hasInvalidFields()) {
                 destination = destinationEditText.getText().toString();
-                roomNumber = Integer.parseInt(roomNumberEditText.getText().toString());
+                numberOfRooms = Integer.parseInt(roomNumberEditText.getText().toString());
                 adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
                 childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
                 SearchDirections.ActionSearchToSearchResultList action =
-                        SearchDirections.actionSearchToSearchResultList(destination, roomNumber, adultNumber, childrenNumber, user, startDateString, endDateString);
+                        SearchDirections.actionSearchToSearchResultList(destination, numberOfRooms, adultNumber, childrenNumber, user, checkInDate, checkOutDate);
                 NavHostFragment.findNavController(Search.this).navigate(action);
             }
         });
@@ -88,9 +82,9 @@ public class Search extends Fragment {
                 Long startDate = selection.first;
                 Long endDate = selection.second;
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                startDateString = sdf.format(new Date(startDate));
-                endDateString = sdf.format(new Date(endDate));
-                String selectedDateRange = startDateString + " - " + endDateString;
+                checkInDate = sdf.format(new Date(startDate));
+                checkOutDate = sdf.format(new Date(endDate));
+                String selectedDateRange = checkInDate + " - " + checkOutDate;
                 date_textView.setText(selectedDateRange);
             });
 
