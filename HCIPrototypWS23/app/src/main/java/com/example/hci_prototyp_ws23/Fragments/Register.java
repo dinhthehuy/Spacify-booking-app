@@ -16,14 +16,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.hci_prototyp_ws23.DatabaseHelper;
-import com.example.hci_prototyp_ws23.Models.Address;
-import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Date;
 
 public class Register extends Fragment {
     View view;
@@ -77,15 +73,13 @@ public class Register extends Fragment {
                 return;
             }
 
-
-
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             if(databaseHelper != null) {
-                                User testUser = new User("dinhthehuy", "Dinh", "The Huy", email, "123456", new Address("Germany", "Darmstadt", "Street", 13),  new Date(100), User.Gender.MALE);
-                                long x = databaseHelper.addUser(testUser, sqLiteDatabase);
-                                Toast.makeText(getContext(), "New Account created " + x, Toast.LENGTH_SHORT).show();
+//                                User testUser = new User("dinhthehuy", "Dinh", "The Huy", email, "123456", new Address("Germany", "Darmstadt", "Street", 13),  new Date(100), User.Gender.MALE);
+//                                long x = databaseHelper.addUser(testUser, sqLiteDatabase);
+//                                Toast.makeText(getContext(), "New Account created ", Toast.LENGTH_SHORT).show();
                                 NavHostFragment.findNavController(Register.this).navigate(R.id.action_register_to_logIn);
                             } else {
                                 Toast.makeText(getContext(), "Error occurred. Please try again later", Toast.LENGTH_SHORT).show();
