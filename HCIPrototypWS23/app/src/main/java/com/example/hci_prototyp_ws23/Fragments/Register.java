@@ -1,5 +1,6 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.hci_prototyp_ws23.DatabaseHelper;
+import com.example.hci_prototyp_ws23.Models.Address;
+import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Date;
 
 public class Register extends Fragment {
     View view;
@@ -26,6 +32,8 @@ public class Register extends Fragment {
     EditText registerEmailEditText, registerPasswordEditText;
     TextView loginNowTextView;
     FirebaseAuth mAuth;
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase sqLiteDatabase;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,6 +45,8 @@ public class Register extends Fragment {
         registerPasswordEditText = view.findViewById(R.id.registerPassword_et);
         loginNowTextView = view.findViewById(R.id.loginNow_tv);
         registerButton = view.findViewById(R.id.register_btn);
+        databaseHelper = DatabaseHelper.getInstance(getContext());
+        sqLiteDatabase = databaseHelper.getWritableDatabase();
         return view;
     }
 
@@ -67,14 +77,22 @@ public class Register extends Fragment {
                 return;
             }
 
+
+
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "New Account created", Toast.LENGTH_SHORT).show();
-                            NavHostFragment.findNavController(Register.this).navigate(R.id.action_register_to_logIn);
+                            if(databaseHelper != null) {
+                                User testUser = new User("dinhthehuy", "Dinh", "The Huy", email, "123456", new Address("Germany", "Darmstadt", "Street", 13),  new Date(100), User.Gender.MALE);
+                                long x = databaseHelper.addUser(testUser, sqLiteDatabase);
+                                Toast.makeText(getContext(), "New Account created " + x, Toast.LENGTH_SHORT).show();
+                                NavHostFragment.findNavController(Register.this).navigate(R.id.action_register_to_logIn);
+                            } else {
+                                Toast.makeText(getContext(), "Error occurred. Please try again later", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Email already used.", Toast.LENGTH_SHORT).show();
                         }
                     });
         });
