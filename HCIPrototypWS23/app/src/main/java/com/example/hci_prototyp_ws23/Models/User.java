@@ -136,7 +136,7 @@ public class User implements Parcelable {
     }
 
     public enum Gender {
-        MALE, FEMALE, OTHER
+        MALE, FEMALE, OTHER, EMPTY
     }
 
     public User(String username, String firstName, String lastName, String email, String phoneNumber, Address userAddress, Date dateOfBirth, Gender gender) {

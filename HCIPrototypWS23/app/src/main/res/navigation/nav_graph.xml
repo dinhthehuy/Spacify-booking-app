@@ -88,9 +88,6 @@
         <argument android:name="hotelArg"
             app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
         <argument
-            android:name="roomTypeArg"
-            app:argType="com.example.hci_prototyp_ws23.Models.RoomType" />
-        <argument
             android:name="adultsNumberArg"
             app:argType="integer" />
         <argument
@@ -131,7 +128,9 @@
             android:id="@+id/action_register_to_logIn"
             app:destination="@id/logIn"
             app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out" />
+            app:exitAnim="@anim/slide_out"
+            app:popUpTo="@id/logIn"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/savedList"
@@ -185,9 +184,6 @@
             android:name="hotelArg"
             app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
         <argument
-            android:name="roomTypeArg"
-            app:argType="com.example.hci_prototyp_ws23.Models.RoomType" />
-        <argument
             android:name="checkInDateArg"
             app:argType="string" />
         <argument
@@ -218,9 +214,6 @@
             android:name="hotelArg"
             app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
         <argument
-            android:name="roomTypeArg"
-            app:argType="com.example.hci_prototyp_ws23.Models.RoomType" />
-        <argument
             android:name="checkInDateArg"
             app:argType="string" />
         <argument
@@ -249,9 +242,6 @@
             app:argType="com.example.hci_prototyp_ws23.Models.User" />
         <argument android:name="hotelArg"
             app:argType="com.example.hci_prototyp_ws23.Models.Hotel" />
-        <argument
-            android:name="roomTypeArg"
-            app:argType="com.example.hci_prototyp_ws23.Models.RoomType" />
         <argument android:name="checkInDateArg"
             app:argType="string" />
         <argument android:name="checkOutDateArg"

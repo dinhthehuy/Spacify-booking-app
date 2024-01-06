@@ -1,6 +1,9 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,12 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.hci_prototyp_ws23.Adapters.UserBookingsAdapter;
-import com.example.hci_prototyp_ws23.Models.Address;
 import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,13 +35,7 @@ public class UserBookings extends Fragment {
         recyclerView = view.findViewById(R.id.userBookings_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<Hotel> hotels = new ArrayList<>();
-        hotels.add(new Hotel("The Villa Britania Platinum House", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("The Villa Britania Platinum House", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("The Villa Britania Platinum House", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("The Villa Britania Platinum House", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("The Villa Britania Platinum House", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("The Villa Britania Platinum House", new Address("United States", "New York", "123 Main St", 10001),""));
+        List<Hotel> hotels = new ArrayList<>(); // TODO: Query from database
 
         UserBookingsAdapter userBookingsAdapter = new UserBookingsAdapter(hotels);
         recyclerView.setAdapter(userBookingsAdapter);

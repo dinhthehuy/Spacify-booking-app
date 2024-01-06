@@ -12,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.widget.Button;
 
 import com.example.hci_prototyp_ws23.Models.Hotel;
-import com.example.hci_prototyp_ws23.Models.RoomType;
 import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,7 +23,6 @@ public class PaymentMethod extends Fragment {
     Toolbar toolbar;
     User user;
     Hotel hotel;
-    RoomType roomType;
     String checkInDate, checkOutDate;
     int adultsNumber, childrenNumber, numberOfRooms;
     double totalPrice;
@@ -39,7 +37,6 @@ public class PaymentMethod extends Fragment {
 
         user = PaymentMethodArgs.fromBundle(getArguments()).getUserArg();
         hotel = PaymentMethodArgs.fromBundle(getArguments()).getHotelArg();
-        roomType = PaymentMethodArgs.fromBundle(getArguments()).getRoomTypeArg();
         checkInDate = PaymentMethodArgs.fromBundle(getArguments()).getCheckInDateArg();
         checkOutDate = PaymentMethodArgs.fromBundle(getArguments()).getCheckOutDateArg();
         adultsNumber = PaymentMethodArgs.fromBundle(getArguments()).getAdultsNumberArg();

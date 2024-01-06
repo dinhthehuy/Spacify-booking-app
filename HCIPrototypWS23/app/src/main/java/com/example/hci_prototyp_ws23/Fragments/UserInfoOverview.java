@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.hci_prototyp_ws23.Models.Hotel;
-import com.example.hci_prototyp_ws23.Models.RoomType;
 import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,7 +27,6 @@ public class UserInfoOverview extends Fragment {
     EditText firstName, lastName, email, streetAddress, city, country, mobileNumber;
     User user;
     Hotel hotel;
-    RoomType roomType;
     String checkInDate, checkOutDate;
     int adultsNumber, childrenNumber, numberOfRooms;
     @Override
@@ -48,7 +46,6 @@ public class UserInfoOverview extends Fragment {
 
         user = UserInfoOverviewArgs.fromBundle(getArguments()).getUserArg();
         hotel = UserInfoOverviewArgs.fromBundle(getArguments()).getHotelArg();
-        roomType = UserInfoOverviewArgs.fromBundle(getArguments()).getRoomTypeArg();
         checkInDate = UserInfoOverviewArgs.fromBundle(getArguments()).getCheckInDateArg();
         checkOutDate = UserInfoOverviewArgs.fromBundle(getArguments()).getCheckOutDateArg();
         adultsNumber = UserInfoOverviewArgs.fromBundle(getArguments()).getAdultsNumberArg();
@@ -62,7 +59,7 @@ public class UserInfoOverview extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(UserInfoOverview.this).popBackStack());
         userInfoButton.setOnClickListener(v -> {
-            UserInfoOverviewDirections.ActionUserInfoOverviewToBookingOverview action = UserInfoOverviewDirections.actionUserInfoOverviewToBookingOverview(user, hotel, roomType, checkInDate, checkOutDate, adultsNumber, childrenNumber, numberOfRooms);
+            UserInfoOverviewDirections.ActionUserInfoOverviewToBookingOverview action = UserInfoOverviewDirections.actionUserInfoOverviewToBookingOverview(user, hotel,  checkInDate, checkOutDate, adultsNumber, childrenNumber, numberOfRooms);
             NavHostFragment.findNavController(UserInfoOverview.this).navigate(action);
         });
         firstName.setText(user.getFirstName());

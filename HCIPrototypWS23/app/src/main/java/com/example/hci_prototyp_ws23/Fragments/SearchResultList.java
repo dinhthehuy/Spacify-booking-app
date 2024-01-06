@@ -59,7 +59,7 @@ public class SearchResultList extends Fragment {
         SearchResultListAdapter searchResultListAdapter = new SearchResultListAdapter(hotels);
         recyclerView.setAdapter(searchResultListAdapter);
         searchResultListAdapter.setOnClickListener((position, hotel) -> {
-            SearchResultListDirections.ActionSearchResultListToHotelDescription action = SearchResultListDirections.actionSearchResultListToHotelDescription(user, hotel, hotel.getRoomTypeList().get(0), adultNumber, childrenNumber, checkInDate, checkOutDate, numberOfRooms);
+            SearchResultListDirections.ActionSearchResultListToHotelDescription action = SearchResultListDirections.actionSearchResultListToHotelDescription(user, hotel, adultNumber, childrenNumber, checkInDate, checkOutDate, numberOfRooms);
             NavHostFragment.findNavController(SearchResultList.this).navigate(action);
         });
         return view;

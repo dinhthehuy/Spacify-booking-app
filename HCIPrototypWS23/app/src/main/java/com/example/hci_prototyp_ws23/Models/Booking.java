@@ -10,7 +10,6 @@ import java.util.Date;
 public class Booking implements Parcelable {
     private User user;
     private Hotel hotel;
-    private RoomType roomType;
     private int numberOfRooms;
     private Date checkInDate;
     private Date checkOutDate;
@@ -23,7 +22,6 @@ public class Booking implements Parcelable {
     protected Booking(Parcel in) {
         user = in.readParcelable(User.class.getClassLoader());
         hotel = in.readParcelable(Hotel.class.getClassLoader());
-        roomType = in.readParcelable(RoomType.class.getClassLoader());
         numberOfRooms = in.readInt();
         checkInDate = new Date(in.readLong());
         checkOutDate = new Date(in.readLong());
@@ -60,14 +58,6 @@ public class Booking implements Parcelable {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
-    }
-
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
     }
 
     public int getNumberOfRooms() {
@@ -142,7 +132,6 @@ public class Booking implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeParcelable(user, flags);
         dest.writeParcelable(hotel, flags);
-        dest.writeParcelable(roomType, flags);
         dest.writeInt(numberOfRooms);
         dest.writeLong(checkInDate.getTime());
         dest.writeLong(checkOutDate.getTime());
@@ -159,10 +148,9 @@ public class Booking implements Parcelable {
     private enum State {
         ENDED, BOOKED, CANCELED
     }
-    public Booking(User user, Hotel hotel, RoomType roomType, int numberOfRooms, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, PaymentMethod paymentMethod) {
+    public Booking(User user, Hotel hotel, int numberOfRooms, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, PaymentMethod paymentMethod) {
         this.user = user;
         this.hotel = hotel;
-        this.roomType = roomType;
         this.numberOfRooms = numberOfRooms;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;

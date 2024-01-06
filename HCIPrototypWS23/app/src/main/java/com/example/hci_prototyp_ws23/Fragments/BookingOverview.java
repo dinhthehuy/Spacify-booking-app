@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.hci_prototyp_ws23.Models.Hotel;
-import com.example.hci_prototyp_ws23.Models.RoomType;
 import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,7 +34,6 @@ public class BookingOverview extends Fragment {
     TextView hotelName, hotelAddress, checkIn, checkOut, guests, total;
     User user;
     Hotel hotel;
-    RoomType roomType;
     String checkInDate, checkOutDate;
     int adultsNumber, childrenNumber, numberOfRooms;
     double totalPrice;
@@ -58,7 +56,6 @@ public class BookingOverview extends Fragment {
 
         user = BookingOverviewArgs.fromBundle(getArguments()).getUserArg();
         hotel = BookingOverviewArgs.fromBundle(getArguments()).getHotelArg();
-        roomType = BookingOverviewArgs.fromBundle(getArguments()).getRoomTypeArg();
         checkInDate = BookingOverviewArgs.fromBundle(getArguments()).getCheckInDateArg();
         checkOutDate = BookingOverviewArgs.fromBundle(getArguments()).getCheckOutDateArg();
         adultsNumber = BookingOverviewArgs.fromBundle(getArguments()).getAdultsNumberArg();
@@ -81,7 +78,7 @@ public class BookingOverview extends Fragment {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        totalPrice = numberOfRooms * roomType.getPricePerNight() * nights;
+        totalPrice = numberOfRooms * nights * hotel.getPricePerNight();
 
         hotelName.setText(hotel.getHotelName());
         hotelAddress.setText(hotel.getHotelAddress().getStreetAddress() + ", " + hotel.getHotelAddress().getCity() + ", " + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
@@ -90,7 +87,7 @@ public class BookingOverview extends Fragment {
         guests.setText("Guests: " + adultsNumber + " adults and " + childrenNumber + " children");
         total.setText("Total: " + totalPrice + " €");
         roomInfoButton.setOnClickListener(v -> {
-            BookingOverviewDirections.ActionBookingOverviewToPaymentMethod action = BookingOverviewDirections.actionBookingOverviewToPaymentMethod(user, hotel, roomType, checkInDate, checkOutDate, adultsNumber, childrenNumber, (float) totalPrice, numberOfRooms);
+            BookingOverviewDirections.ActionBookingOverviewToPaymentMethod action = BookingOverviewDirections.actionBookingOverviewToPaymentMethod(user, hotel, checkInDate, checkOutDate, adultsNumber, childrenNumber, (float) totalPrice, numberOfRooms);
             NavHostFragment.findNavController(BookingOverview.this).navigate(action);
         });
     }

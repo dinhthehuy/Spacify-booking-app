@@ -8,17 +8,18 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 public class Hotel implements Parcelable {
-    private String hotelName;
-    private Address hotelAddress;
-    private ArrayList<RoomType> roomTypeList;
-    private String description;
+    private final String hotelName;
+    private final Address hotelAddress;
+    private final String description;
+    private final double pricePerNight;
+    private String imageURL; // TODO: Implement later
     private ArrayList<String> facilities;
 
     protected Hotel(Parcel in) {
         hotelName = in.readString();
         hotelAddress = in.readParcelable(Address.class.getClassLoader());
-        roomTypeList = in.createTypedArrayList(RoomType.CREATOR);
         description = in.readString();
+        pricePerNight = in.readDouble();
         facilities = in.createStringArrayList();
     }
 
@@ -37,29 +38,24 @@ public class Hotel implements Parcelable {
     public String getHotelName() {
         return hotelName;
     }
-
     public Address getHotelAddress() {
         return hotelAddress;
     }
-
-    public ArrayList<RoomType> getRoomTypeList() {
-        return roomTypeList;
-    }
-
     public String getDescription() {
         return description;
     }
-
     public ArrayList<String> getFacilities() {
         return facilities;
     }
-
-    public Hotel(String hotelName, Address hotelAddress, String description) {
+    public double getPricePerNight() {
+        return pricePerNight;
+    }
+    public Hotel(String hotelName, Address hotelAddress, String description, double pricePerNight) {
         facilities = new ArrayList<>();
-        roomTypeList = new ArrayList<>();
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
         this.description = description;
+        this.pricePerNight = pricePerNight;
     }
 
     @Override
@@ -71,8 +67,8 @@ public class Hotel implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(hotelName);
         dest.writeParcelable(hotelAddress, flags);
-        dest.writeTypedList(roomTypeList);
         dest.writeString(description);
+        dest.writeDouble(pricePerNight);
         dest.writeStringList(facilities);
     }
 }
