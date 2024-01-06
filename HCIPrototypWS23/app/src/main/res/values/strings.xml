@@ -81,4 +81,5 @@
     <string name="sepa_lastscrifft">SEPA- Lastscrifft</string>
     <string name="payment_methods">Payment Methods</string>
     <string name="book_now">Book now!</string>
+    <string name="username">Username</string>
 </resources>

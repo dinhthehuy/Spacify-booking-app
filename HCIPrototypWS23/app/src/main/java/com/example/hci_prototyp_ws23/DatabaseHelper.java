@@ -19,31 +19,43 @@ import java.util.Collections;
 import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String HOTEL_TABLE = "hotel";
+    private static final String HOTEL_TABLE = "hotel";
     private static final String HOTEL_NAME_COLUMN = "hotel_name";
     private static final String HOTEL_COUNTRY_COLUMN = "country";
     private static final String HOTEL_CITY_COLUMN = "city";
     private static final String HOTEL_STREET_ADDRESS_COLUMN = "street_address";
     private static final String HOTEL_POSTAL_CODE_COLUMN = "postal_code";
-    public static final String USER_TABLE = "user";
-    public static final String USERNAME_COLUMN = "username";
-    public static final String USER_FIRST_NAME_COLUMN = "first_name";
-    public static final String USER_LAST_NAME_COLUMN = "last_name";
-    public static final String USER_EMAIL_COLUMN = "email";
-    public static final String USER_COUNTRY_COLUMN = "country";
-    public static final String USER_CITY_COLUMN = "city";
-    public static final String USER_STREET_ADDRESS_COLUMN = "street_address";
-    public static final String USER_POSTAL_CODE_COLUMN = "postal_code";
-    public static final String USER_PHONE_NUMBER_COLUMN = "phone_number";
-    public static final String USER_GENDER_COLUMN = "gender";
-    public static final String USER_DATE_OF_BIRTH_COLUMN = "date_of_birth";
-
-    public static final String ADDRESS_TABLE = "address";
-    public static final String COUNTRY_COLUMN = "country";
-    public static final String CITY_COLUMN = "city";
-    public static final String STREET_ADDRESS_COLUMN = "street_address";
-    public static final String POSTAL_CODE_COLUMN = "postal_code";
+    private static final String HOTEL_PRICE_PER_NIGHT = "price_per_night";
+    private static final String USER_TABLE = "user";
+    private static final String USERNAME_COLUMN = "username";
+    private static final String USER_FIRST_NAME_COLUMN = "first_name";
+    private static final String USER_LAST_NAME_COLUMN = "last_name";
+    private static final String USER_EMAIL_COLUMN = "email";
+    private static final String USER_COUNTRY_COLUMN = "country";
+    private static final String USER_CITY_COLUMN = "city";
+    private static final String USER_STREET_ADDRESS_COLUMN = "street_address";
+    private static final String USER_POSTAL_CODE_COLUMN = "postal_code";
+    private static final String USER_PHONE_NUMBER_COLUMN = "phone_number";
+    private static final String USER_GENDER_COLUMN = "gender";
+    private static final String USER_DATE_OF_BIRTH_COLUMN = "date_of_birth";
+    private static final String ADDRESS_TABLE = "address";
+    private static final String COUNTRY_COLUMN = "country";
+    private static final String CITY_COLUMN = "city";
+    private static final String STREET_ADDRESS_COLUMN = "street_address";
+    private static final String POSTAL_CODE_COLUMN = "postal_code";
     private static final String HOTEL_DESCRIPTION_COLUMN = "description";
+    private static final String SERVICE_TABLE = "service";
+    private static final String SERVICE_NAME_COLUMN = "name";
+    private static final String SERVICE_HOTEL_NAME_COLUMN = "hotel_name";
+    private static final String BOOKING_TABLE = "booking";
+    private static final String BOOKING_USERNAME_COLUMN = "username";
+    private static final String BOOKING_HOTEL_NAME_COLUMN = "hotel_name";
+    private static final String BOOKING_CHECK_IN_DATE_COLUMN = "check_in_date";
+    private static final String BOOKING_CHECK_OUT_DATE_COLUMN = "check_out_date";
+    private static final String BOOKING_ADULT_NUMBER_COLUMN = "adult_number";
+    private static final String BOOKING_CHILDREN_NUMBER_COLUMN = "children_number";
+    private static final String BOOKING_TOTAL_PRICE_COLUMN = "total_price";
+    private static final String BOOKING_PAYMENT_METHOD_COLUMN = "payment_method";
     public static DatabaseHelper instance;
     ArrayList<Address> initialAddresses = new ArrayList<>(Arrays.asList(
             new Address("United States", "New York", "123 Main St", 10001),
@@ -55,12 +67,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     ));
 
     ArrayList<Hotel> initialHotels = new ArrayList<>(Arrays.asList(
-            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""),
-            new Hotel("Azure Haven Hotel", new Address("United States", "California", "325 Serenity Lane", 90210),""),
-            new Hotel("Crimson Crown Inn", new Address("United States", "New York", "112 Royal Street, Regal City", 10001),""),
-            new Hotel("Mystic Oasis Resort", new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),""),
-            new Hotel("Radiant Horizon Hotel", new Address("United States", "Texas", "75 Luminous Boulevard, Radiant City", 75234),""),
-            new Hotel("Alpine Haven Lodge", new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345),"")
+            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"", 90),
+            new Hotel("Azure Haven Hotel", new Address("United States", "California", "325 Serenity Lane", 90210),"", 100),
+            new Hotel("Crimson Crown Inn", new Address("United States", "New York", "112 Royal Street, Regal City", 10001),"", 85),
+            new Hotel("Mystic Oasis Resort", new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),"", 90),
+            new Hotel("Radiant Horizon Hotel", new Address("United States", "Texas", "75 Luminous Boulevard, Radiant City", 75234),"", 95),
+            new Hotel("Alpine Haven Lodge", new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345),"", 110)
     ));
 
     ArrayList<User> initialUsers;
@@ -104,31 +116,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + HOTEL_CITY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + CITY_COLUMN + "), "
                 + HOTEL_STREET_ADDRESS_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
                 + HOTEL_POSTAL_CODE_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + POSTAL_CODE_COLUMN + "), "
-                + HOTEL_DESCRIPTION_COLUMN + " TEXT, "
+                + HOTEL_DESCRIPTION_COLUMN + " TEXT NOT NULL, "
+                + HOTEL_PRICE_PER_NIGHT + " FLOAT NOT NULL, "
                 + "PRIMARY KEY (" + HOTEL_NAME_COLUMN
                 + "));";
 
         String createUserTable = "CREATE TABLE " + USER_TABLE + " ("
                 + USERNAME_COLUMN + " TEXT, "
-                + USER_FIRST_NAME_COLUMN + " TEXT, "
-                + USER_LAST_NAME_COLUMN + " TEXT, "
-                + USER_EMAIL_COLUMN + " TEXT, "
+                + USER_FIRST_NAME_COLUMN + " TEXT NOT NULL, "
+                + USER_LAST_NAME_COLUMN + " TEXT NOT NULL, "
+                + USER_EMAIL_COLUMN + " TEXT NOT NULL, "
                 + USER_COUNTRY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
                 + USER_CITY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + CITY_COLUMN + "), "
                 + USER_STREET_ADDRESS_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
                 + USER_POSTAL_CODE_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + POSTAL_CODE_COLUMN + "), "
-                + USER_PHONE_NUMBER_COLUMN + " TEXT, "
-                + USER_GENDER_COLUMN + " TEXT, "
-                + USER_DATE_OF_BIRTH_COLUMN + " TEXT, "
+                + USER_PHONE_NUMBER_COLUMN + " TEXT NOT NULL, "
+                + USER_GENDER_COLUMN + " TEXT NOT NULL, "
+                + USER_DATE_OF_BIRTH_COLUMN + " DATE NOT NULL, "
                 + "PRIMARY KEY (" + USERNAME_COLUMN
+                + "));";
+
+        String createBookingTable = "CREATE TABLE " + BOOKING_TABLE + " ("
+                + BOOKING_USERNAME_COLUMN + " TEXT REFERENCES " + USER_TABLE + "(" + USERNAME_COLUMN + "), "
+                + BOOKING_HOTEL_NAME_COLUMN + " TEXT REFERENCES " + HOTEL_TABLE + "(" + HOTEL_NAME_COLUMN + "), "
+                + BOOKING_CHECK_IN_DATE_COLUMN + " DATE, "
+                + BOOKING_CHECK_OUT_DATE_COLUMN + " DATE, "
+                + BOOKING_ADULT_NUMBER_COLUMN + " INTEGER NOT NULL, "
+                + BOOKING_CHILDREN_NUMBER_COLUMN + " INTEGER NOT NULL, "
+                + BOOKING_TOTAL_PRICE_COLUMN + " FLOAT NOT NULL, "
+                + BOOKING_PAYMENT_METHOD_COLUMN + " TEXT NOT NULL, "
+                + "PRIMARY KEY (" + BOOKING_USERNAME_COLUMN + ", " + BOOKING_HOTEL_NAME_COLUMN + ", " + BOOKING_CHECK_IN_DATE_COLUMN + ", " + BOOKING_CHECK_OUT_DATE_COLUMN
+                + "));";
+
+        String createServiceTable = "CREATE TABLE " + SERVICE_TABLE + " ("
+                + SERVICE_HOTEL_NAME_COLUMN + " TEXT REFERENCES " + HOTEL_TABLE + "(" + HOTEL_NAME_COLUMN + "), "
+                + SERVICE_NAME_COLUMN + " TEXT NOT NULL, "
+                + "PRIMARY KEY (" + SERVICE_HOTEL_NAME_COLUMN
                 + "));";
 
         db.execSQL(createAddressTable);
         db.execSQL(createHotelTable);
         db.execSQL(createUserTable);
+        db.execSQL(createServiceTable);
+        db.execSQL(createBookingTable);
         loadInitialAddress(db);
         loadInitialHotels(db);
-        insertUser(db, initialUsers.get(0));
+        insertUser(initialUsers.get(0), db);
     }
 
     @Override
@@ -156,11 +189,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cv.put(HOTEL_STREET_ADDRESS_COLUMN, initialHotels.get(i).getHotelAddress().getStreetAddress());
             cv.put(HOTEL_POSTAL_CODE_COLUMN, initialHotels.get(i).getHotelAddress().getPostalCode());
             cv.put(HOTEL_DESCRIPTION_COLUMN, initialHotels.get(i).getDescription());
+            cv.put(HOTEL_PRICE_PER_NIGHT, initialHotels.get(i).getPricePerNight());
             db.insert(HOTEL_TABLE, null, cv);
         }
     }
 
-    public void insertUser(SQLiteDatabase db, User user) {
+    public void insertUser(User user, SQLiteDatabase db) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         ContentValues cv = new ContentValues();
         cv.put(USERNAME_COLUMN, user.getUsername());

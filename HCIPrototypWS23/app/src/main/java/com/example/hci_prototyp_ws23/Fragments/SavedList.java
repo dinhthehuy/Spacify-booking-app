@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hci_prototyp_ws23.Adapters.SavedListAdapter;
-import com.example.hci_prototyp_ws23.Models.Address;
 import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,14 +37,7 @@ public class SavedList extends Fragment {
         recyclerView = view.findViewById(R.id.savedList_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        hotels = new ArrayList<>();
-        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
-        hotels.add(new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),""));
+        hotels = new ArrayList<>(); // TODO: Query from database
 
         SavedListAdapter savedListAdapter = new SavedListAdapter(hotels);
         recyclerView.setAdapter(savedListAdapter);
