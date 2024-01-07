@@ -94,7 +94,7 @@ public class Register extends Fragment {
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
-                    (view1, year1, month1, dayOfMonth) -> dateOfBirthTextView.setText(year1 + "-" + (month1 -1) + "-" + dayOfMonth), year, month, day);
+                    (view1, year1, month1, dayOfMonth) -> dateOfBirthTextView.setText(year1 + "-" + (month1+1) + "-" + dayOfMonth), year, month, day);
             datePickerDialog.show();
         });
 

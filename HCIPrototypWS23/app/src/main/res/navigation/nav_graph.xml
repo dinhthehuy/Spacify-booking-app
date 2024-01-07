@@ -33,9 +33,6 @@
             app:destination="@id/search"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out" />
-        <argument
-            android:name="emailArg"
-            app:argType="string" />
         <action
             android:id="@+id/action_homepage_to_search2"
             app:destination="@id/search" />

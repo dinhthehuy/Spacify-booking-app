@@ -38,14 +38,14 @@
             tools:ignore="RtlSymmetry" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/first_name_til"
+            android:id="@+id/_first_name_til"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/gray_background"
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/first_name_et"
+                android:id="@+id/profile_first_name_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -61,7 +61,7 @@
             android:background="@drawable/gray_background">
 
             <EditText
-                android:id="@+id/last_name_et"
+                android:id="@+id/profile_last_name_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -87,7 +87,7 @@
             android:background="@drawable/gray_background">
 
             <EditText
-                android:id="@+id/loginEmail_et"
+                android:id="@+id/profile_email_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -113,7 +113,7 @@
             android:background="@drawable/gray_background">
 
             <EditText
-                android:id="@+id/mobile_number_et"
+                android:id="@+id/profile_mobile_number_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -129,7 +129,7 @@
             android:background="@drawable/gray_background">
 
             <EditText
-                android:id="@+id/date_of_birth_et"
+                android:id="@+id/profile_date_of_birth_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="date"
@@ -186,7 +186,7 @@
             android:background="@drawable/gray_background" >
 
             <EditText
-                android:id="@+id/country_et"
+                android:id="@+id/profile_country_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -202,10 +202,10 @@
             android:background="@drawable/gray_background">
 
             <EditText
-                android:id="@+id/city_et"
+                android:id="@+id/profile_city_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="date"
+                android:inputType="text"
                 android:importantForAutofill="no"
                 android:hint="@string/city" />
 
@@ -218,10 +218,10 @@
             android:background="@drawable/gray_background">
 
             <EditText
-                android:id="@+id/street_address_et"
+                android:id="@+id/profile_street_address_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="text"
                 android:importantForAutofill="no"
                 android:hint="@string/street_address" />
 
@@ -235,10 +235,10 @@
             android:layout_marginBottom="10dp">
 
             <EditText
-                android:id="@+id/postal_code_et"
+                android:id="@+id/profile_postal_code_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="date"
+                android:inputType="number"
                 android:importantForAutofill="no"
                 android:hint="@string/postal_code" />
 

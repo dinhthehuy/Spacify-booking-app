@@ -1,7 +1,9 @@
 package com.example.hci_prototyp_ws23;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -15,7 +17,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -75,21 +76,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             new Hotel("Alpine Haven Lodge", new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345),"", 110)
     ));
 
-    ArrayList<User> initialUsers;
-
-    {
-        try {
-            initialUsers = new ArrayList<>(Collections.singletonList(
-                    new User("dinhthehuy", "Dinh", "The Huy", "dinhthehuy51@gmail.com", "123456",
-                            new Address("Germany", "Darmstadt", "Street", 13),
-                            new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse("2002-11-08"),
-                            User.Gender.MALE)
-            ));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static synchronized DatabaseHelper getInstance(Context context) {
         if(instance == null) {
             return new DatabaseHelper(context.getApplicationContext());
@@ -128,7 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + USER_EMAIL_COLUMN + " TEXT NOT NULL, "
                 + USER_COUNTRY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
                 + USER_CITY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + CITY_COLUMN + "), "
-                + USER_STREET_ADDRESS_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
+                + USER_STREET_ADDRESS_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
                 + USER_POSTAL_CODE_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + POSTAL_CODE_COLUMN + "), "
                 + USER_PHONE_NUMBER_COLUMN + " TEXT NOT NULL, "
                 + USER_GENDER_COLUMN + " TEXT NOT NULL, "
@@ -161,7 +147,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createBookingTable);
         loadInitialAddress(db);
         loadInitialHotels(db);
-        insertUser(initialUsers.get(0), db);
     }
 
     @Override
@@ -209,5 +194,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(USER_GENDER_COLUMN, user.getGender().name());
         cv.put(USER_DATE_OF_BIRTH_COLUMN, sdf.format(user.getDateOfBirth()));
         db.insert(USER_TABLE, null, cv);
+    }
+
+    public User readUserByEmail(String email) {
+        User user;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String queryUser = "SELECT * FROM " + USER_TABLE + " WHERE " + USER_EMAIL_COLUMN + "=" + "'"+email+"'" + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryUser, null);
+        if(cursor.moveToFirst()) {
+            String readUsername = cursor.getString(0);
+            String readFirstName = cursor.getString(1);
+            String readLastName = cursor.getString(2);
+            String readEmail = cursor.getString(3);
+            String readCountry = cursor.getString(4);
+            String readCity = cursor.getString(5);
+            String readAddress = cursor.getString(6);
+            int readPostalCode = cursor.getInt(7);
+            String readPhoneNumber = cursor.getString(8);
+            String readGender = cursor.getString(9);
+            String readDateOfBirth = cursor.getString(10);
+            try {
+                user = new User(readUsername, readFirstName, readLastName, readEmail, readPhoneNumber, new Address(readCountry, readCity, readAddress, readPostalCode), sdf.parse(readDateOfBirth), User.Gender.valueOf(readGender));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return null;
+        }
+        cursor.close();
+        db.close();
+        return user;
+    }
+
+    public void updateUser(User user) {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USERNAME_COLUMN, user.getUsername());
+        values.put(USER_FIRST_NAME_COLUMN, user.getFirstName());
+        values.put(USER_LAST_NAME_COLUMN, user.getLastName());
+        values.put(USER_EMAIL_COLUMN, user.getEmail());
+        values.put(USER_COUNTRY_COLUMN, user.getUserAddress().getCountry());
+        values.put(USER_CITY_COLUMN, user.getUserAddress().getCity());
+        values.put(USER_STREET_ADDRESS_COLUMN, user.getUserAddress().getStreetAddress());
+        values.put(USER_POSTAL_CODE_COLUMN, String.valueOf(user.getUserAddress().getPostalCode()));
+        values.put(USER_PHONE_NUMBER_COLUMN, user.getPhoneNumber());
+        values.put(USER_GENDER_COLUMN, user.getGender().name());
+        values.put(USER_DATE_OF_BIRTH_COLUMN, sdf.format(user.getDateOfBirth()));
+        String whereClause = USER_EMAIL_COLUMN + "= ? ";
+        String[] whereArgs = {user.getEmail()};
+        db.update(USER_TABLE, values, whereClause, whereArgs);
     }
 }

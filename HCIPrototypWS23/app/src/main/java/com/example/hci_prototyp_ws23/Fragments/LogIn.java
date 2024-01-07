@@ -70,8 +70,7 @@ public class LogIn extends Fragment {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            LogInDirections.ActionLogInToHomepage action = LogInDirections.actionLogInToHomepage(loginEmailEditText.getText().toString());
-                            NavHostFragment.findNavController(LogIn.this).navigate(action);
+                            NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_homepage);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
