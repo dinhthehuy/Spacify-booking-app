@@ -37,7 +37,7 @@ public class BookingOverview extends Fragment {
     String checkInDate, checkOutDate;
     int adultsNumber, childrenNumber, numberOfRooms;
     double totalPrice;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     long nights;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +70,7 @@ public class BookingOverview extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.GONE);
         toolbar.setVisibility(View.VISIBLE);
+        toolbar.setTitle("Overview");
         toolbar.inflateMenu(R.menu.top_action_bar_room_information);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(BookingOverview.this).popBackStack());
 

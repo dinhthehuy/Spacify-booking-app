@@ -20,94 +20,70 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/payment_methods"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:translationX="130dp" />
+        android:text="@string/how_do_you_want_to_pay"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/rounded_slight_gray"
-        android:translationY="50dp">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <RadioButton
+            android:id="@+id/payment_paypal_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="15dp"
+            android:padding="15dp"
             android:text="@string/paypal"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@drawable/rounded_slight_gray"/>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/rounded_slight_gray"
-        android:translationY="50dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <RadioButton
+            android:id="@+id/payment_debit_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="15dp"
+            android:padding="15dp"
             android:text="@string/debit_credit_card"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@drawable/rounded_slight_gray" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/rounded_slight_gray"
-        android:translationY="50dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <RadioButton
+            android:id="@+id/payment_giropay_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="15dp"
+            android:padding="15dp"
             android:text="@string/giropay"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@drawable/rounded_slight_gray" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/rounded_slight_gray"
-        android:translationY="50dp">
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <RadioButton
+            android:id="@+id/payment_sepa_rb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="15dp"
+            android:padding="15dp"
             android:text="@string/sepa_lastscrifft"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:background="@drawable/rounded_slight_gray" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </RadioGroup>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/paymentMethod_btn"

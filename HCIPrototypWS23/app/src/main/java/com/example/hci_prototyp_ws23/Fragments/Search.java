@@ -81,7 +81,7 @@ public class Search extends Fragment {
             datePicker.addOnPositiveButtonClickListener(selection -> {
                 Long startDate = selection.first;
                 Long endDate = selection.second;
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                 checkInDate = sdf.format(new Date(startDate));
                 checkOutDate = sdf.format(new Date(endDate));
                 String selectedDateRange = checkInDate + " - " + checkOutDate;

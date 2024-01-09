@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.hci_prototyp_ws23.Models.Address;
+import com.example.hci_prototyp_ws23.Models.Booking;
 import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.example.hci_prototyp_ws23.Models.User;
 
@@ -100,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + HOTEL_NAME_COLUMN + " TEXT, "
                 + HOTEL_COUNTRY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
                 + HOTEL_CITY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + CITY_COLUMN + "), "
-                + HOTEL_STREET_ADDRESS_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
+                + HOTEL_STREET_ADDRESS_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
                 + HOTEL_POSTAL_CODE_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + POSTAL_CODE_COLUMN + "), "
                 + HOTEL_DESCRIPTION_COLUMN + " TEXT NOT NULL, "
                 + HOTEL_PRICE_PER_NIGHT + " FLOAT NOT NULL, "
@@ -196,6 +197,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(USER_TABLE, null, cv);
     }
 
+    public void insertBooking(Booking booking) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        ContentValues cv = new ContentValues();
+        cv.put(BOOKING_USERNAME_COLUMN, booking.getUser().getUsername());
+        cv.put(BOOKING_HOTEL_NAME_COLUMN, booking.getHotel().getHotelName());
+        cv.put(BOOKING_CHECK_IN_DATE_COLUMN, sdf.format(booking.getCheckInDate()));
+        cv.put(BOOKING_CHECK_OUT_DATE_COLUMN, sdf.format(booking.getCheckOutDate()));
+        cv.put(BOOKING_ADULT_NUMBER_COLUMN, booking.getAdultNumber());
+        cv.put(BOOKING_CHILDREN_NUMBER_COLUMN, booking.getChildrenNumber());
+        cv.put(BOOKING_TOTAL_PRICE_COLUMN, booking.getTotalPrice());
+        cv.put(BOOKING_PAYMENT_METHOD_COLUMN, booking.getPaymentMethod().name());
+        db.insert(BOOKING_TABLE, null, cv);
+    }
+
     public User readUserByEmail(String email) {
         User user;
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -245,5 +261,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String whereClause = USER_EMAIL_COLUMN + "= ? ";
         String[] whereArgs = {user.getEmail()};
         db.update(USER_TABLE, values, whereClause, whereArgs);
+        db.close();
+    }
+
+    public ArrayList<Hotel> readAllHotels() {
+        ArrayList<Hotel> arrayList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + HOTEL_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                String readHotelName = cursor.getString(0);
+                String readCountry = cursor.getString(1);
+                String readCity = cursor.getString(2);
+                String readStreetAddress = cursor.getString(3);
+                int readPostalCode = cursor.getInt(4);
+                String readDescription = cursor.getString(5);
+                double readPricePerNight = cursor.getFloat( 6);
+                Hotel hotel = new Hotel(readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), readDescription, readPricePerNight);
+                arrayList.add(hotel);
+            } while(cursor.moveToNext());
+        } else {
+            return arrayList;
+        }
+
+        cursor.close();
+        db.close();
+        return arrayList;
     }
 }

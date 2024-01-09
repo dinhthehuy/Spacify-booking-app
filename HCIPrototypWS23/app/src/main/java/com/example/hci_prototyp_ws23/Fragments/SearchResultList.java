@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hci_prototyp_ws23.Adapters.SearchResultListAdapter;
+import com.example.hci_prototyp_ws23.DatabaseHelper;
 import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchResultList extends Fragment {
     View view;
@@ -34,6 +34,8 @@ public class SearchResultList extends Fragment {
     int adultNumber;
     int childrenNumber;
     String checkOutDate;
+    ArrayList<Hotel> hotels;
+    DatabaseHelper databaseHelper;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class SearchResultList extends Fragment {
         toolbar = view.findViewById(R.id.searchResultList_tb);
         recyclerView = view.findViewById(R.id.searchResultList_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        databaseHelper = DatabaseHelper.getInstance(getContext());
 
         if (getArguments() != null) {
             user = SearchResultListArgs.fromBundle(getArguments()).getUserArg();
@@ -54,7 +57,7 @@ public class SearchResultList extends Fragment {
             checkOutDate = SearchResultListArgs.fromBundle(getArguments()).getCheckOutDate();
         }
 
-        List<Hotel> hotels = new ArrayList<>();
+        hotels = databaseHelper.readAllHotels();
 
         SearchResultListAdapter searchResultListAdapter = new SearchResultListAdapter(hotels);
         recyclerView.setAdapter(searchResultListAdapter);

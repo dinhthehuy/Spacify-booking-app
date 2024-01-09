@@ -17,7 +17,6 @@ public class Booking implements Parcelable {
     private int childrenNumber;
     private double totalPrice;
     private PaymentMethod paymentMethod;
-    private State state;
 
     protected Booking(Parcel in) {
         user = in.readParcelable(User.class.getClassLoader());
@@ -29,7 +28,6 @@ public class Booking implements Parcelable {
         childrenNumber = in.readInt();
         totalPrice = in.readDouble();
         paymentMethod = PaymentMethod.valueOf(in.readString());
-        state = State.valueOf(in.readString());
     }
 
     public static final Creator<Booking> CREATOR = new Creator<Booking>() {
@@ -115,14 +113,6 @@ public class Booking implements Parcelable {
         this.paymentMethod = paymentMethod;
     }
 
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -139,14 +129,10 @@ public class Booking implements Parcelable {
         dest.writeInt(childrenNumber);
         dest.writeDouble(totalPrice);
         dest.writeString(paymentMethod.name());
-        dest.writeString(state.name());
     }
 
     public enum PaymentMethod {
-        PAYPAL, ONSITE, BANKING
-    }
-    private enum State {
-        ENDED, BOOKED, CANCELED
+        PAYPAL, DEBIT, GIROPAY, SEPA
     }
     public Booking(User user, Hotel hotel, int numberOfRooms, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, PaymentMethod paymentMethod) {
         this.user = user;
@@ -158,6 +144,5 @@ public class Booking implements Parcelable {
         this.childrenNumber = childrenNumber;
         this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
-        this.state = State.BOOKED;
     }
 }

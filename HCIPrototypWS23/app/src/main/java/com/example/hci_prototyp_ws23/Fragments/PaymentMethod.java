@@ -10,22 +10,33 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.fragment.NavHostFragment;
 import android.widget.Button;
+import android.widget.RadioButton;
 
+import com.example.hci_prototyp_ws23.DatabaseHelper;
+import com.example.hci_prototyp_ws23.Models.Booking;
 import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class PaymentMethod extends Fragment {
 
    View view;
     BottomNavigationView bottomNavigationView;
     Button roomInfoButton;
+    RadioButton paypalRadioButton, debitRadioButton, giropayRadioButton, sepaRadioButton;
     Toolbar toolbar;
     User user;
     Hotel hotel;
     String checkInDate, checkOutDate;
     int adultsNumber, childrenNumber, numberOfRooms;
     double totalPrice;
+    Booking.PaymentMethod paymentMethod;
+    DatabaseHelper databaseHelper;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,7 +44,12 @@ public class PaymentMethod extends Fragment {
         view = inflater.inflate(R.layout.fragment_payment_method, container, false);
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
         toolbar = view.findViewById(R.id.paymentMethod_tb);
+        databaseHelper = DatabaseHelper.getInstance(getContext());
         roomInfoButton = view.findViewById(R.id.paymentMethod_btn);
+        paypalRadioButton = view.findViewById(R.id.payment_paypal_rb);
+        debitRadioButton = view.findViewById(R.id.payment_debit_rb);
+        giropayRadioButton = view.findViewById(R.id.payment_giropay_rb);
+        sepaRadioButton = view.findViewById(R.id.payment_sepa_rb);
 
         user = PaymentMethodArgs.fromBundle(getArguments()).getUserArg();
         hotel = PaymentMethodArgs.fromBundle(getArguments()).getHotelArg();
@@ -51,9 +67,29 @@ public class PaymentMethod extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.GONE);
         toolbar.setVisibility(View.VISIBLE);
+        toolbar.setTitle("Payment Information");
         toolbar.inflateMenu(R.menu.top_action_bar_room_information);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(PaymentMethod.this).popBackStack());
+
         roomInfoButton.setOnClickListener(v -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+            if(paypalRadioButton.isChecked()) {
+                paymentMethod = Booking.PaymentMethod.PAYPAL;
+            } else if (debitRadioButton.isChecked()) {
+                paymentMethod = Booking.PaymentMethod.DEBIT;
+            } else if (giropayRadioButton.isChecked()) {
+                paymentMethod = Booking.PaymentMethod.GIROPAY;
+            } else {
+                paymentMethod = Booking.PaymentMethod.SEPA;
+            }
+            try {
+                Booking booking = new Booking(user, hotel, numberOfRooms, sdf.parse(checkInDate), sdf.parse(checkOutDate), adultsNumber, childrenNumber, totalPrice, paymentMethod);
+                databaseHelper.insertBooking(booking);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+
             PaymentMethodDirections.ActionPaymentMethodToBookingConfimation action = PaymentMethodDirections.actionPaymentMethodToBookingConfimation(user.getEmail());
             NavHostFragment.findNavController(PaymentMethod.this).navigate(action);
         });

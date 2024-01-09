@@ -37,7 +37,7 @@ public class HotelDescription extends Fragment {
     int numberOfRooms, adultsNumber, childrenNumber;
     Date checkInDate = new Date();
     Date checkOutDate = new Date();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
