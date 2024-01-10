@@ -22,7 +22,6 @@
         android:layout_toEndOf="@+id/savedList_iv"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:text="The Villa Britania Platnium House"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/white"/>
@@ -37,6 +36,5 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="15dp"
         android:textSize="12sp"
-        android:layout_below="@+id/savedListHotelName_tv"
-        android:text="Educt street, Yogyakarta, Central" />
+        android:layout_below="@+id/savedListHotelName_tv" />
 </androidx.appcompat.widget.LinearLayoutCompat>

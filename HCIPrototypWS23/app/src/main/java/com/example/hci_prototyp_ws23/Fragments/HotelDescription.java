@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.hci_prototyp_ws23.DatabaseHelper;
 import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
@@ -37,6 +38,8 @@ public class HotelDescription extends Fragment {
     int numberOfRooms, adultsNumber, childrenNumber;
     Date checkInDate = new Date();
     Date checkOutDate = new Date();
+    long nights;
+    DatabaseHelper databaseHelper;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,13 +55,13 @@ public class HotelDescription extends Fragment {
         totalPriceTextView = view.findViewById(R.id.totalPrice_tv);
         hotelAddressTextView = view.findViewById(R.id.hotelAddress_tv);
         seeYourOptionsButton = view.findViewById(R.id.seeYourOptions_btn);
+        databaseHelper = DatabaseHelper.getInstance(getContext());
 
         user = HotelDescriptionArgs.fromBundle(getArguments()).getUserArg();
         hotel = HotelDescriptionArgs.fromBundle(getArguments()).getHotelArg();
         numberOfRooms = HotelDescriptionArgs.fromBundle(getArguments()).getNumberOfRoomsArg();
         adultsNumber = HotelDescriptionArgs.fromBundle(getArguments()).getAdultsNumberArg();
         childrenNumber = HotelDescriptionArgs.fromBundle(getArguments()).getChildrenNumberArg();
-        Toast.makeText(getContext(), user.getUsername() + " and " + hotel.getHotelName(), Toast.LENGTH_SHORT).show();
 
         try {
             checkInDate = sdf.parse(HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate());
@@ -78,6 +81,16 @@ public class HotelDescription extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle(hotel.getHotelName());
         toolbar.inflateMenu(R.menu.top_action_bar_hotel_description);
+        toolbar.getMenu().getItem(0).setOnMenuItemClickListener(item -> {
+            if(databaseHelper.existInSavedHotel(user, hotel)) {
+                databaseHelper.deleteSavedHotel(user, hotel);
+                Toast.makeText(getContext(), "Removed from your saved list", Toast.LENGTH_SHORT).show();
+            } else {
+                databaseHelper.insertSavedHotel(user, hotel, HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate(), HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate(), adultsNumber, childrenNumber, nights * hotel.getPricePerNight());
+                Toast.makeText(getContext(), "Added to your saved list", Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        });
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(HotelDescription.this).popBackStack());
         seeYourOptionsButton.setOnClickListener(v -> {
             HotelDescriptionDirections.ActionHotelDescriptionToUserInfoOverview action = HotelDescriptionDirections.actionHotelDescriptionToUserInfoOverview(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate), adultsNumber, childrenNumber, numberOfRooms);
@@ -87,9 +100,8 @@ public class HotelDescription extends Fragment {
         hotelNameTextView.setText(hotel.getHotelName());
         checkInDateTextView.setText("Check-in" + "\n" + sdf.format(checkInDate));
         checkOutDateTextView.setText("Check-out" + "\n" + sdf.format(checkOutDate));
-            roomsAndGuestTextView.setText("Rooms and guests" + "\n" + numberOfRooms + " room " + adultsNumber + " adults " + childrenNumber + " children");
-
-        long nights = TimeUnit.MILLISECONDS.toDays(checkOutDate.getTime() - checkInDate.getTime());
+        roomsAndGuestTextView.setText("Rooms and guests" + "\n" + numberOfRooms + " room " + adultsNumber + " adults " + childrenNumber + " children");
+        nights = TimeUnit.MILLISECONDS.toDays(checkOutDate.getTime() - checkInDate.getTime());
         totalPriceTextView.setText("Price for " + nights + " nights/room" + "\n" + nights * hotel.getPricePerNight() + " €");
         hotelAddressTextView.setText(hotel.getHotelAddress().getStreetAddress() + " " + hotel.getHotelAddress().getCity() + "\n" + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
     }

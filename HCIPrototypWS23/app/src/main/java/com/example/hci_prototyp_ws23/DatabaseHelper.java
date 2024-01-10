@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.example.hci_prototyp_ws23.Models.Address;
 import com.example.hci_prototyp_ws23.Models.Booking;
 import com.example.hci_prototyp_ws23.Models.Hotel;
+import com.example.hci_prototyp_ws23.Models.SavedHotel;
 import com.example.hci_prototyp_ws23.Models.User;
 
 import java.text.ParseException;
@@ -58,6 +59,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String BOOKING_CHILDREN_NUMBER_COLUMN = "children_number";
     private static final String BOOKING_TOTAL_PRICE_COLUMN = "total_price";
     private static final String BOOKING_PAYMENT_METHOD_COLUMN = "payment_method";
+    private static final String SAVED_HOTEL_TABLE = "saved_hotel";
+    private static final String SAVED_USERNAME_COLUMN = "username";
+    private static final String SAVED_HOTEL_NAME_COLUMN = "hotel_name";
+    private static final String SAVED_CHECK_IN_DATE_COLUMN = "check_in_date";
+    private static final String SAVED_CHECK_OUT_DATE_COLUMN = "check_out_date";
+    private static final String SAVED_ADULT_NUMBER_COLUMN = "adult_number";
+    private static final String SAVED_CHILDREN_NUMBER_COLUMN = "children_number";
+    private static final String SAVED_TOTAL_PRICE_COLUMN = "total_price";
+    private static final String SAVED_HOTEL_COUNTRY_COLUMN = "country";
+    private static final String SAVED_HOTEL_CITY_COLUMN = "city";
+    private static final String SAVED_HOTEL_STREET_ADDRESS_COLUMN = "street_address";
+    private static final String SAVED_HOTEL_POSTAL_CODE_COLUMN = "postal_code";
     public static DatabaseHelper instance;
     ArrayList<Address> initialAddresses = new ArrayList<>(Arrays.asList(
             new Address("United States", "New York", "123 Main St", 10001),
@@ -108,6 +121,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "PRIMARY KEY (" + HOTEL_NAME_COLUMN
                 + "));";
 
+        String createSavedHotel = "CREATE TABLE " + SAVED_HOTEL_TABLE + " ("
+                + SAVED_USERNAME_COLUMN + " TEXT REFERENCES " + USER_TABLE + "(" + USERNAME_COLUMN + "), "
+                + SAVED_HOTEL_NAME_COLUMN + " TEXT REFERENCES " + HOTEL_TABLE + "(" + HOTEL_NAME_COLUMN + "), "
+                + SAVED_HOTEL_COUNTRY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
+                + SAVED_HOTEL_CITY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + CITY_COLUMN + "), "
+                + SAVED_HOTEL_STREET_ADDRESS_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
+                + SAVED_HOTEL_POSTAL_CODE_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + POSTAL_CODE_COLUMN + "), "
+                + SAVED_CHECK_IN_DATE_COLUMN + " DATE NOT NULL, "
+                + SAVED_CHECK_OUT_DATE_COLUMN + " DATE NOT NULL, "
+                + SAVED_ADULT_NUMBER_COLUMN + " INTEGER NOT NULL, "
+                + SAVED_CHILDREN_NUMBER_COLUMN + " INTEGER NOT NULL, "
+                + SAVED_TOTAL_PRICE_COLUMN + " FLOAT NOT NULL, "
+                + "PRIMARY KEY (" + SAVED_USERNAME_COLUMN + ", " + SAVED_HOTEL_NAME_COLUMN
+                + "));";
+
         String createUserTable = "CREATE TABLE " + USER_TABLE + " ("
                 + USERNAME_COLUMN + " TEXT, "
                 + USER_FIRST_NAME_COLUMN + " TEXT NOT NULL, "
@@ -126,8 +154,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createBookingTable = "CREATE TABLE " + BOOKING_TABLE + " ("
                 + BOOKING_USERNAME_COLUMN + " TEXT REFERENCES " + USER_TABLE + "(" + USERNAME_COLUMN + "), "
                 + BOOKING_HOTEL_NAME_COLUMN + " TEXT REFERENCES " + HOTEL_TABLE + "(" + HOTEL_NAME_COLUMN + "), "
-                + BOOKING_CHECK_IN_DATE_COLUMN + " DATE, "
-                + BOOKING_CHECK_OUT_DATE_COLUMN + " DATE, "
+                + BOOKING_CHECK_IN_DATE_COLUMN + " DATE NOT NULL, "
+                + BOOKING_CHECK_OUT_DATE_COLUMN + " DATE NOT NULL, "
                 + BOOKING_ADULT_NUMBER_COLUMN + " INTEGER NOT NULL, "
                 + BOOKING_CHILDREN_NUMBER_COLUMN + " INTEGER NOT NULL, "
                 + BOOKING_TOTAL_PRICE_COLUMN + " FLOAT NOT NULL, "
@@ -146,6 +174,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createUserTable);
         db.execSQL(createServiceTable);
         db.execSQL(createBookingTable);
+        db.execSQL(createSavedHotel);
         loadInitialAddress(db);
         loadInitialHotels(db);
     }
@@ -210,6 +239,78 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(BOOKING_TOTAL_PRICE_COLUMN, booking.getTotalPrice());
         cv.put(BOOKING_PAYMENT_METHOD_COLUMN, booking.getPaymentMethod().name());
         db.insert(BOOKING_TABLE, null, cv);
+    }
+
+    public void insertSavedHotel(User user, Hotel hotel, String checkInDate, String checkOutDate, int adultNumber, int childrenNumber, double totalPrice) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(SAVED_USERNAME_COLUMN, user.getUsername());
+        cv.put(SAVED_HOTEL_NAME_COLUMN, hotel.getHotelName());
+        cv.put(SAVED_HOTEL_COUNTRY_COLUMN, hotel.getHotelAddress().getCountry());
+        cv.put(SAVED_HOTEL_CITY_COLUMN, hotel.getHotelAddress().getCity());
+        cv.put(SAVED_HOTEL_STREET_ADDRESS_COLUMN, hotel.getHotelAddress().getStreetAddress());
+        cv.put(SAVED_HOTEL_POSTAL_CODE_COLUMN, hotel.getHotelAddress().getPostalCode());
+        cv.put(SAVED_CHECK_IN_DATE_COLUMN, checkInDate);
+        cv.put(SAVED_CHECK_OUT_DATE_COLUMN, checkOutDate);
+        cv.put(SAVED_ADULT_NUMBER_COLUMN, adultNumber);
+        cv.put(SAVED_CHILDREN_NUMBER_COLUMN, childrenNumber);
+        cv.put(SAVED_TOTAL_PRICE_COLUMN, totalPrice);
+        db.insert(SAVED_HOTEL_TABLE, null, cv);
+    }
+
+    public void deleteSavedHotel(User user, Hotel hotel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = "username = ? AND hotel_name = ?";
+        String[] whereArgs = {user.getUsername(), hotel.getHotelName()};
+        db.delete(SAVED_HOTEL_TABLE, whereClause, whereArgs);
+    }
+
+    public boolean existInSavedHotel(User user, Hotel hotel) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selection = "username = ? AND hotel_name = ?";
+        String[] selectionArgs = {user.getUsername(), hotel.getHotelName()};
+
+        Cursor cursor = db.query(SAVED_HOTEL_TABLE, null, selection, selectionArgs, null, null, null);
+        if(cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+        } else {
+            cursor.close();
+            return false;
+        }
+    }
+
+    public ArrayList<SavedHotel> readSavedHotelByUsername(String username) {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList<SavedHotel> resultList = new ArrayList<>();
+        String query = "SELECT * FROM " + SAVED_HOTEL_TABLE + " WHERE " + SAVED_USERNAME_COLUMN + "=" + "'" + username + "'" + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()) {
+            do {
+                String readUsername = cursor.getString(0);
+                String readHotelName = cursor.getString(1);
+                String readCountry = cursor.getString(2);
+                String readCity = cursor.getString(3);
+                String readStreetAddress = cursor.getString(4);
+                int readPostalCode = cursor.getInt(5);
+                String readCheckInDate = cursor.getString(6);
+                String readCheckOutDate = cursor.getString(7);
+                int readAdultNumber = cursor.getInt(8);
+                int readChildrenNumber = cursor.getInt(9);
+                double readTotalPrice = cursor.getFloat(10);
+                try {
+                    SavedHotel savedHotel = new SavedHotel(readUsername, readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), sdf.parse(readCheckInDate), sdf.parse(readCheckOutDate), readAdultNumber, readChildrenNumber, readTotalPrice);
+                    resultList.add(savedHotel);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
+            } while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return resultList;
     }
 
     public User readUserByEmail(String email) {

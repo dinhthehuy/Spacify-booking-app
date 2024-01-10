@@ -9,15 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hci_prototyp_ws23.Models.Hotel;
+import com.example.hci_prototyp_ws23.Models.SavedHotel;
 import com.example.hci_prototyp_ws23.R;
 
 import java.util.List;
 
 public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.SavedListAdapterViewHolder> {
-    private final List<Hotel> hotelList;
+    private final List<SavedHotel> hotelList;
     private onClickListener onClickListener;
-    public SavedListAdapter(List<Hotel> hotelList) {
+    public SavedListAdapter(List<SavedHotel> hotelList) {
         this.hotelList = hotelList;
     }
     @NonNull
@@ -29,7 +29,7 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
 
     @Override
     public void onBindViewHolder(@NonNull SavedListAdapterViewHolder holder, int position) {
-        Hotel hotel = hotelList.get(position);
+        SavedHotel hotel = hotelList.get(position);
         holder.nameView.setText(hotelList.get(position).getHotelName());
         String Address = hotelList.get(position).getHotelAddress().getCountry() + " " + hotelList.get(position).getHotelAddress().getCity() + " " + hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getPostalCode();
         holder.addressView.setText(Address);
@@ -48,7 +48,7 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
         this.onClickListener = onClickListener;
     }
     public interface onClickListener {
-        void onClick(int position, Hotel hotel);
+        void onClick(int position, SavedHotel hotel);
     }
 
     public static class SavedListAdapterViewHolder extends RecyclerView.ViewHolder{

@@ -9,16 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hci_prototyp_ws23.Adapters.SavedListAdapter;
-import com.example.hci_prototyp_ws23.Models.Hotel;
+import com.example.hci_prototyp_ws23.DatabaseHelper;
+import com.example.hci_prototyp_ws23.Models.SavedHotel;
+import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SavedList extends Fragment {
@@ -26,7 +28,11 @@ public class SavedList extends Fragment {
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
     RecyclerView recyclerView;
-    List<Hotel> hotels;
+    List<SavedHotel> hotels;
+    DatabaseHelper databaseHelper;
+    User currentUser;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,14 +40,11 @@ public class SavedList extends Fragment {
         view = inflater.inflate(R.layout.fragment_saved_list, container, false);
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
         toolbar = view.findViewById(R.id.savedList_tb);
+        databaseHelper = DatabaseHelper.getInstance(getContext());
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         recyclerView = view.findViewById(R.id.savedList_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        hotels = new ArrayList<>(); // TODO: Query from database
-
-        SavedListAdapter savedListAdapter = new SavedListAdapter(hotels);
-        recyclerView.setAdapter(savedListAdapter);
-        savedListAdapter.setOnClickListener((position, hotel) -> NavHostFragment.findNavController(SavedList.this).navigate(R.id.action_savedList_to_hotelDescription));
         return view;
     }
 
@@ -52,5 +55,11 @@ public class SavedList extends Fragment {
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
         toolbar.setVisibility(View.VISIBLE);
         toolbar.inflateMenu(R.menu.top_action_bar_saved);
+        currentUser = databaseHelper.readUserByEmail(user.getEmail());
+        hotels = databaseHelper.readSavedHotelByUsername(currentUser.getUsername()); // Query from database
+
+        SavedListAdapter savedListAdapter = new SavedListAdapter(hotels);
+        recyclerView.setAdapter(savedListAdapter);
+        //savedListAdapter.setOnClickListener((position, hotel) -> NavHostFragment.findNavController(SavedList.this).navigate(R.id.action_savedList_to_hotelDescription));
     }
 }
