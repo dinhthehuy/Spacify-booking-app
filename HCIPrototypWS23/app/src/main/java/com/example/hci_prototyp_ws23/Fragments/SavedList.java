@@ -55,6 +55,8 @@ public class SavedList extends Fragment {
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
         toolbar.setVisibility(View.VISIBLE);
         toolbar.inflateMenu(R.menu.top_action_bar_saved);
+//        toolbar.setTitle("Saved");
+//        toolbar.setTitleMarginStart(450);
         currentUser = databaseHelper.readUserByEmail(user.getEmail());
         hotels = databaseHelper.readSavedHotelByUsername(currentUser.getUsername()); // Query from database
 

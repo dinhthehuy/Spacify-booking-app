@@ -1,5 +1,6 @@
 package com.example.hci_prototyp_ws23.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.SavedListAdapterViewHolder> {
     private final List<SavedHotel> hotelList;
+    private Context context;
     private onClickListener onClickListener;
     public SavedListAdapter(List<SavedHotel> hotelList) {
         this.hotelList = hotelList;
@@ -24,6 +26,7 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
     @Override
     public SavedListAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.saved_list_item, parent, false);
+        context = parent.getContext();
         return new SavedListAdapterViewHolder(itemView);
     }
 
@@ -33,6 +36,7 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
         holder.nameView.setText(hotelList.get(position).getHotelName());
         String Address = hotelList.get(position).getHotelAddress().getCountry() + " " + hotelList.get(position).getHotelAddress().getCity() + " " + hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getPostalCode();
         holder.addressView.setText(Address);
+        holder.imageView.setImageResource(context.getResources().getIdentifier(hotel.getImageURL(), "drawable", context.getPackageName()));
         holder.itemView.setOnClickListener(v -> {
             if(onClickListener != null) {
                 onClickListener.onClick(position, hotel);

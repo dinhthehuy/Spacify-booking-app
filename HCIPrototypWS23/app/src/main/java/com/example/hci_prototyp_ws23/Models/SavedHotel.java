@@ -13,7 +13,7 @@ public class SavedHotel {
     private final double totalPrice;
     private String imageURL; // TODO: Implement later
 
-    public SavedHotel(String username, String hotelName, Address hotelAddress, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice) {
+    public SavedHotel(String username, String hotelName, Address hotelAddress, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, String imageURL) {
         this.username = username;
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
@@ -22,6 +22,7 @@ public class SavedHotel {
         this.adultNumber = adultNumber;
         this.childrenNumber = childrenNumber;
         this.totalPrice = totalPrice;
+        this.imageURL = imageURL;
     }
 
     public String getHotelName() {
@@ -30,14 +31,6 @@ public class SavedHotel {
 
     public String getImageURL() {
         return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public Date getCheckInDate() {

@@ -12,15 +12,16 @@ public class Hotel implements Parcelable {
     private final Address hotelAddress;
     private final String description;
     private final double pricePerNight;
-    private String imageURL; // TODO: Implement later
-    private ArrayList<String> facilities;
+    private final String imageURL;
+    private final ArrayList<String> facilities;
 
-    protected Hotel(Parcel in) {
+    private Hotel(Parcel in) {
         hotelName = in.readString();
         hotelAddress = in.readParcelable(Address.class.getClassLoader());
         description = in.readString();
         pricePerNight = in.readDouble();
         facilities = in.createStringArrayList();
+        imageURL = in.readString();
     }
 
     public static final Creator<Hotel> CREATOR = new Creator<Hotel>() {
@@ -50,7 +51,8 @@ public class Hotel implements Parcelable {
     public double getPricePerNight() {
         return pricePerNight;
     }
-    public Hotel(String hotelName, Address hotelAddress, String description, double pricePerNight) {
+    public Hotel(String hotelName, Address hotelAddress, String description, double pricePerNight, String imageURL) {
+        this.imageURL = imageURL;
         facilities = new ArrayList<>();
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
@@ -70,5 +72,10 @@ public class Hotel implements Parcelable {
         dest.writeString(description);
         dest.writeDouble(pricePerNight);
         dest.writeStringList(facilities);
+        dest.writeString(getImageURL());
+    }
+
+    public String getImageURL() {
+        return imageURL;
     }
 }

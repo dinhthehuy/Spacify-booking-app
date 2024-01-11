@@ -100,7 +100,7 @@ public class HotelDescription extends Fragment {
             NavHostFragment.findNavController(HotelDescription.this).navigate(action);
             }
         );
-        imageView.setImageResource(R.drawable.pexels_pixabay_237371);
+        imageView.setImageResource(getResources().getIdentifier(hotel.getImageURL(), "drawable", requireActivity().getPackageName()));
         hotelNameTextView.setText(hotel.getHotelName());
         checkInDateTextView.setText("Check-in" + "\n" + sdf.format(checkInDate));
         checkOutDateTextView.setText("Check-out" + "\n" + sdf.format(checkOutDate));

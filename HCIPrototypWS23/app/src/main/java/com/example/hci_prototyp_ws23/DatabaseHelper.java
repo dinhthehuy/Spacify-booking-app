@@ -29,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String HOTEL_STREET_ADDRESS_COLUMN = "street_address";
     private static final String HOTEL_POSTAL_CODE_COLUMN = "postal_code";
     private static final String HOTEL_PRICE_PER_NIGHT = "price_per_night";
+    private static final String HOTEL_IMAGE_URL = "image_url";
     private static final String USER_TABLE = "user";
     private static final String USERNAME_COLUMN = "username";
     private static final String USER_FIRST_NAME_COLUMN = "first_name";
@@ -71,6 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SAVED_HOTEL_CITY_COLUMN = "city";
     private static final String SAVED_HOTEL_STREET_ADDRESS_COLUMN = "street_address";
     private static final String SAVED_HOTEL_POSTAL_CODE_COLUMN = "postal_code";
+    private static final String SAVED_HOTEL_IMAGE_URL = "image_url";
     public static DatabaseHelper instance;
     ArrayList<Address> initialAddresses = new ArrayList<>(Arrays.asList(
             new Address("United States", "New York", "123 Main St", 10001),
@@ -82,12 +84,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     ));
 
     ArrayList<Hotel> initialHotels = new ArrayList<>(Arrays.asList(
-            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"", 90),
-            new Hotel("Azure Haven Hotel", new Address("United States", "California", "325 Serenity Lane", 90210),"", 100),
-            new Hotel("Crimson Crown Inn", new Address("United States", "New York", "112 Royal Street, Regal City", 10001),"", 85),
-            new Hotel("Mystic Oasis Resort", new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),"", 90),
-            new Hotel("Radiant Horizon Hotel", new Address("United States", "Texas", "75 Luminous Boulevard, Radiant City", 75234),"", 95),
-            new Hotel("Alpine Haven Lodge", new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345),"", 110)
+            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"", 90, "pic"),
+            new Hotel("Azure Haven Hotel", new Address("United States", "California", "325 Serenity Lane", 90210),"", 100, "pic"),
+            new Hotel("Crimson Crown Inn", new Address("United States", "New York", "112 Royal Street, Regal City", 10001),"", 85, "pic"),
+            new Hotel("Mystic Oasis Resort", new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),"", 90, "pic"),
+            new Hotel("Radiant Horizon Hotel", new Address("United States", "Texas", "75 Luminous Boulevard, Radiant City", 75234),"", 95, "pic"),
+            new Hotel("Alpine Haven Lodge", new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345),"", 110, "pic")
     ));
 
     public static synchronized DatabaseHelper getInstance(Context context) {
@@ -118,6 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + HOTEL_POSTAL_CODE_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + POSTAL_CODE_COLUMN + "), "
                 + HOTEL_DESCRIPTION_COLUMN + " TEXT NOT NULL, "
                 + HOTEL_PRICE_PER_NIGHT + " FLOAT NOT NULL, "
+                + HOTEL_IMAGE_URL + " TEXT NOT NULL, "
                 + "PRIMARY KEY (" + HOTEL_NAME_COLUMN
                 + "));";
 
@@ -128,6 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + SAVED_HOTEL_CITY_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + CITY_COLUMN + "), "
                 + SAVED_HOTEL_STREET_ADDRESS_COLUMN + " TEXT NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + STREET_ADDRESS_COLUMN + "), "
                 + SAVED_HOTEL_POSTAL_CODE_COLUMN + " INTEGER NOT NULL REFERENCES " + ADDRESS_TABLE + "(" + POSTAL_CODE_COLUMN + "), "
+                + SAVED_HOTEL_IMAGE_URL + " TEXT NOT NULL REFERENCES " + HOTEL_TABLE + "(" + HOTEL_IMAGE_URL + "), "
                 + SAVED_CHECK_IN_DATE_COLUMN + " DATE NOT NULL, "
                 + SAVED_CHECK_OUT_DATE_COLUMN + " DATE NOT NULL, "
                 + SAVED_ADULT_NUMBER_COLUMN + " INTEGER NOT NULL, "
@@ -205,6 +209,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cv.put(HOTEL_POSTAL_CODE_COLUMN, initialHotels.get(i).getHotelAddress().getPostalCode());
             cv.put(HOTEL_DESCRIPTION_COLUMN, initialHotels.get(i).getDescription());
             cv.put(HOTEL_PRICE_PER_NIGHT, initialHotels.get(i).getPricePerNight());
+            cv.put(HOTEL_IMAGE_URL, initialHotels.get(i).getImageURL());
             db.insert(HOTEL_TABLE, null, cv);
         }
     }
@@ -250,6 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(SAVED_HOTEL_CITY_COLUMN, hotel.getHotelAddress().getCity());
         cv.put(SAVED_HOTEL_STREET_ADDRESS_COLUMN, hotel.getHotelAddress().getStreetAddress());
         cv.put(SAVED_HOTEL_POSTAL_CODE_COLUMN, hotel.getHotelAddress().getPostalCode());
+        cv.put(SAVED_HOTEL_IMAGE_URL, hotel.getImageURL());
         cv.put(SAVED_CHECK_IN_DATE_COLUMN, checkInDate);
         cv.put(SAVED_CHECK_OUT_DATE_COLUMN, checkOutDate);
         cv.put(SAVED_ADULT_NUMBER_COLUMN, adultNumber);
@@ -294,13 +300,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String readCity = cursor.getString(3);
                 String readStreetAddress = cursor.getString(4);
                 int readPostalCode = cursor.getInt(5);
-                String readCheckInDate = cursor.getString(6);
-                String readCheckOutDate = cursor.getString(7);
-                int readAdultNumber = cursor.getInt(8);
-                int readChildrenNumber = cursor.getInt(9);
-                double readTotalPrice = cursor.getFloat(10);
+                String imageURL = cursor.getString(6);
+                String readCheckInDate = cursor.getString(7);
+                String readCheckOutDate = cursor.getString(8);
+                int readAdultNumber = cursor.getInt(9);
+                int readChildrenNumber = cursor.getInt(10);
+                double readTotalPrice = cursor.getFloat(11);
                 try {
-                    SavedHotel savedHotel = new SavedHotel(readUsername, readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), sdf.parse(readCheckInDate), sdf.parse(readCheckOutDate), readAdultNumber, readChildrenNumber, readTotalPrice);
+                    SavedHotel savedHotel = new SavedHotel(readUsername, readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), sdf.parse(readCheckInDate), sdf.parse(readCheckOutDate), readAdultNumber, readChildrenNumber, readTotalPrice, imageURL);
                     resultList.add(savedHotel);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
@@ -380,7 +387,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int readPostalCode = cursor.getInt(4);
                 String readDescription = cursor.getString(5);
                 double readPricePerNight = cursor.getFloat( 6);
-                Hotel hotel = new Hotel(readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), readDescription, readPricePerNight);
+                String imageURL = cursor.getString(7);
+                Hotel hotel = new Hotel(readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), readDescription, readPricePerNight, imageURL);
                 arrayList.add(hotel);
             } while(cursor.moveToNext());
         } else {

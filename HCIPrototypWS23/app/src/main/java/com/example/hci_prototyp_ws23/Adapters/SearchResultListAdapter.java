@@ -1,6 +1,7 @@
 package com.example.hci_prototyp_ws23.Adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultListAdapter.SearchResultListAdapterViewHolder> {
     private final List<Hotel> hotelList;
+    private Context context;
     private onClickListener onClickListener;
     public SearchResultListAdapter(List<Hotel> hotelList) {
         this.hotelList = hotelList;
@@ -25,6 +27,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
     @Override
     public SearchResultListAdapter.SearchResultListAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_list_item, parent, false);
+        context = parent.getContext();
         return new SearchResultListAdapterViewHolder(itemView);
     }
 
@@ -34,6 +37,7 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
         holder.nameView.setText(hotelList.get(position).getHotelName());
         String Address =  hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getCity() +  " " + hotelList.get(position).getHotelAddress().getPostalCode() + ", " + hotelList.get(position).getHotelAddress().getCountry();
         holder.addressView.setText(Address);
+        holder.imageView.setImageResource(context.getResources().getIdentifier(hotel.getImageURL(), "drawable", context.getPackageName()));
         holder.itemView.setOnClickListener(v -> {
             if(onClickListener != null) {
                 onClickListener.onClick(position, hotel);
@@ -61,8 +65,6 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
             imageView = itemView.findViewById(R.id.searchResultList_iv);
             nameView = itemView.findViewById(R.id.searchResultListHotelName_tv);
             addressView = itemView.findViewById(R.id.searchResultListHotelAddress_tv);
-
-            imageView.setImageResource(R.drawable.pexels_pixabay_237371);
             }
         }
     }
