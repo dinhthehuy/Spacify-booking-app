@@ -83,4 +83,9 @@
     <string name="book_now">Book now!</string>
     <string name="username">Username</string>
     <string name="how_do_you_want_to_pay">How do you want to pay ?</string>
+    <string name="all">All</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="best_deals">Best Deals</string>
+    <string name="nearby">Nearby</string>
+    <string name="top_rated_hotels">Top Rated Hotels</string>
 </resources>

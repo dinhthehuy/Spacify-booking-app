@@ -26,12 +26,19 @@
         android:layout_marginEnd="15dp"
         android:orientation="vertical">
 
-        <ImageView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:id="@+id/bookingOverview_iv"
-            android:background="@drawable/rounded_image"
-            android:contentDescription="@string/hotel_image" />
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="25dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:id="@+id/bookingOverview_iv"
+                android:background="@drawable/rounded_image"
+                android:contentDescription="@string/hotel_image" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/bookingOverviewHotelName_tv"
@@ -39,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/roomInfo_iv_iv"
             android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -51,6 +59,7 @@
             android:layout_toEndOf="@+id/roomInfo_iv_iv"
             android:textColor="@color/white"
             android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="15dp"
             android:textSize="12sp"
@@ -122,6 +131,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"

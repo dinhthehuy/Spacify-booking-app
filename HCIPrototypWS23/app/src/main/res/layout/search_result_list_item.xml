@@ -2,18 +2,27 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
     android:focusable="true"
     android:clickable="true"
     android:orientation="vertical"
     android:background="@drawable/rounded_button_background">
 
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/searchResultList_iv"
-        android:background="@drawable/rounded_image"
-        android:contentDescription="@string/hotel_image" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/searchResultList_iv"
+            android:background="@drawable/rounded_image"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/hotel_image" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/searchResultListHotelName_tv"
@@ -23,6 +32,7 @@
         android:text="@string/textview"
         android:layout_marginTop="5dp"
         android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/white"/>
@@ -38,5 +48,6 @@
         android:text="@string/textview"
         android:layout_marginTop="5dp"
         android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

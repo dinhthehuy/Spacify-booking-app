@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HotelDescription extends Fragment {
     View view;
+    ImageView imageView;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
     TextView hotelNameTextView, checkInDateTextView, checkOutDateTextView, roomsAndGuestTextView, totalPriceTextView, hotelAddressTextView;
@@ -47,6 +49,7 @@ public class HotelDescription extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_hotel_description, container, false);
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
+        imageView = view.findViewById(R.id.hotelDescription_iv);
         toolbar = view.findViewById(R.id.hotelDescription_tb);
         hotelNameTextView = view.findViewById(R.id.hotelName_tv);
         checkInDateTextView = view.findViewById(R.id.checkInDate_tv);
@@ -97,6 +100,7 @@ public class HotelDescription extends Fragment {
             NavHostFragment.findNavController(HotelDescription.this).navigate(action);
             }
         );
+        imageView.setImageResource(R.drawable.pexels_pixabay_237371);
         hotelNameTextView.setText(hotel.getHotelName());
         checkInDateTextView.setText("Check-in" + "\n" + sdf.format(checkInDate));
         checkOutDateTextView.setText("Check-out" + "\n" + sdf.format(checkOutDate));

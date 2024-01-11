@@ -61,6 +61,8 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
             imageView = itemView.findViewById(R.id.searchResultList_iv);
             nameView = itemView.findViewById(R.id.searchResultListHotelName_tv);
             addressView = itemView.findViewById(R.id.searchResultListHotelAddress_tv);
+
+            imageView.setImageResource(R.drawable.pexels_pixabay_237371);
             }
         }
     }

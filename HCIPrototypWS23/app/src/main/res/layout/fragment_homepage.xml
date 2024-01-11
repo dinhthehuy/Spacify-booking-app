@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         app:menu="@menu/top_action_bar_homepage"
         android:background="@color/slightGrayBackground"
-        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -35,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:background="@drawable/rounded_button_background"
-            android:text="All"
+            android:text="@string/all"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -44,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:background="@drawable/rounded_button_white_background"
-            android:text="Top Rated"
+            android:text="@string/top_rated"
             android:textAllCaps="false"
             android:textColor="@color/black" />
 
@@ -53,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:background="@drawable/rounded_button_white_background"
-            android:text="Best Deals"
+            android:text="@string/best_deals"
             android:textAllCaps="false"
             android:textColor="@color/black" />
 
@@ -62,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:background="@drawable/rounded_button_white_background"
-            android:text="Nearby"
+            android:text="@string/nearby"
             android:textAllCaps="false"
             android:textColor="@color/black" />
     </LinearLayout>
@@ -72,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="176dp"
-        android:text="Top Rated Hotels"
+        android:text="@string/top_rated_hotels"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Best Deals"
+        android:text="@string/best_deals"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
