@@ -13,18 +13,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hci_prototyp_ws23.Adapters.UserBookingsAdapter;
-import com.example.hci_prototyp_ws23.Models.Hotel;
+import com.example.hci_prototyp_ws23.DatabaseHelper;
+import com.example.hci_prototyp_ws23.Models.Booking;
+import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserBookings extends Fragment {
     View view;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
     RecyclerView recyclerView;
+    DatabaseHelper databaseHelper;
+    User currentUser;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    ArrayList<Booking> bookings = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,10 +42,12 @@ public class UserBookings extends Fragment {
         toolbar = view.findViewById(R.id.userBookings_tb);
         recyclerView = view.findViewById(R.id.userBookings_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        List<Hotel> hotels = new ArrayList<>(); // TODO: Query from database
-
-        UserBookingsAdapter userBookingsAdapter = new UserBookingsAdapter(hotels);
+        databaseHelper = DatabaseHelper.getInstance(getContext());
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        currentUser = databaseHelper.readUserBy("email", user.getEmail());
+        bookings = databaseHelper.readBookingByUsername(currentUser.getUsername());
+        UserBookingsAdapter userBookingsAdapter = new UserBookingsAdapter(bookings);
         recyclerView.setAdapter(userBookingsAdapter);
         return view;
     }

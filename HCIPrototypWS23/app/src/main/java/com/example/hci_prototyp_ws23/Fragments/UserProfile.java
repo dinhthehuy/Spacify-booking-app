@@ -75,7 +75,7 @@ public class UserProfile extends Fragment {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(3).setChecked(true);
-        currentUser = databaseHelper.readUserByEmail(email);
+        currentUser = databaseHelper.readUserBy("email", email);
 
         dateOfBirthEditText.setFocusable(false);
         dateOfBirthEditText.setClickable(true);

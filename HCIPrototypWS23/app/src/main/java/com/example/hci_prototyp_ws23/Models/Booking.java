@@ -10,13 +10,13 @@ import java.util.Date;
 public class Booking implements Parcelable {
     private User user;
     private Hotel hotel;
-    private int numberOfRooms;
-    private Date checkInDate;
-    private Date checkOutDate;
-    private int adultNumber;
-    private int childrenNumber;
-    private double totalPrice;
-    private PaymentMethod paymentMethod;
+    private final int numberOfRooms;
+    private final Date checkInDate;
+    private final Date checkOutDate;
+    private final int adultNumber;
+    private final int childrenNumber;
+    private final double totalPrice;
+    private final PaymentMethod paymentMethod;
 
     protected Booking(Parcel in) {
         user = in.readParcelable(User.class.getClassLoader());
@@ -53,66 +53,30 @@ public class Booking implements Parcelable {
     public Hotel getHotel() {
         return hotel;
     }
-
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
-
     public int getNumberOfRooms() {
         return numberOfRooms;
     }
-    public void setNumberOfRooms(int numberOfRooms) {
-        this.numberOfRooms = numberOfRooms;
-    }
-
     public Date getCheckInDate() {
         return checkInDate;
     }
-
-    public void setCheckInDate(Date checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
     public Date getCheckOutDate() {
         return checkOutDate;
     }
-
-    public void setCheckOutDate(Date checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
     public int getAdultNumber() {
         return adultNumber;
     }
-
-    public void setAdultNumber(int adultNumber) {
-        this.adultNumber = adultNumber;
-    }
-
     public int getChildrenNumber() {
         return childrenNumber;
     }
-
-    public void setChildrenNumber(int childrenNumber) {
-        this.childrenNumber = childrenNumber;
-    }
-
     public double getTotalPrice() {
         return totalPrice;
     }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -132,7 +96,16 @@ public class Booking implements Parcelable {
     }
 
     public enum PaymentMethod {
-        PAYPAL, DEBIT, GIROPAY, SEPA
+        PAYPAL, DEBIT, GIROPAY, SEPA;
+
+        public static PaymentMethod stringToEnum(String input) {
+            for(PaymentMethod value: PaymentMethod.values()) {
+                if(value.name().equals(input)) {
+                    return value;
+                }
+            }
+            return null;
+        }
     }
     public Booking(User user, Hotel hotel, int numberOfRooms, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, PaymentMethod paymentMethod) {
         this.user = user;

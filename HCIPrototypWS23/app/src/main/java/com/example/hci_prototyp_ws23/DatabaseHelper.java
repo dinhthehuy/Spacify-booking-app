@@ -54,6 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String BOOKING_TABLE = "booking";
     private static final String BOOKING_USERNAME_COLUMN = "username";
     private static final String BOOKING_HOTEL_NAME_COLUMN = "hotel_name";
+    private static final String BOOKING_NUMBER_OF_ROOM = "number_of_room";
     private static final String BOOKING_CHECK_IN_DATE_COLUMN = "check_in_date";
     private static final String BOOKING_CHECK_OUT_DATE_COLUMN = "check_out_date";
     private static final String BOOKING_ADULT_NUMBER_COLUMN = "adult_number";
@@ -158,6 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createBookingTable = "CREATE TABLE " + BOOKING_TABLE + " ("
                 + BOOKING_USERNAME_COLUMN + " TEXT REFERENCES " + USER_TABLE + "(" + USERNAME_COLUMN + "), "
                 + BOOKING_HOTEL_NAME_COLUMN + " TEXT REFERENCES " + HOTEL_TABLE + "(" + HOTEL_NAME_COLUMN + "), "
+                + BOOKING_NUMBER_OF_ROOM + " INTEGER NOT NULL, "
                 + BOOKING_CHECK_IN_DATE_COLUMN + " DATE NOT NULL, "
                 + BOOKING_CHECK_OUT_DATE_COLUMN + " DATE NOT NULL, "
                 + BOOKING_ADULT_NUMBER_COLUMN + " INTEGER NOT NULL, "
@@ -237,6 +239,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(BOOKING_USERNAME_COLUMN, booking.getUser().getUsername());
         cv.put(BOOKING_HOTEL_NAME_COLUMN, booking.getHotel().getHotelName());
+        cv.put(BOOKING_NUMBER_OF_ROOM, booking.getNumberOfRooms());
         cv.put(BOOKING_CHECK_IN_DATE_COLUMN, sdf.format(booking.getCheckInDate()));
         cv.put(BOOKING_CHECK_OUT_DATE_COLUMN, sdf.format(booking.getCheckOutDate()));
         cv.put(BOOKING_ADULT_NUMBER_COLUMN, booking.getAdultNumber());
@@ -320,10 +323,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return resultList;
     }
 
-    public User readUserByEmail(String email) {
+    public ArrayList<Booking> readBookingByUsername(String username) {
+        ArrayList<Booking> bookings = new ArrayList<>();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String query = "SELECT * FROM " + BOOKING_TABLE + " WHERE " + BOOKING_USERNAME_COLUMN + "=" + "'" + username + "'" + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+            do {
+                String readUsername = cursor.getString(0);
+                String readHotelName = cursor.getString(1);
+                int readNumberOfRoom = cursor.getInt(2);
+                String readCheckInDate = cursor.getString(3);
+                String readCheckOutDate = cursor.getString(4);
+                int readAdultNumber = cursor.getInt(5);
+                int readChildrenNumber = cursor.getInt(6);
+                double readTotalPrice = cursor.getFloat(7);
+                String readPaymentMethod = cursor.getString(8);
+
+                User user = readUserBy(USERNAME_COLUMN, readUsername);
+                Hotel hotel = readHotelBy(HOTEL_NAME_COLUMN, readHotelName);
+                Booking.PaymentMethod paymentMethod = Booking.PaymentMethod.stringToEnum(readPaymentMethod);
+
+                try {
+                    Booking booking = new Booking(user, hotel, readNumberOfRoom, sdf.parse(readCheckInDate), sdf.parse(readCheckOutDate), readAdultNumber, readChildrenNumber, readTotalPrice, paymentMethod);
+                    bookings.add(booking);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
+            } while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return bookings;
+    }
+
+    public User readUserBy(String column, String email) {
         User user;
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String queryUser = "SELECT * FROM " + USER_TABLE + " WHERE " + USER_EMAIL_COLUMN + "=" + "'"+email+"'" + ";";
+        String queryUser = "SELECT * FROM " + USER_TABLE + " WHERE " + column + "=" + "'"+email+"'" + ";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryUser, null);
         if(cursor.moveToFirst()) {
@@ -370,6 +410,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] whereArgs = {user.getEmail()};
         db.update(USER_TABLE, values, whereClause, whereArgs);
         db.close();
+    }
+
+    public Hotel readHotelBy(String column, String email) {
+        Hotel hotel;
+        String queryUser = "SELECT * FROM " + HOTEL_TABLE + " WHERE " + column + "=" + "'"+email+"'" + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryUser, null);
+        if(cursor.moveToFirst()) {
+            String readHotelName = cursor.getString(0);
+            String readCountry = cursor.getString(1);
+            String readCity = cursor.getString(2);
+            String readStreetAddress = cursor.getString(3);
+            int readPostalCode = cursor.getInt(4);
+            String readDescription = cursor.getString(5);
+            double readPricePerNight = cursor.getFloat( 6);
+            String imageURL = cursor.getString(7);
+            hotel = new Hotel(readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), readDescription, readPricePerNight, imageURL);
+        } else {
+            return null;
+        }
+        cursor.close();
+        db.close();
+        return hotel;
     }
 
     public ArrayList<Hotel> readAllHotels() {

@@ -1,5 +1,7 @@
 package com.example.hci_prototyp_ws23.Adapters;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,33 +11,39 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hci_prototyp_ws23.Models.Hotel;
+import com.example.hci_prototyp_ws23.Models.Booking;
 import com.example.hci_prototyp_ws23.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class UserBookingsAdapter extends RecyclerView.Adapter<UserBookingsAdapter.UserBookingAdapterViewHolder> {
-    private final List<Hotel> hotelList;
-    public UserBookingsAdapter(List<Hotel> hotelList) {
-        this.hotelList = hotelList;
+    private Context context;
+    private final List<Booking> bookingList;
+    public UserBookingsAdapter(List<Booking> bookingList) {
+        this.bookingList = bookingList;
     }
     @NonNull
     @Override
     public UserBookingAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_bookings_item, parent, false);
+        context = parent.getContext();
         return new UserBookingAdapterViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserBookingAdapterViewHolder holder, int position) {
-        holder.nameTextView.setText(hotelList.get(position).getHotelName());
-        String date = "20-21 Dez 2021";
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        holder.nameTextView.setText(bookingList.get(position).getHotel().getHotelName());
+        String date = "Check-in: " + sdf.format(bookingList.get(position).getCheckInDate()) + "\n"
+                + "Check-out: " + sdf.format(bookingList.get(position).getCheckOutDate());
         holder.dateTextView.setText(date);
+        holder.imageView.setImageResource(context.getResources().getIdentifier(bookingList.get(position).getHotel().getImageURL(), "drawable", context.getPackageName()));
     }
 
     @Override
     public int getItemCount() {
-        return hotelList.size();
+        return bookingList.size();
     }
 
     public static class UserBookingAdapterViewHolder extends RecyclerView.ViewHolder {

@@ -44,7 +44,7 @@ public class Homepage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
-        currentUser = databaseHelper.readUserByEmail(user.getEmail());
+        currentUser = databaseHelper.readUserBy("email", user.getEmail());
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle("Hi " + currentUser.getUsername() + " !");
         toolbar.getMenu().getItem(0).setOnMenuItemClickListener(item -> {
