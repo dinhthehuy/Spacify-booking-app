@@ -52,7 +52,6 @@ public class Search extends Fragment {
         adultNumberEditText = view.findViewById(R.id.adultNumber_edt);
         childrenNumberEditText = view.findViewById(R.id.childrenNumber_edt);
         user = SearchArgs.fromBundle(getArguments()).getUserArg();
-        Toast.makeText(getContext(), user.getUsername() + " has arrived !", Toast.LENGTH_SHORT).show();
         return view;
     }
 

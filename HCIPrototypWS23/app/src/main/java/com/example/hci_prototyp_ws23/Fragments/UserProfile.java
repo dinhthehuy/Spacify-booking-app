@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -100,6 +101,7 @@ public class UserProfile extends Fragment {
         cityEditText.setText(currentUser.getUserAddress().getCity());
         streetAddressEditText.setText(currentUser.getUserAddress().getStreetAddress());
         postalCodeEditText.setText(String.valueOf(currentUser.getUserAddress().getPostalCode()));
+        mobileNumberEditText.setText(String.valueOf(currentUser.getPhoneNumber()));
         if (currentUser.getGender().equals(User.Gender.MALE)) {
             genderMaleRadioButton.setChecked(true);
         } else if (currentUser.getGender().equals(User.Gender.FEMALE)) {
@@ -133,6 +135,7 @@ public class UserProfile extends Fragment {
                         gender
                 );
                 databaseHelper.updateUser(newUser);
+                Toast.makeText(getContext(), "Your changes are saved", Toast.LENGTH_SHORT).show();
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }

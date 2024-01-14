@@ -4,11 +4,11 @@
     <item
         android:id="@+id/action_sort"
         android:title="@string/sort"
-        android:icon="@mipmap/sort_foreground"
+        android:icon="@drawable/sort"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_filter"
         android:title="@string/filter"
-        android:icon="@mipmap/filter_foreground"
+        android:icon="@drawable/filter"
         app:showAsAction="always" />
 </menu>

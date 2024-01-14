@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
+        bottomNavigationView.setActiveIndicatorLabelPadding(5);
+        bottomNavigationView.setItemActiveIndicatorHeight(150);
+        bottomNavigationView.setItemPaddingBottom(20);
+        bottomNavigationView.setItemIconSize(110);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int menuItemId = item.getItemId();
             //navigateFromMenuItem(homepage);

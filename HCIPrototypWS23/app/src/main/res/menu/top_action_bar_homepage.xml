@@ -5,5 +5,5 @@
         android:id="@+id/homepage_search_item"
         android:title="@string/search"
         app:showAsAction="always"
-        android:icon="@mipmap/search_foreground"/>
+        android:icon="@drawable/search"/>
 </menu>

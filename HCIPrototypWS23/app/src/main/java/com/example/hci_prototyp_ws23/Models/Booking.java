@@ -45,11 +45,9 @@ public class Booking implements Parcelable {
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
-
     public Hotel getHotel() {
         return hotel;
     }

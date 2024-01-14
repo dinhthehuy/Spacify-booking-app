@@ -20,8 +20,10 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
     private final List<Hotel> hotelList;
     private Context context;
     private onClickListener onClickListener;
-    public SearchResultListAdapter(List<Hotel> hotelList) {
+    private final int numberOfRooms;
+    public SearchResultListAdapter(List<Hotel> hotelList, int numberOfRooms) {
         this.hotelList = hotelList;
+        this.numberOfRooms = numberOfRooms;
     }
     @NonNull
     @Override
@@ -31,12 +33,15 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
         return new SearchResultListAdapterViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SearchResultListAdapter.SearchResultListAdapterViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Hotel hotel = hotelList.get(position);
         holder.nameView.setText(hotelList.get(position).getHotelName());
         String Address =  hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getCity() +  " " + hotelList.get(position).getHotelAddress().getPostalCode() + ", " + hotelList.get(position).getHotelAddress().getCountry();
         holder.addressView.setText(Address);
+        holder.numberOfRoomView.setText(numberOfRooms + " rooms");
+        holder.priceView.setText(hotel.getPricePerNight() + " €/night");
         holder.imageView.setImageResource(context.getResources().getIdentifier(hotel.getImageURL(), "drawable", context.getPackageName()));
         holder.itemView.setOnClickListener(v -> {
             if(onClickListener != null) {
@@ -59,12 +64,14 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
 
     public static class SearchResultListAdapterViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView nameView, addressView;
+        TextView nameView, addressView, numberOfRoomView, priceView;
         public SearchResultListAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.searchResultList_iv);
             nameView = itemView.findViewById(R.id.searchResultListHotelName_tv);
             addressView = itemView.findViewById(R.id.searchResultListHotelAddress_tv);
+            numberOfRoomView = itemView.findViewById(R.id.searchResultListRoomNumber_tv);
+            priceView = itemView.findViewById(R.id.searchResultListPrice_tv);
             }
         }
     }
