@@ -74,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SAVED_HOTEL_STREET_ADDRESS_COLUMN = "street_address";
     private static final String SAVED_HOTEL_POSTAL_CODE_COLUMN = "postal_code";
     private static final String SAVED_HOTEL_IMAGE_URL = "image_url";
+    private static final String SAVED_NUMBER_OF_ROOMS_COLUMN = "number_of_rooms";
     public static DatabaseHelper instance;
     ArrayList<Address> initialAddresses = new ArrayList<>(Arrays.asList(
             new Address("United States", "New York", "123 Main St", 10001),
@@ -137,6 +138,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + SAVED_CHECK_OUT_DATE_COLUMN + " DATE NOT NULL, "
                 + SAVED_ADULT_NUMBER_COLUMN + " INTEGER NOT NULL, "
                 + SAVED_CHILDREN_NUMBER_COLUMN + " INTEGER NOT NULL, "
+                + SAVED_NUMBER_OF_ROOMS_COLUMN + " INTEGER NOT NULL, "
                 + SAVED_TOTAL_PRICE_COLUMN + " FLOAT NOT NULL, "
                 + "PRIMARY KEY (" + SAVED_USERNAME_COLUMN + ", " + SAVED_HOTEL_NAME_COLUMN
                 + "));";
@@ -249,7 +251,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(BOOKING_TABLE, null, cv);
     }
 
-    public void insertSavedHotel(User user, Hotel hotel, String checkInDate, String checkOutDate, int adultNumber, int childrenNumber, double totalPrice) {
+    public void insertSavedHotel(User user, Hotel hotel, String checkInDate, String checkOutDate, int numberOfRooms, int adultNumber, int childrenNumber, double totalPrice) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(SAVED_USERNAME_COLUMN, user.getUsername());
@@ -263,6 +265,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(SAVED_CHECK_OUT_DATE_COLUMN, checkOutDate);
         cv.put(SAVED_ADULT_NUMBER_COLUMN, adultNumber);
         cv.put(SAVED_CHILDREN_NUMBER_COLUMN, childrenNumber);
+        cv.put(SAVED_NUMBER_OF_ROOMS_COLUMN, numberOfRooms);
         cv.put(SAVED_TOTAL_PRICE_COLUMN, totalPrice);
         db.insert(SAVED_HOTEL_TABLE, null, cv);
     }
@@ -308,9 +311,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String readCheckOutDate = cursor.getString(8);
                 int readAdultNumber = cursor.getInt(9);
                 int readChildrenNumber = cursor.getInt(10);
-                double readTotalPrice = cursor.getFloat(11);
+                int readNumberOfRooms = cursor.getInt(11);
+                double readTotalPrice = cursor.getFloat(12);
                 try {
-                    SavedHotel savedHotel = new SavedHotel(readUsername, readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), sdf.parse(readCheckInDate), sdf.parse(readCheckOutDate), readAdultNumber, readChildrenNumber, readTotalPrice, imageURL);
+                    SavedHotel savedHotel = new SavedHotel(readUsername, readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), sdf.parse(readCheckInDate), sdf.parse(readCheckOutDate), readNumberOfRooms, readAdultNumber, readChildrenNumber, readTotalPrice, imageURL);
                     resultList.add(savedHotel);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
@@ -412,9 +416,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Hotel readHotelBy(String column, String email) {
+    public Hotel readHotelBy(String column, String value) {
         Hotel hotel;
-        String queryUser = "SELECT * FROM " + HOTEL_TABLE + " WHERE " + column + "=" + "'"+email+"'" + ";";
+        String queryUser = "SELECT * FROM " + HOTEL_TABLE + " WHERE " + column + "=" + "'"+value+"'" + ";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryUser, null);
         if(cursor.moveToFirst()) {

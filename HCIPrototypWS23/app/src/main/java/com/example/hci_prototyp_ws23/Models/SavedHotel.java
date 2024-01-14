@@ -8,17 +8,19 @@ public class SavedHotel {
     private final Address hotelAddress;
     private final Date checkInDate;
     private final Date checkOutDate;
+    private final int numberOfRoom;
     private final int adultNumber;
     private final int childrenNumber;
     private final double totalPrice;
-    private String imageURL; // TODO: Implement later
+    private final String imageURL; 
 
-    public SavedHotel(String username, String hotelName, Address hotelAddress, Date checkInDate, Date checkOutDate, int adultNumber, int childrenNumber, double totalPrice, String imageURL) {
+    public SavedHotel(String username, String hotelName, Address hotelAddress, Date checkInDate, Date checkOutDate, int numberOfRoom, int adultNumber, int childrenNumber, double totalPrice, String imageURL) {
         this.username = username;
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
+        this.numberOfRoom = numberOfRoom;
         this.adultNumber = adultNumber;
         this.childrenNumber = childrenNumber;
         this.totalPrice = totalPrice;
@@ -55,5 +57,9 @@ public class SavedHotel {
 
     public Address getHotelAddress() {
         return hotelAddress;
+    }
+
+    public int getNumberOfRoom() {
+        return numberOfRoom;
     }
 }

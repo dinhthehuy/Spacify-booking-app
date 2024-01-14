@@ -89,7 +89,7 @@ public class HotelDescription extends Fragment {
                 databaseHelper.deleteSavedHotel(user, hotel);
                 Toast.makeText(getContext(), "Removed from your saved list", Toast.LENGTH_SHORT).show();
             } else {
-                databaseHelper.insertSavedHotel(user, hotel, HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate(), HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate(), adultsNumber, childrenNumber, nights * hotel.getPricePerNight());
+                databaseHelper.insertSavedHotel(user, hotel, HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate(), HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate(), numberOfRooms, adultsNumber, childrenNumber, nights * hotel.getPricePerNight());
                 Toast.makeText(getContext(), "Added to your saved list", Toast.LENGTH_SHORT).show();
             }
             return true;

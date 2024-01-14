@@ -1,5 +1,6 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hci_prototyp_ws23.Adapters.SavedListAdapter;
 import com.example.hci_prototyp_ws23.DatabaseHelper;
+import com.example.hci_prototyp_ws23.Models.Hotel;
 import com.example.hci_prototyp_ws23.Models.SavedHotel;
 import com.example.hci_prototyp_ws23.Models.User;
 import com.example.hci_prototyp_ws23.R;
@@ -21,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class SavedList extends Fragment {
@@ -58,8 +62,13 @@ public class SavedList extends Fragment {
         currentUser = databaseHelper.readUserBy("email", user.getEmail());
         hotels = databaseHelper.readSavedHotelByUsername(currentUser.getUsername()); // Query from database
 
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SavedListAdapter savedListAdapter = new SavedListAdapter(hotels);
         recyclerView.setAdapter(savedListAdapter);
-        //savedListAdapter.setOnClickListener((position, hotel) -> NavHostFragment.findNavController(SavedList.this).navigate(R.id.action_savedList_to_hotelDescription));
+        savedListAdapter.setOnClickListener((position, hotel) -> {
+            Hotel hotelParam = databaseHelper.readHotelBy("hotel_name", hotel.getHotelName());
+            SavedListDirections.ActionSavedListToHotelDescription action = SavedListDirections.actionSavedListToHotelDescription(currentUser, hotelParam, hotel.getAdultNumber(), hotel.getChildrenNumber(), sdf.format(hotel.getCheckInDate()), sdf.format(hotel.getCheckOutDate()), hotel.getNumberOfRoom());
+            NavHostFragment.findNavController(SavedList.this).navigate(action);
+        });
     }
 }
