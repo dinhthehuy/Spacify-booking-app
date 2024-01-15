@@ -75,6 +75,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SAVED_HOTEL_POSTAL_CODE_COLUMN = "postal_code";
     private static final String SAVED_HOTEL_IMAGE_URL = "image_url";
     private static final String SAVED_NUMBER_OF_ROOMS_COLUMN = "number_of_rooms";
+    private static final String HOTEL_PAYMENT_METHOD_TABLE = "hotel_payment_method";
+    private static final String PAYMENT_METHOD_HOTEL_NAME_COLUMN = "hotel_name";
+    private static final String PAYMENT_METHOD_NAME_COLUMN = "payment_method";
     public static DatabaseHelper instance;
     ArrayList<Address> initialAddresses = new ArrayList<>(Arrays.asList(
             new Address("United States", "New York", "123 Main St", 10001),
@@ -177,14 +180,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "PRIMARY KEY (" + SERVICE_HOTEL_NAME_COLUMN
                 + "));";
 
+        String createHotelPaymentMethodTable = "CREATE TABLE " + HOTEL_PAYMENT_METHOD_TABLE + " ("
+                + PAYMENT_METHOD_HOTEL_NAME_COLUMN + " TEXT REFERENCES " + HOTEL_TABLE + "(" + HOTEL_NAME_COLUMN + "), "
+                + PAYMENT_METHOD_NAME_COLUMN + " TEXT NOT NULL, "
+                + "PRIMARY KEY (" + PAYMENT_METHOD_HOTEL_NAME_COLUMN + ", " + PAYMENT_METHOD_NAME_COLUMN
+                + "));";
+
+
         db.execSQL(createAddressTable);
         db.execSQL(createHotelTable);
         db.execSQL(createUserTable);
         db.execSQL(createServiceTable);
         db.execSQL(createBookingTable);
         db.execSQL(createSavedHotel);
+        db.execSQL(createHotelPaymentMethodTable);
         loadInitialAddress(db);
         loadInitialHotels(db);
+        insertHotelPaymentMethod(initialHotels.get(0).getHotelName(), Booking.PaymentMethod.DEBIT, db);
+        insertHotelPaymentMethod(initialHotels.get(0).getHotelName(), Booking.PaymentMethod.PAYPAL, db);
+        insertHotelPaymentMethod(initialHotels.get(0).getHotelName(), Booking.PaymentMethod.CASH, db);
+        insertHotelPaymentMethod(initialHotels.get(0).getHotelName(), Booking.PaymentMethod.SEPA, db);
+        insertHotelPaymentMethod(initialHotels.get(1).getHotelName(), Booking.PaymentMethod.DEBIT, db);
+        insertHotelPaymentMethod(initialHotels.get(1).getHotelName(), Booking.PaymentMethod.CASH, db);
+        insertHotelPaymentMethod(initialHotels.get(1).getHotelName(), Booking.PaymentMethod.SEPA, db);
+        insertHotelPaymentMethod(initialHotels.get(2).getHotelName(), Booking.PaymentMethod.CASH, db);
+        insertHotelPaymentMethod(initialHotels.get(2).getHotelName(), Booking.PaymentMethod.SEPA, db);
+        insertHotelPaymentMethod(initialHotels.get(3).getHotelName(), Booking.PaymentMethod.PAYPAL, db);
+        insertHotelPaymentMethod(initialHotels.get(3).getHotelName(), Booking.PaymentMethod.CASH, db);
+        insertHotelPaymentMethod(initialHotels.get(3).getHotelName(), Booking.PaymentMethod.SEPA, db);
+        insertHotelPaymentMethod(initialHotels.get(4).getHotelName(), Booking.PaymentMethod.DEBIT, db);
+        insertHotelPaymentMethod(initialHotels.get(4).getHotelName(), Booking.PaymentMethod.PAYPAL, db);
+        insertHotelPaymentMethod(initialHotels.get(4).getHotelName(), Booking.PaymentMethod.CASH, db);
+        insertHotelPaymentMethod(initialHotels.get(4).getHotelName(), Booking.PaymentMethod.SEPA, db);
+        insertHotelPaymentMethod(initialHotels.get(4).getHotelName(), Booking.PaymentMethod.GIROPAY, db);
+        insertHotelPaymentMethod(initialHotels.get(5).getHotelName(), Booking.PaymentMethod.DEBIT, db);
+        insertHotelPaymentMethod(initialHotels.get(5).getHotelName(), Booking.PaymentMethod.PAYPAL, db);
+        insertHotelPaymentMethod(initialHotels.get(5).getHotelName(), Booking.PaymentMethod.CASH, db);
+        insertHotelPaymentMethod(initialHotels.get(5).getHotelName(), Booking.PaymentMethod.SEPA, db);
+        insertHotelPaymentMethod(initialHotels.get(5).getHotelName(), Booking.PaymentMethod.GIROPAY, db);
     }
 
     @Override
@@ -270,6 +303,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(SAVED_HOTEL_TABLE, null, cv);
     }
 
+    public void insertHotelPaymentMethod(String hotelName, Booking.PaymentMethod paymentMethod, SQLiteDatabase db) {
+        ContentValues cv = new ContentValues();
+        cv.put(PAYMENT_METHOD_HOTEL_NAME_COLUMN, hotelName);
+        cv.put(PAYMENT_METHOD_NAME_COLUMN, paymentMethod.name());
+        db.insert(HOTEL_PAYMENT_METHOD_TABLE, null, cv);
+    }
+
+    public ArrayList<String> readAllPaymentMethodsByHotelName(String hotelName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> results = new ArrayList<>();
+        String selection = "hotel_name = ?";
+        String[] selectionArgs = {hotelName};
+
+        Cursor cursor = db.query(HOTEL_PAYMENT_METHOD_TABLE, null, selection, selectionArgs, null, null, null);
+        if(cursor.moveToFirst()) {
+            do {
+                String paymentMethod = cursor.getString(1);
+                results.add(paymentMethod);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return results;
+    }
+
     public void deleteSavedHotel(User user, Hotel hotel) {
         SQLiteDatabase db = this.getWritableDatabase();
         String whereClause = "username = ? AND hotel_name = ?";
@@ -277,10 +335,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(SAVED_HOTEL_TABLE, whereClause, whereArgs);
     }
 
-    public boolean existInSavedHotel(User user, Hotel hotel) {
+    public boolean readSavedHotelByHotelNameAndUsername(User user, Hotel hotel, String check_in_date, String check_out_date) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String selection = "username = ? AND hotel_name = ?";
-        String[] selectionArgs = {user.getUsername(), hotel.getHotelName()};
+        String selection = "username = ? AND hotel_name = ? AND check_in_date = ? AND check_out_date = ?";
+        String[] selectionArgs = {user.getUsername(), hotel.getHotelName(), check_in_date, check_out_date};
 
         Cursor cursor = db.query(SAVED_HOTEL_TABLE, null, selection, selectionArgs, null, null, null);
         if(cursor.moveToFirst()) {
@@ -313,8 +371,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int readChildrenNumber = cursor.getInt(10);
                 int readNumberOfRooms = cursor.getInt(11);
                 double readTotalPrice = cursor.getFloat(12);
+                ArrayList<String> acceptedPaymentMethods = readAllPaymentMethodsByHotelName(readHotelName);
                 try {
                     SavedHotel savedHotel = new SavedHotel(readUsername, readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), sdf.parse(readCheckInDate), sdf.parse(readCheckOutDate), readNumberOfRooms, readAdultNumber, readChildrenNumber, readTotalPrice, imageURL);
+                    savedHotel.setAcceptedPaymentMethods(acceptedPaymentMethods);
                     resultList.add(savedHotel);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
@@ -430,7 +490,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String readDescription = cursor.getString(5);
             double readPricePerNight = cursor.getFloat( 6);
             String imageURL = cursor.getString(7);
+            ArrayList<String> acceptedPaymentMethods = readAllPaymentMethodsByHotelName(readHotelName);
             hotel = new Hotel(readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), readDescription, readPricePerNight, imageURL);
+            hotel.setAcceptedPaymentMethods(acceptedPaymentMethods);
         } else {
             return null;
         }
@@ -455,7 +517,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String readDescription = cursor.getString(5);
                 double readPricePerNight = cursor.getFloat( 6);
                 String imageURL = cursor.getString(7);
+                ArrayList<String> acceptedPaymentMethods = readAllPaymentMethodsByHotelName(readHotelName);
                 Hotel hotel = new Hotel(readHotelName, new Address(readCountry, readCity, readStreetAddress, readPostalCode), readDescription, readPricePerNight, imageURL);
+                hotel.setAcceptedPaymentMethods(acceptedPaymentMethods);
                 arrayList.add(hotel);
             } while(cursor.moveToNext());
         } else {

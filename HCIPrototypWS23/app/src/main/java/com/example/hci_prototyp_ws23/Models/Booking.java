@@ -94,8 +94,7 @@ public class Booking implements Parcelable {
     }
 
     public enum PaymentMethod {
-        PAYPAL, DEBIT, GIROPAY, SEPA;
-
+        PAYPAL, DEBIT, GIROPAY, SEPA, CASH;
         public static PaymentMethod stringToEnum(String input) {
             for(PaymentMethod value: PaymentMethod.values()) {
                 if(value.name().equals(input)) {

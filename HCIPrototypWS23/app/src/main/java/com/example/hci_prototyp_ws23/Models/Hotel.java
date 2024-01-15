@@ -13,14 +13,16 @@ public class Hotel implements Parcelable {
     private final String description;
     private final double pricePerNight;
     private final String imageURL;
-    private final ArrayList<String> facilities;
+    private final ArrayList<String> services;
+    private ArrayList<String> acceptedPaymentMethods;
 
     private Hotel(Parcel in) {
         hotelName = in.readString();
         hotelAddress = in.readParcelable(Address.class.getClassLoader());
         description = in.readString();
         pricePerNight = in.readDouble();
-        facilities = in.createStringArrayList();
+        services = in.createStringArrayList();
+        setAcceptedPaymentMethods(in.createStringArrayList());
         imageURL = in.readString();
     }
 
@@ -45,15 +47,16 @@ public class Hotel implements Parcelable {
     public String getDescription() {
         return description;
     }
-    public ArrayList<String> getFacilities() {
-        return facilities;
+    public ArrayList<String> getServices() {
+        return services;
     }
     public double getPricePerNight() {
         return pricePerNight;
     }
     public Hotel(String hotelName, Address hotelAddress, String description, double pricePerNight, String imageURL) {
         this.imageURL = imageURL;
-        facilities = new ArrayList<>();
+        services = new ArrayList<>();
+        setAcceptedPaymentMethods(new ArrayList<>());
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
         this.description = description;
@@ -71,11 +74,27 @@ public class Hotel implements Parcelable {
         dest.writeParcelable(hotelAddress, flags);
         dest.writeString(description);
         dest.writeDouble(pricePerNight);
-        dest.writeStringList(facilities);
+        dest.writeStringList(services);
+        dest.writeStringList(getAcceptedPaymentMethods());
         dest.writeString(getImageURL());
     }
 
     public String getImageURL() {
         return imageURL;
+    }
+
+    public ArrayList<String> getAcceptedPaymentMethods() {
+        return acceptedPaymentMethods;
+    }
+
+    public void setAcceptedPaymentMethods(ArrayList<String> acceptedPaymentMethods) {
+        this.acceptedPaymentMethods = acceptedPaymentMethods;
+    }
+    public String toStringPayment() {
+        StringBuilder payment = new StringBuilder("We accept: ");
+        for(String p: this.getAcceptedPaymentMethods()) {
+            payment.append(p).append(", ");
+        }
+        return payment.toString();
     }
 }

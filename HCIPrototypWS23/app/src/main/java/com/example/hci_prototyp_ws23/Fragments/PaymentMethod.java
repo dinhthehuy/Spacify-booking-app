@@ -1,5 +1,7 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
+import static com.example.hci_prototyp_ws23.Models.Booking.PaymentMethod.stringToEnum;
+
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,13 +24,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 public class PaymentMethod extends Fragment {
 
    View view;
     BottomNavigationView bottomNavigationView;
     Button roomInfoButton;
-    RadioButton paypalRadioButton, debitRadioButton, giropayRadioButton, sepaRadioButton;
+    RadioButton paypalRadioButton, debitRadioButton, giropayRadioButton, sepaRadioButton, cashRadioButton;
     Toolbar toolbar;
     User user;
     Hotel hotel;
@@ -50,6 +53,7 @@ public class PaymentMethod extends Fragment {
         debitRadioButton = view.findViewById(R.id.payment_debit_rb);
         giropayRadioButton = view.findViewById(R.id.payment_giropay_rb);
         sepaRadioButton = view.findViewById(R.id.payment_sepa_rb);
+        cashRadioButton = view.findViewById(R.id.payment_cash_rb);
 
         user = PaymentMethodArgs.fromBundle(getArguments()).getUserArg();
         hotel = PaymentMethodArgs.fromBundle(getArguments()).getHotelArg();
@@ -59,6 +63,7 @@ public class PaymentMethod extends Fragment {
         childrenNumber = PaymentMethodArgs.fromBundle(getArguments()).getChildrenNumberArg();
         numberOfRooms = PaymentMethodArgs.fromBundle(getArguments()).getNumberOfRoomsArg();
         totalPrice = PaymentMethodArgs.fromBundle(getArguments()).getTotalPriceArg();
+        checkPaymentMethods();
         return view;
     }
 
@@ -93,5 +98,27 @@ public class PaymentMethod extends Fragment {
             PaymentMethodDirections.ActionPaymentMethodToBookingConfimation action = PaymentMethodDirections.actionPaymentMethodToBookingConfimation(user.getEmail());
             NavHostFragment.findNavController(PaymentMethod.this).navigate(action);
         });
+    }
+
+    public void checkPaymentMethods() {
+        paypalRadioButton.setClickable(false);
+        debitRadioButton.setClickable(false);
+        giropayRadioButton.setClickable(false);
+        sepaRadioButton.setClickable(false);
+        cashRadioButton.setClickable(false);
+
+        for(String p: hotel.getAcceptedPaymentMethods()) {
+            if(Objects.equals(stringToEnum(p), Booking.PaymentMethod.PAYPAL)) {
+                paypalRadioButton.setClickable(true);
+            } else if(Objects.equals(stringToEnum(p), Booking.PaymentMethod.DEBIT)) {
+                debitRadioButton.setClickable(true);
+            } else if(Objects.equals(stringToEnum(p), Booking.PaymentMethod.GIROPAY)) {
+                giropayRadioButton.setClickable(true);
+            } else if(Objects.equals(stringToEnum(p), Booking.PaymentMethod.SEPA)) {
+                sepaRadioButton.setClickable(true);
+            } else {
+                cashRadioButton.setClickable(true);
+            }
+        }
     }
 }

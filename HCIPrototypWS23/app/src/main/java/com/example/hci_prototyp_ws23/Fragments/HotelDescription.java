@@ -33,7 +33,8 @@ public class HotelDescription extends Fragment {
     ImageView imageView;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
-    TextView hotelNameTextView, checkInDateTextView, checkOutDateTextView, roomsAndGuestTextView, totalPriceTextView, hotelAddressTextView;
+    TextView hotelNameTextView, checkInDateTextView, checkOutDateTextView, roomsAndGuestTextView,
+            totalPriceTextView, hotelAddressTextView, hotelAcceptedPayments;
     Button seeYourOptionsButton;
     Hotel hotel;
     User user;
@@ -57,6 +58,7 @@ public class HotelDescription extends Fragment {
         roomsAndGuestTextView = view.findViewById(R.id.roomsAndGuests_tv);
         totalPriceTextView = view.findViewById(R.id.totalPrice_tv);
         hotelAddressTextView = view.findViewById(R.id.hotelAddress_tv);
+        hotelAcceptedPayments = view.findViewById(R.id.hotelPayment_tv);
         seeYourOptionsButton = view.findViewById(R.id.seeYourOptions_btn);
         databaseHelper = DatabaseHelper.getInstance(getContext());
 
@@ -85,7 +87,7 @@ public class HotelDescription extends Fragment {
         toolbar.setTitle(hotel.getHotelName());
         toolbar.inflateMenu(R.menu.top_action_bar_hotel_description);
         toolbar.getMenu().getItem(0).setOnMenuItemClickListener(item -> {
-            if(databaseHelper.existInSavedHotel(user, hotel)) {
+            if(databaseHelper.readSavedHotelByHotelNameAndUsername(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate))) {
                 databaseHelper.deleteSavedHotel(user, hotel);
                 Toast.makeText(getContext(), "Removed from your saved list", Toast.LENGTH_SHORT).show();
             } else {
@@ -108,5 +110,6 @@ public class HotelDescription extends Fragment {
         nights = TimeUnit.MILLISECONDS.toDays(checkOutDate.getTime() - checkInDate.getTime());
         totalPriceTextView.setText("Price for " + nights + " nights/room" + "\n" + nights * hotel.getPricePerNight() + " €");
         hotelAddressTextView.setText(hotel.getHotelAddress().getStreetAddress() + " " + hotel.getHotelAddress().getCity() + "\n" + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
+        hotelAcceptedPayments.setText(hotel.toStringPayment());
     }
 }

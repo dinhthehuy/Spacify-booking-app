@@ -1,5 +1,6 @@
 package com.example.hci_prototyp_ws23.Models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SavedHotel {
@@ -12,7 +13,8 @@ public class SavedHotel {
     private final int adultNumber;
     private final int childrenNumber;
     private final double totalPrice;
-    private final String imageURL; 
+    private final String imageURL;
+    private ArrayList<String> acceptedPaymentMethods;
 
     public SavedHotel(String username, String hotelName, Address hotelAddress, Date checkInDate, Date checkOutDate, int numberOfRoom, int adultNumber, int childrenNumber, double totalPrice, String imageURL) {
         this.username = username;
@@ -25,6 +27,7 @@ public class SavedHotel {
         this.childrenNumber = childrenNumber;
         this.totalPrice = totalPrice;
         this.imageURL = imageURL;
+        setAcceptedPaymentMethods(new ArrayList<>());
     }
 
     public String getHotelName() {
@@ -61,5 +64,21 @@ public class SavedHotel {
 
     public int getNumberOfRoom() {
         return numberOfRoom;
+    }
+
+    public ArrayList<String> getAcceptedPaymentMethods() {
+        return acceptedPaymentMethods;
+    }
+
+    public void setAcceptedPaymentMethods(ArrayList<String> acceptedPaymentMethods) {
+        this.acceptedPaymentMethods = acceptedPaymentMethods;
+    }
+
+    public String toStringPayment() {
+        StringBuilder payment = new StringBuilder("We accept: ");
+        for(String p: this.getAcceptedPaymentMethods()) {
+            payment.append(p).append(", ");
+        }
+        return payment.toString();
     }
 }
