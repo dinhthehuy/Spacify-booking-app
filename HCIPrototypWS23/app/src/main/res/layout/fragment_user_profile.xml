@@ -22,13 +22,7 @@
             android:src="@drawable/ic_launcher_background"
             app:civ_border_color="@color/black"
             app:civ_border_width="3dp"
-            android:layout_marginTop="40dp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.564" />
+            android:layout_marginTop="40dp" />
 
         <TextView
             android:id="@+id/name_tv"
@@ -43,7 +37,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/_first_name_til"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/gray_background">
 
             <EditText
                 android:id="@+id/profile_first_name_et"
@@ -51,15 +46,15 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:importantForAutofill="no"
-                android:hint="@string/first_name"
-                android:background="@drawable/gray_background"/>
+                android:hint="@string/first_name"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/last_name_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
 
             <EditText
                 android:id="@+id/profile_last_name_et"
@@ -67,8 +62,7 @@
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:importantForAutofill="no"
-                android:hint="@string/last_name"
-                android:background="@drawable/gray_background"/>
+                android:hint="@string/last_name"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +79,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
 
             <EditText
                 android:id="@+id/profile_email_et"
@@ -93,8 +88,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:importantForAutofill="no"
-                android:hint="@string/email"
-                android:background="@drawable/gray_background"/>
+                android:hint="@string/email"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,7 +105,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/mobile_number_til"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/gray_background">
 
             <EditText
                 android:id="@+id/profile_mobile_number_et"
@@ -119,15 +114,15 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:importantForAutofill="no"
-                android:hint="@string/mobile_number"
-                android:background="@drawable/gray_background" />
+                android:hint="@string/mobile_number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/date_of_birth_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
 
             <EditText
                 android:id="@+id/profile_date_of_birth_et"
@@ -135,8 +130,7 @@
                 android:layout_height="match_parent"
                 android:inputType="date"
                 android:importantForAutofill="no"
-                android:hint="@string/date_of_birth"
-                android:background="@drawable/gray_background" />
+                android:hint="@string/date_of_birth" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,8 +153,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="70dp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
                 android:text="@string/female" />
 
             <RadioButton
@@ -168,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/other" />
         </RadioGroup>
 
@@ -185,23 +179,24 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/country_til"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:background="@drawable/gray_background" >
 
             <EditText
                 android:id="@+id/profile_country_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="text"
                 android:importantForAutofill="no"
-                android:hint="@string/country_region"
-                android:background="@drawable/gray_background" />
+                android:hint="@string/country_region" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/city_til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_background">
 
             <EditText
                 android:id="@+id/profile_city_et"
@@ -209,15 +204,15 @@
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:importantForAutofill="no"
-                android:hint="@string/city"
-                android:background="@drawable/gray_background" />
+                android:hint="@string/city" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/street_address_til"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/gray_background">
 
             <EditText
                 android:id="@+id/profile_street_address_et"
@@ -225,8 +220,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:importantForAutofill="no"
-                android:hint="@string/street_address"
-                android:background="@drawable/gray_background" />
+                android:hint="@string/street_address" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -234,7 +228,8 @@
             android:id="@+id/postal_code_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/gray_background">
 
             <EditText
                 android:id="@+id/profile_postal_code_et"
@@ -242,8 +237,7 @@
                 android:layout_height="match_parent"
                 android:inputType="number"
                 android:importantForAutofill="no"
-                android:hint="@string/postal_code"
-                android:background="@drawable/gray_background" />
+                android:hint="@string/postal_code" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

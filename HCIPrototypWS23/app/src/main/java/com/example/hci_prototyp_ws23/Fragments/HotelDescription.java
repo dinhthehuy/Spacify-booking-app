@@ -34,7 +34,7 @@ public class HotelDescription extends Fragment {
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
     TextView hotelNameTextView, checkInDateTextView, checkOutDateTextView, roomsAndGuestTextView,
-            totalPriceTextView, hotelAddressTextView, hotelAcceptedPayments;
+            totalPriceTextView, hotelAddressTextView, hotelAcceptedPayments, descriptionTextView;
     Button seeYourOptionsButton;
     Hotel hotel;
     User user;
@@ -58,6 +58,7 @@ public class HotelDescription extends Fragment {
         roomsAndGuestTextView = view.findViewById(R.id.roomsAndGuests_tv);
         totalPriceTextView = view.findViewById(R.id.totalPrice_tv);
         hotelAddressTextView = view.findViewById(R.id.hotelAddress_tv);
+        descriptionTextView = view.findViewById(R.id.hotelDescription_tv);
         hotelAcceptedPayments = view.findViewById(R.id.hotelPayment_tv);
         seeYourOptionsButton = view.findViewById(R.id.seeYourOptions_btn);
         databaseHelper = DatabaseHelper.getInstance(getContext());
@@ -111,5 +112,6 @@ public class HotelDescription extends Fragment {
         totalPriceTextView.setText("Price for " + nights + " nights/room" + "\n" + nights * hotel.getPricePerNight() + " €");
         hotelAddressTextView.setText(hotel.getHotelAddress().getStreetAddress() + " " + hotel.getHotelAddress().getCity() + "\n" + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
         hotelAcceptedPayments.setText(hotel.toStringPayment());
+        descriptionTextView.setText(hotel.getDescription());
     }
 }

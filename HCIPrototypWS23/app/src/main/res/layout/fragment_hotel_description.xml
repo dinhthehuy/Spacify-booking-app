@@ -108,6 +108,14 @@
                 android:layout_marginEnd="15dp"
                 android:paddingTop="10dp"/>
 
+            <TextView
+                android:id="@+id/hotelDescription_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:paddingTop="10dp"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
     <androidx.appcompat.widget.AppCompatButton

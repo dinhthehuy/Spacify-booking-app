@@ -89,4 +89,11 @@
     <string name="nearby">Nearby</string>
     <string name="top_rated_hotels">Top Rated Hotels</string>
     <string name="cash_on_arrival">Cash (on arrival)</string>
+    <string name="serenity_springs_hotel">Serenity Springs Hotel</string>
+    <string name="portland_oregon">Portland, Oregon</string>
+    <string name="star_hotel">Star Hotel</string>
+    <string name="schletterstrasse_13">Schletterstrasse 13,</string>
+    <string name="_9064_gonten">9064 Gonten</string>
+    <string name="switzerland">Switzerland</string>
+    <string name="_59_night">59€/night</string>
 </resources>
