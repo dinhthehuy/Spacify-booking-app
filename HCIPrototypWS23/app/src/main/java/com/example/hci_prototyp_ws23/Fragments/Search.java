@@ -1,13 +1,18 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,10 +33,10 @@ import java.util.Locale;
 public class Search extends Fragment {
     View view;
     BottomNavigationView bottomNavigationView;
-    Button search_button;
-    TextView date_textView;
+    Button search_button, apply_button;
+    TextView date_textView, guestTextView, roomNumberTextView, adultNumberTextView, childrenNumberTextView;
     Toolbar toolbar;
-    EditText destinationEditText, roomNumberEditText, adultNumberEditText, childrenNumberEditText;
+    EditText destinationEditText;
     User user;
     String destination;
     int numberOfRooms, adultNumber, childrenNumber;
@@ -44,13 +49,11 @@ public class Search extends Fragment {
         view = inflater.inflate(R.layout.fragment_search, container, false);
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_bar);
         toolbar = view.findViewById(R.id.search_tb);
-        toolbar = view.findViewById(R.id.search_tb);
         search_button = view.findViewById(R.id.search_btn);
         date_textView = view.findViewById(R.id.date_edt);
         destinationEditText = view.findViewById(R.id.destination_edt);
-        roomNumberEditText = view.findViewById(R.id.roomNumber_edt);
-        adultNumberEditText = view.findViewById(R.id.adultNumber_edt);
-        childrenNumberEditText = view.findViewById(R.id.childrenNumber_edt);
+        guestTextView = view.findViewById(R.id.guest_tv);
+
         user = SearchArgs.fromBundle(getArguments()).getUserArg();
         return view;
     }
@@ -61,16 +64,14 @@ public class Search extends Fragment {
         bottomNavigationView.setVisibility(View.GONE);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(Search.this).popBackStack());
+
+        guestTextView.setOnClickListener(v -> showDialog());
+
         search_button.setOnClickListener(v -> {
-            if(!hasEmptyFields() && !hasInvalidFields()) {
-                destination = destinationEditText.getText().toString();
-                numberOfRooms = Integer.parseInt(roomNumberEditText.getText().toString());
-                adultNumber = Integer.parseInt(adultNumberEditText.getText().toString());
-                childrenNumber = Integer.parseInt(childrenNumberEditText.getText().toString());
+            destination = destinationEditText.getText().toString();
                 SearchDirections.ActionSearchToSearchResultList action =
                         SearchDirections.actionSearchToSearchResultList(destination, numberOfRooms, adultNumber, childrenNumber, user, checkInDate, checkOutDate);
                 NavHostFragment.findNavController(Search.this).navigate(action);
-            }
         });
 
         date_textView.setOnClickListener(v -> {
@@ -91,44 +92,85 @@ public class Search extends Fragment {
         });
     }
 
-    public boolean hasEmptyFields() {
-        if(destinationEditText.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Destination field is empty", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+    @SuppressLint("SetTextI18n")
+    private void showDialog() {
+        TextView minusRoom, plusRoom, minusAdult, plusAdult, minusChildren, plusChildren;
+        final Dialog dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottom_sheet_layout);
 
-        if(date_textView.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Date field is empty", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+        roomNumberTextView = dialog.findViewById(R.id.roomNumber_tv);
+        adultNumberTextView = dialog.findViewById(R.id.adultNumber_tv);
+        childrenNumberTextView = dialog.findViewById(R.id.childrenNumber_tv);
+        minusRoom = dialog.findViewById(R.id.minus_room_tv);
+        plusRoom = dialog.findViewById(R.id.plus_room_tv);
+        minusAdult = dialog.findViewById(R.id.minus_adult_tv);
+        plusAdult = dialog.findViewById(R.id.plus_adult_tv);
+        minusChildren = dialog.findViewById(R.id.minus_children_tv);
+        plusChildren = dialog.findViewById(R.id.plus_children_tv);
+        apply_button = dialog.findViewById(R.id.apply_btn);
 
-        if(roomNumberEditText.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Room field is empty", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+        minusRoom.setOnClickListener(v -> {
+            if (Integer.parseInt(roomNumberTextView.getText().toString()) > 1) {
+                roomNumberTextView.setText(String.valueOf(Integer.parseInt(roomNumberTextView.getText().toString()) - 1));
+            }
+        });
 
-        if(adultNumberEditText.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Adult field is empty", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+        plusRoom.setOnClickListener(v -> roomNumberTextView.setText(String.valueOf(Integer.parseInt(roomNumberTextView.getText().toString())+1)));
 
-        if(childrenNumberEditText.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(), "Children field is empty", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
-    }
+        minusAdult.setOnClickListener(v -> {
+            if(Integer.parseInt(adultNumberTextView.getText().toString()) > 1) {
+                adultNumberTextView.setText(String.valueOf(Integer.parseInt(adultNumberTextView.getText().toString()) - 1));
+            }
+        });
 
-    public boolean hasInvalidFields() {
-        if(Integer.parseInt(roomNumberEditText.getText().toString()) == 0) {
-            Toast.makeText(getContext(), "Invalid room value", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+        plusAdult.setOnClickListener(v -> adultNumberTextView.setText(String.valueOf(Integer.parseInt(adultNumberTextView.getText().toString())+1)));
 
-        if(Integer.parseInt(adultNumberEditText.getText().toString()) == 0) {
-            Toast.makeText(getContext(), "Invalid room value", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
+        minusChildren.setOnClickListener(v -> {
+            if(Integer.parseInt(childrenNumberTextView.getText().toString()) > 0) {
+                childrenNumberTextView.setText(String.valueOf(Integer.parseInt(childrenNumberTextView.getText().toString()) - 1));
+            }
+        });
+
+        plusChildren.setOnClickListener(v -> childrenNumberTextView.setText(String.valueOf(Integer.parseInt(childrenNumberTextView.getText().toString()) + 1)));
+
+
+        apply_button.setOnClickListener(v -> {
+            numberOfRooms = Integer.parseInt(roomNumberTextView.getText().toString());
+            adultNumber = Integer.parseInt(adultNumberTextView.getText().toString());
+            childrenNumber = Integer.parseInt(childrenNumberTextView.getText().toString());
+
+            String room, adult, children;
+
+            if (numberOfRooms == 1) {
+                room = numberOfRooms + " room";
+            } else {
+                room = numberOfRooms + " rooms";
+            }
+
+            if (adultNumber == 1) {
+                adult = adultNumber + " adult";
+            } else {
+                adult = adultNumber + " adults";
+            }
+
+            if (childrenNumber == 1) {
+                children = childrenNumber + " child";
+            } else if(childrenNumber == 0) {
+                children = "No children";
+            } else {
+                children = childrenNumber + " children";
+            }
+
+
+            guestTextView.setText(room + " - " + adult + " - " + children);
+            dialog.dismiss();
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 }

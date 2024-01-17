@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hci_prototyp_ws23.Models.Hotel;
@@ -32,6 +33,7 @@ public class BookingOverview extends Fragment {
     Toolbar toolbar;
     Button roomInfoButton;
     TextView hotelName, hotelAddress, checkIn, checkOut, guests, total;
+    ImageView hotelImageView;
     User user;
     Hotel hotel;
     String checkInDate, checkOutDate;
@@ -53,6 +55,7 @@ public class BookingOverview extends Fragment {
         checkOut = view.findViewById(R.id.booking_overview_checkOut_tv);
         guests = view.findViewById(R.id.booking_overview_guests_tv);
         total = view.findViewById(R.id.booking_overview_total_tv);
+        hotelImageView = view.findViewById(R.id.bookingOverview_iv);
 
         user = BookingOverviewArgs.fromBundle(getArguments()).getUserArg();
         hotel = BookingOverviewArgs.fromBundle(getArguments()).getHotelArg();
@@ -81,6 +84,7 @@ public class BookingOverview extends Fragment {
         }
         totalPrice = numberOfRooms * nights * hotel.getPricePerNight();
 
+        hotelImageView.setImageResource(getResources().getIdentifier(hotel.getImageURL(), "drawable", requireActivity().getPackageName()));
         hotelName.setText(hotel.getHotelName());
         hotelAddress.setText(hotel.getHotelAddress().getStreetAddress() + ", " + hotel.getHotelAddress().getCity() + ", " + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
         checkIn.setText("Check-in date: " + checkInDate);

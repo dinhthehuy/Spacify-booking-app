@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="?attr/homeAsUpIndicator"/>
+        app:navigationIcon="?attr/homeAsUpIndicator" />
 
     <TextView
         android:id="@+id/welcome_edt"
@@ -49,48 +49,19 @@
         app:layout_constraintTop_toBottomOf="@+id/welcome_edt"
         tools:ignore="RtlSymmetry" />
 
-    <EditText
-        android:id="@+id/roomNumber_edt"
-        android:layout_width="100dp"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/guest_tv"
+        android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_textview_white_background"
         android:hint="@string/rooms"
-        android:importantForAutofill="no"
-        android:inputType="number"
         android:paddingStart="20dp"
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="@+id/date_edt"
         app:layout_constraintStart_toStartOf="@+id/date_edt"
         app:layout_constraintTop_toBottomOf="@+id/date_edt"
-        tools:ignore="RtlSymmetry" />
-
-    <EditText
-        android:id="@+id/adultNumber_edt"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:background="@drawable/rounded_textview_white_background"
-        android:hint="@string/adults"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:paddingStart="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/roomNumber_edt"
-        app:layout_constraintStart_toEndOf="@+id/roomNumber_edt"
-        tools:ignore="RtlSymmetry" />
-
-    <EditText
-        android:id="@+id/childrenNumber_edt"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:background="@drawable/rounded_textview_white_background"
-        android:hint="@string/children"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:paddingStart="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/adultNumber_edt"
-        app:layout_constraintEnd_toEndOf="@+id/date_edt"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/adultNumber_edt"
         tools:ignore="RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -130,9 +101,8 @@
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="@+id/childrenNumber_edt"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/roomNumber_edt" />
+        app:layout_constraintEnd_toEndOf="@+id/guest_tv"
+        app:layout_constraintStart_toStartOf="@+id/guest_tv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
