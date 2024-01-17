@@ -126,6 +126,7 @@
             android:id="@+id/user_overview_mobile_number_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/gray_background">
             <EditText
                 android:id="@+id/user_overview_mobile_number"
@@ -146,12 +147,14 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:background="@drawable/rounded_slight_gray">
+
         <androidx.appcompat.widget.AppCompatTextView
             android:text="@string/what_is_the_purpose_of_your_trip"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <RadioGroup

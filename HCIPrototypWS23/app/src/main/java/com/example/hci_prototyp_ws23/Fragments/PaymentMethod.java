@@ -91,6 +91,11 @@ public class PaymentMethod extends Fragment {
             try {
                 Booking booking = new Booking(user, hotel, numberOfRooms, sdf.parse(checkInDate), sdf.parse(checkOutDate), adultsNumber, childrenNumber, totalPrice, paymentMethod);
                 databaseHelper.insertBooking(booking);
+
+                if(databaseHelper.readSavedHotelByHotelNameAndUsername(user, hotel, checkInDate, checkOutDate)) {
+                    databaseHelper.deleteSavedHotel(user, hotel, checkInDate, checkOutDate);
+                }
+
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }

@@ -143,7 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + SAVED_CHILDREN_NUMBER_COLUMN + " INTEGER NOT NULL, "
                 + SAVED_NUMBER_OF_ROOMS_COLUMN + " INTEGER NOT NULL, "
                 + SAVED_TOTAL_PRICE_COLUMN + " FLOAT NOT NULL, "
-                + "PRIMARY KEY (" + SAVED_USERNAME_COLUMN + ", " + SAVED_HOTEL_NAME_COLUMN
+                + "PRIMARY KEY (" + SAVED_USERNAME_COLUMN + ", " + SAVED_HOTEL_NAME_COLUMN + ", " + SAVED_CHECK_IN_DATE_COLUMN + ", " + SAVED_CHECK_OUT_DATE_COLUMN
                 + "));";
 
         String createUserTable = "CREATE TABLE " + USER_TABLE + " ("
@@ -328,10 +328,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return results;
     }
 
-    public void deleteSavedHotel(User user, Hotel hotel) {
+    public void deleteSavedHotel(User user, Hotel hotel, String check_in_date, String check_out_date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String whereClause = "username = ? AND hotel_name = ?";
-        String[] whereArgs = {user.getUsername(), hotel.getHotelName()};
+        String whereClause = "username = ? AND hotel_name = ? AND check_in_date = ? AND check_out_date = ?";
+        String[] whereArgs = {user.getUsername(), hotel.getHotelName(), check_in_date, check_out_date};
         db.delete(SAVED_HOTEL_TABLE, whereClause, whereArgs);
     }
 

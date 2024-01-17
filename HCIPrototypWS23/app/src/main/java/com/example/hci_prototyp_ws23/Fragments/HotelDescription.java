@@ -89,7 +89,7 @@ public class HotelDescription extends Fragment {
         toolbar.inflateMenu(R.menu.top_action_bar_hotel_description);
         toolbar.getMenu().getItem(0).setOnMenuItemClickListener(item -> {
             if(databaseHelper.readSavedHotelByHotelNameAndUsername(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate))) {
-                databaseHelper.deleteSavedHotel(user, hotel);
+                databaseHelper.deleteSavedHotel(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate));
                 Toast.makeText(getContext(), "Removed from your saved list", Toast.LENGTH_SHORT).show();
             } else {
                 databaseHelper.insertSavedHotel(user, hotel, HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate(), HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate(), numberOfRooms, adultsNumber, childrenNumber, nights * hotel.getPricePerNight());
