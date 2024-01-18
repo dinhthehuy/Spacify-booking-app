@@ -40,7 +40,13 @@ public class SearchResultListAdapter extends RecyclerView.Adapter<SearchResultLi
         holder.nameView.setText(hotelList.get(position).getHotelName());
         String Address =  hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getCity() +  " " + hotelList.get(position).getHotelAddress().getPostalCode() + ", " + hotelList.get(position).getHotelAddress().getCountry();
         holder.addressView.setText(Address);
-        holder.numberOfRoomView.setText(numberOfRooms + " rooms");
+
+        if(numberOfRooms > 1) {
+            holder.numberOfRoomView.setText(numberOfRooms + " rooms");
+        } else {
+            holder.numberOfRoomView.setText(numberOfRooms + " room");
+        }
+
         holder.priceView.setText(hotel.getPricePerNight() + " €/night");
         holder.imageView.setImageResource(context.getResources().getIdentifier(hotel.getImageURL(), "drawable", context.getPackageName()));
         holder.itemView.setOnClickListener(v -> {

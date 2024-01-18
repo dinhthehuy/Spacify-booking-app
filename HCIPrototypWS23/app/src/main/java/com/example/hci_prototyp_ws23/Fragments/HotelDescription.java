@@ -44,6 +44,7 @@ public class HotelDescription extends Fragment {
     long nights;
     DatabaseHelper databaseHelper;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    SimpleDateFormat sdf2 = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -105,8 +106,8 @@ public class HotelDescription extends Fragment {
         );
         imageView.setImageResource(getResources().getIdentifier(hotel.getImageURL(), "drawable", requireActivity().getPackageName()));
         hotelNameTextView.setText(hotel.getHotelName());
-        checkInDateTextView.setText("Check-in" + "\n" + sdf.format(checkInDate));
-        checkOutDateTextView.setText("Check-out" + "\n" + sdf.format(checkOutDate));
+        checkInDateTextView.setText("Check-in" + "\n" + sdf2.format(checkInDate));
+        checkOutDateTextView.setText("Check-out" + "\n" + sdf2.format(checkOutDate));
         roomsAndGuestTextView.setText("Rooms and guests" + "\n" + numberOfRooms + " room " + adultsNumber + " adults " + childrenNumber + " children");
         nights = TimeUnit.MILLISECONDS.toDays(checkOutDate.getTime() - checkInDate.getTime());
         totalPriceTextView.setText("Price for " + nights + " nights/room" + "\n" + nights * hotel.getPricePerNight() + " €");

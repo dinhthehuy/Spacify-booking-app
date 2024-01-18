@@ -82,9 +82,11 @@ public class Search extends Fragment {
                 Long startDate = selection.first;
                 Long endDate = selection.second;
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                SimpleDateFormat sdf2 = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
                 checkInDate = sdf.format(new Date(startDate));
                 checkOutDate = sdf.format(new Date(endDate));
-                String selectedDateRange = checkInDate + " - " + checkOutDate;
+                String selectedDateRange = sdf2.format(new Date(startDate)) + " - " + sdf2.format(new Date(endDate));
+
                 date_textView.setText(selectedDateRange);
             });
 

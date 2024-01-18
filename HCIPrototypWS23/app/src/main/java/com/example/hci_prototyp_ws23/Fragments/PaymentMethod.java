@@ -3,16 +3,17 @@ package com.example.hci_prototyp_ws23.Fragments;
 import static com.example.hci_prototyp_ws23.Models.Booking.PaymentMethod.stringToEnum;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import android.widget.Button;
-import android.widget.RadioButton;
 
 import com.example.hci_prototyp_ws23.DatabaseHelper;
 import com.example.hci_prototyp_ws23.Models.Booking;
@@ -72,7 +73,6 @@ public class PaymentMethod extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.GONE);
         toolbar.setVisibility(View.VISIBLE);
-        toolbar.setTitle("Payment Information");
         toolbar.inflateMenu(R.menu.top_action_bar_room_information);
         toolbar.setNavigationOnClickListener(v -> NavHostFragment.findNavController(PaymentMethod.this).popBackStack());
 
@@ -106,23 +106,22 @@ public class PaymentMethod extends Fragment {
     }
 
     public void checkPaymentMethods() {
-        paypalRadioButton.setClickable(false);
-        debitRadioButton.setClickable(false);
-        giropayRadioButton.setClickable(false);
-        sepaRadioButton.setClickable(false);
-        cashRadioButton.setClickable(false);
-
         for(String p: hotel.getAcceptedPaymentMethods()) {
             if(Objects.equals(stringToEnum(p), Booking.PaymentMethod.PAYPAL)) {
                 paypalRadioButton.setClickable(true);
+                paypalRadioButton.setAlpha(1);
             } else if(Objects.equals(stringToEnum(p), Booking.PaymentMethod.DEBIT)) {
                 debitRadioButton.setClickable(true);
+                debitRadioButton.setAlpha(1);
             } else if(Objects.equals(stringToEnum(p), Booking.PaymentMethod.GIROPAY)) {
                 giropayRadioButton.setClickable(true);
+                giropayRadioButton.setAlpha(1);
             } else if(Objects.equals(stringToEnum(p), Booking.PaymentMethod.SEPA)) {
                 sepaRadioButton.setClickable(true);
+                sepaRadioButton.setAlpha(1);
             } else {
                 cashRadioButton.setClickable(true);
+                cashRadioButton.setAlpha(1);
             }
         }
     }
