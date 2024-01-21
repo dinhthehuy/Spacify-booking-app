@@ -79,6 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PAYMENT_METHOD_HOTEL_NAME_COLUMN = "hotel_name";
     private static final String PAYMENT_METHOD_NAME_COLUMN = "payment_method";
     public static DatabaseHelper instance;
+    private final String dummyText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book";
     ArrayList<Address> initialAddresses = new ArrayList<>(Arrays.asList(
             new Address("United States", "New York", "123 Main St", 10001),
             new Address("United States", "California", "325 Serenity Lane", 90210),
@@ -89,12 +90,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     ));
 
     ArrayList<Hotel> initialHotels = new ArrayList<>(Arrays.asList(
-            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"Near bus station A", 90, "pic"),
-            new Hotel("Azure Haven Hotel", new Address("United States", "California", "325 Serenity Lane", 90210),"Near train station", 100, "pic2"),
-            new Hotel("Crimson Crown Inn", new Address("United States", "New York", "112 Royal Street, Regal City", 10001),"Near airport", 85, "pic6"),
-            new Hotel("Mystic Oasis Resort", new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),"Near bus station and train station", 90, "pic3"),
-            new Hotel("Radiant Horizon Hotel", new Address("United States", "Texas", "75 Luminous Boulevard, Radiant City", 75234),"Near bus station and city centre", 95, "pic4"),
-            new Hotel("Alpine Haven Lodge", new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345),"Near train station", 110, "pic5")
+            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"Near bus station.", 90, "pic"),
+            new Hotel("Azure Haven Hotel", new Address("United States", "California", "325 Serenity Lane", 90210),"Near train station." + "\n" + dummyText, 100, "pic2"),
+            new Hotel("Crimson Crown Inn", new Address("United States", "New York", "112 Royal Street, Regal City", 10001),"Near airport." + "\n" + dummyText, 85, "pic6"),
+            new Hotel("Mystic Oasis Resort", new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),"Near bus station and train station." + "\n" + dummyText, 90, "pic3"),
+            new Hotel("Radiant Horizon Hotel", new Address("United States", "Texas", "75 Luminous Boulevard, Radiant City", 75234),"Near bus station and city centre." + "\n" + dummyText, 95, "pic4"),
+            new Hotel("Alpine Haven Lodge", new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345),"Near train station." + "\n" + dummyText, 110, "pic5")
     ));
 
     public static synchronized DatabaseHelper getInstance(Context context) {

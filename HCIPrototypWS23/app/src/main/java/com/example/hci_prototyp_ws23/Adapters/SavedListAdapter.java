@@ -1,5 +1,6 @@
 package com.example.hci_prototyp_ws23.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,12 +31,39 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
         return new SavedListAdapterViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SavedListAdapterViewHolder holder, int position) {
         SavedHotel hotel = hotelList.get(position);
         holder.nameView.setText(hotelList.get(position).getHotelName());
         String Address = hotelList.get(position).getHotelAddress().getCountry() + " " + hotelList.get(position).getHotelAddress().getCity() + " " + hotelList.get(position).getHotelAddress().getStreetAddress() + " " + hotelList.get(position).getHotelAddress().getPostalCode();
         holder.addressView.setText(Address);
+
+        String roomNum;
+        if(hotel.getNumberOfRoom() == 1) {
+            roomNum = hotel.getNumberOfRoom() + " room for";
+        } else {
+            roomNum = hotel.getNumberOfRoom() + " rooms for";
+        }
+
+        String adultNum;
+        if(hotel.getAdultNumber() == 1) {
+            adultNum = hotel.getAdultNumber() + " adult";
+        } else {
+            adultNum = hotel.getAdultNumber() + " adults";
+        }
+
+        String childrenNum;
+        if(hotel.getChildrenNumber() == 1) {
+            childrenNum = hotel.getChildrenNumber() + " child";
+        } else if(hotel.getChildrenNumber() == 0) {
+            childrenNum = "no children";
+        } else {
+            childrenNum = hotel.getChildrenNumber() + " children";
+        }
+
+        holder.guestAndRoomTextView.setText(roomNum + " " + adultNum + ", " + childrenNum);
+        holder.hotelPriceTextView.setText(hotel.getTotalPrice() + "€");
         holder.imageView.setImageResource(context.getResources().getIdentifier(hotel.getImageURL(), "drawable", context.getPackageName()));
         holder.itemView.setOnClickListener(v -> {
             if(onClickListener != null) {
@@ -57,12 +85,14 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.Save
 
     public static class SavedListAdapterViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
-        TextView nameView, addressView;
+        TextView nameView, addressView, guestAndRoomTextView, hotelPriceTextView;
         public SavedListAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.savedList_iv);
             nameView = itemView.findViewById(R.id.savedListHotelName_tv);
             addressView = itemView.findViewById(R.id.savedListHotelAddress_tv);
+            guestAndRoomTextView = itemView.findViewById(R.id.savedListGuestAndRoom_tv);
+            hotelPriceTextView = itemView.findViewById(R.id.savedListHotelPrice_tv);
         }
     }
 }

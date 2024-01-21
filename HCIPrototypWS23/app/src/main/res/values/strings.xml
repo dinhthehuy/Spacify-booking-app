@@ -100,6 +100,11 @@
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="adult">Adult</string>
-    <string name="children_0_17_years_old">Children (0-17 years old)</string>
+    <string name="children_0_17_years_old">Children (0–17 years old)</string>
     <string name="apply">Apply</string>
+    <string name="description">Description</string>
+    <string name="payment">Payment</string>
+    <string name="rooms_and_guests">Rooms and guests</string>
+    <string name="check_in">Check-in</string>
+    <string name="check_out">Check-out</string>
 </resources>

@@ -16,6 +16,7 @@ import com.example.hci_prototyp_ws23.R;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class UserBookingsAdapter extends RecyclerView.Adapter<UserBookingsAdapter.UserBookingAdapterViewHolder> {
     private Context context;
@@ -31,13 +32,15 @@ public class UserBookingsAdapter extends RecyclerView.Adapter<UserBookingsAdapte
         return new UserBookingAdapterViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull UserBookingAdapterViewHolder holder, int position) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        SimpleDateFormat sdf3 = new SimpleDateFormat("dd", Locale.getDefault());
         holder.nameTextView.setText(bookingList.get(position).getHotel().getHotelName());
-        String date = "Check-in: " + sdf.format(bookingList.get(position).getCheckInDate()) + "\n"
-                + "Check-out: " + sdf.format(bookingList.get(position).getCheckOutDate());
+        String date = sdf3.format(bookingList.get(position).getCheckInDate()) + " - " + sdf2.format(bookingList.get(position).getCheckOutDate());
         holder.dateTextView.setText(date);
+        holder.totalPriceTextView.setText(bookingList.get(position).getTotalPrice() + "€");
         holder.imageView.setImageResource(context.getResources().getIdentifier(bookingList.get(position).getHotel().getImageURL(), "drawable", context.getPackageName()));
     }
 
@@ -48,12 +51,13 @@ public class UserBookingsAdapter extends RecyclerView.Adapter<UserBookingsAdapte
 
     public static class UserBookingAdapterViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView nameTextView, dateTextView;
+        TextView nameTextView, dateTextView, totalPriceTextView;
         public UserBookingAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.userBookings_iv);
             nameTextView = itemView.findViewById(R.id.userBookingsHotelName_tv);
             dateTextView = itemView.findViewById(R.id.userBookingsHotelDate_tv);
+            totalPriceTextView = itemView.findViewById(R.id.userBookingsTotalPrice_tv);
         }
     }
 }

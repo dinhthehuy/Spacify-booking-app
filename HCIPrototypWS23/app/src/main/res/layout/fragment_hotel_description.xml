@@ -71,18 +71,59 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:paddingTop="10dp">
-                <TextView
-                    android:id="@+id/checkInDate_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/checkOutDate_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="@string/check_in"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/checkInDate_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="@string/check_out"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/checkOutDate_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                android:text="@string/rooms_and_guests"/>
 
             <TextView
                 android:id="@+id/roomsAndGuests_tv"
@@ -90,7 +131,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:paddingTop="10dp"/>
+                android:background="@drawable/slight_gray"
+                android:padding="15dp"/>
 
             <TextView
                 android:id="@+id/totalPrice_tv"
@@ -98,7 +140,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
+                android:textStyle="bold"
                 android:paddingTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                android:text="@string/payment"/>
 
             <TextView
                 android:id="@+id/hotelPayment_tv"
@@ -106,7 +159,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:paddingTop="10dp"/>
+                android:background="@drawable/slight_gray"
+                android:padding="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                android:text="@string/description"/>
 
             <TextView
                 android:id="@+id/hotelDescription_tv"
@@ -114,7 +178,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:paddingTop="10dp"/>
+                android:background="@drawable/slight_gray"
+                android:padding="15dp"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>

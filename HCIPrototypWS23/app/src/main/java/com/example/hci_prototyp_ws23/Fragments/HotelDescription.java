@@ -73,6 +73,7 @@ public class HotelDescription extends Fragment {
         try {
             checkInDate = sdf.parse(HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate());
             checkOutDate = sdf.parse(HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate());
+            nights = TimeUnit.MILLISECONDS.toDays(checkOutDate.getTime() - checkInDate.getTime());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -93,7 +94,7 @@ public class HotelDescription extends Fragment {
                 databaseHelper.deleteSavedHotel(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate));
                 Toast.makeText(getContext(), "Removed from your saved list", Toast.LENGTH_SHORT).show();
             } else {
-                databaseHelper.insertSavedHotel(user, hotel, HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate(), HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate(), numberOfRooms, adultsNumber, childrenNumber, nights * hotel.getPricePerNight());
+                databaseHelper.insertSavedHotel(user, hotel, HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate(), HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate(), numberOfRooms, adultsNumber, childrenNumber, nights * hotel.getPricePerNight() * numberOfRooms);
                 Toast.makeText(getContext(), "Added to your saved list", Toast.LENGTH_SHORT).show();
             }
             return true;
@@ -106,12 +107,44 @@ public class HotelDescription extends Fragment {
         );
         imageView.setImageResource(getResources().getIdentifier(hotel.getImageURL(), "drawable", requireActivity().getPackageName()));
         hotelNameTextView.setText(hotel.getHotelName());
-        checkInDateTextView.setText("Check-in" + "\n" + sdf2.format(checkInDate));
-        checkOutDateTextView.setText("Check-out" + "\n" + sdf2.format(checkOutDate));
-        roomsAndGuestTextView.setText("Rooms and guests" + "\n" + numberOfRooms + " room " + adultsNumber + " adults " + childrenNumber + " children");
-        nights = TimeUnit.MILLISECONDS.toDays(checkOutDate.getTime() - checkInDate.getTime());
-        totalPriceTextView.setText("Price for " + nights + " nights/room" + "\n" + nights * hotel.getPricePerNight() + " €");
-        hotelAddressTextView.setText(hotel.getHotelAddress().getStreetAddress() + " " + hotel.getHotelAddress().getCity() + "\n" + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
+        checkInDateTextView.setText(sdf2.format(checkInDate));
+        checkOutDateTextView.setText(sdf2.format(checkOutDate));
+
+        String roomNum;
+        if(numberOfRooms == 1) {
+            roomNum = numberOfRooms + " room for";
+        } else {
+            roomNum = numberOfRooms + " rooms for";
+        }
+
+        String adultNum;
+        if(adultsNumber == 1) {
+            adultNum = adultsNumber + " adult";
+        } else {
+            adultNum = adultsNumber + " adults";
+        }
+
+        String childrenNum;
+        if(childrenNumber == 1) {
+            childrenNum = childrenNumber + " child";
+        } else if(childrenNumber == 0) {
+            childrenNum = "no children";
+        } else {
+            childrenNum = childrenNumber + " children";
+        }
+
+        roomsAndGuestTextView.setText(roomNum + " " + adultNum + " " + childrenNum);
+
+        String night;
+
+        if(nights == 1) {
+            night = nights + " night";
+        } else {
+            night = nights + " nights";
+        }
+
+        totalPriceTextView.setText("Price for " + night + ": " + nights * hotel.getPricePerNight() * numberOfRooms + " €");
+        hotelAddressTextView.setText(hotel.getHotelAddress().getStreetAddress() + " " + hotel.getHotelAddress().getCity() + " " + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
         hotelAcceptedPayments.setText(hotel.toStringPayment());
         descriptionTextView.setText(hotel.getDescription());
     }
