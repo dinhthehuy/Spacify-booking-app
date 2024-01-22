@@ -22,7 +22,7 @@
         android:background="@drawable/rounded_button_background"
         android:clickable="true"
         android:focusable="true"
-        android:layout_weight="1"
+        android:paddingBottom="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:orientation="vertical">
@@ -49,7 +49,7 @@
             android:layout_toEndOf="@+id/roomInfo_iv_iv"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"/>
@@ -62,8 +62,7 @@
             android:textColor="@color/white"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="7dp"
             android:textSize="12sp"
             android:layout_below="@+id/roomInfo_ivHotelName_tv" />
 
@@ -75,7 +74,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_weight="1"
+        android:paddingBottom="15dp"
         android:background="@drawable/rounded_slight_gray"
         android:orientation="vertical">
 
