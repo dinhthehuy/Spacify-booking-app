@@ -233,7 +233,9 @@
         tools:layout="@layout/fragment_payment_method" >
         <action
             android:id="@+id/action_paymentMethod_to_bookingConfimation"
-            app:destination="@id/bookingConfimation" />
+            app:destination="@id/bookingConfimation"
+            app:popUpTo="@id/bookingConfimation"
+            app:popUpToInclusive="true" />
         <argument
             android:name="userArg"
             app:argType="com.example.hci_prototyp_ws23.Models.User" />
