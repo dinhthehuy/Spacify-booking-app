@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.hci_prototyp_ws23.DatabaseHelper;
 import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +26,7 @@ public class LogIn extends Fragment {
     BottomNavigationView bottomNavigationView;
     EditText loginEmailEditText, loginPasswordEditText;
     TextView registerNowTextView;
+    DatabaseHelper databaseHelper;
     FirebaseAuth mAuth;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +39,7 @@ public class LogIn extends Fragment {
         loginEmailEditText = view.findViewById(R.id.loginEmail_et);
         loginPasswordEditText = view.findViewById(R.id.loginPassword_et);
         registerNowTextView = view.findViewById(R.id.registerNow_tv);
+        databaseHelper = DatabaseHelper.getInstance(getContext());
         return view;
     }
 
@@ -69,7 +72,7 @@ public class LogIn extends Fragment {
 
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful() && databaseHelper.readUserBy("email", email) != null) {
                             NavHostFragment.findNavController(LogIn.this).navigate(R.id.action_logIn_to_homepage);
                         } else {
                             // If sign in fails, display a message to the user.

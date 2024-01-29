@@ -1,8 +1,10 @@
 package com.example.hci_prototyp_ws23.Fragments;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -43,6 +46,7 @@ public class HotelDescription extends Fragment {
     Date checkOutDate = new Date();
     long nights;
     DatabaseHelper databaseHelper;
+    MenuItem item;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     SimpleDateFormat sdf2 = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
     @Override
@@ -63,7 +67,7 @@ public class HotelDescription extends Fragment {
         hotelAcceptedPayments = view.findViewById(R.id.hotelPayment_tv);
         seeYourOptionsButton = view.findViewById(R.id.seeYourOptions_btn);
         databaseHelper = DatabaseHelper.getInstance(getContext());
-
+        item = view.findViewById(R.id.save_item);
         user = HotelDescriptionArgs.fromBundle(getArguments()).getUserArg();
         hotel = HotelDescriptionArgs.fromBundle(getArguments()).getHotelArg();
         numberOfRooms = HotelDescriptionArgs.fromBundle(getArguments()).getNumberOfRoomsArg();
@@ -93,9 +97,15 @@ public class HotelDescription extends Fragment {
             if(databaseHelper.readSavedHotelByHotelNameAndUsername(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate))) {
                 databaseHelper.deleteSavedHotel(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate));
                 Toast.makeText(getContext(), "Removed from your saved list", Toast.LENGTH_SHORT).show();
+                Drawable icon = item.getIcon();
+                icon.setTint(ContextCompat.getColor(requireContext(), R.color.black));
+                item.setIcon(icon);
             } else {
                 databaseHelper.insertSavedHotel(user, hotel, HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate(), HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate(), numberOfRooms, adultsNumber, childrenNumber, nights * hotel.getPricePerNight() * numberOfRooms);
                 Toast.makeText(getContext(), "Added to your saved list", Toast.LENGTH_SHORT).show();
+                Drawable icon = item.getIcon();
+                icon.setTint(ContextCompat.getColor(requireContext(), R.color.primaryColor));
+                item.setIcon(icon);
             }
             return true;
         });
@@ -110,20 +120,9 @@ public class HotelDescription extends Fragment {
         checkInDateTextView.setText(sdf2.format(checkInDate));
         checkOutDateTextView.setText(sdf2.format(checkOutDate));
 
-        String roomNum;
-        if(numberOfRooms == 1) {
-            roomNum = numberOfRooms + " room for";
-        } else {
-            roomNum = numberOfRooms + " rooms for";
-        }
-
-        String adultNum;
-        if(adultsNumber == 1) {
-            adultNum = adultsNumber + " adult";
-        } else {
-            adultNum = adultsNumber + " adults";
-        }
-
+        String roomNum = numberOfRooms == 1 ? numberOfRooms + " room for" : numberOfRooms + " rooms for";
+        String adultNum = adultsNumber == 1 ? adultsNumber + " adult" : adultsNumber + " adults";
+        String night = nights == 1 ? nights + " night" : nights + " nights";
         String childrenNum;
         if(childrenNumber == 1) {
             childrenNum = childrenNumber + " child";
@@ -134,15 +133,6 @@ public class HotelDescription extends Fragment {
         }
 
         roomsAndGuestTextView.setText(roomNum + " " + adultNum + " " + childrenNum);
-
-        String night;
-
-        if(nights == 1) {
-            night = nights + " night";
-        } else {
-            night = nights + " nights";
-        }
-
         totalPriceTextView.setText("Price for " + night + ": " + nights * hotel.getPricePerNight() * numberOfRooms + " €");
         hotelAddressTextView.setText(hotel.getHotelAddress().getStreetAddress() + " " + hotel.getHotelAddress().getCity() + " " + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
         hotelAcceptedPayments.setText(hotel.toStringPayment());
