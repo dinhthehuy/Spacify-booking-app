@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -44,6 +45,10 @@ public class Homepage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        bottomNavigationView.getMenu().getItem(1).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.heart));
+        bottomNavigationView.getMenu().getItem(2).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.bed));
+        bottomNavigationView.getMenu().getItem(3).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.profile));
+        bottomNavigationView.getMenu().getItem(0).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.home_blue_black_tint));
         currentUser = databaseHelper.readUserBy("email", user.getEmail());
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle("Hi " + currentUser.getUsername() + " !");

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.hci_prototyp_ws23.DatabaseHelper;
@@ -76,6 +77,11 @@ public class UserProfile extends Fragment {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(3).setChecked(true);
+        bottomNavigationView.getMenu().getItem(0).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.home));
+        bottomNavigationView.getMenu().getItem(2).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.bed));
+        bottomNavigationView.getMenu().getItem(1).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.heart));
+        bottomNavigationView.getMenu().getItem(3).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.profile_blue_black_tint));
+
         currentUser = databaseHelper.readUserBy("email", email);
 
         dateOfBirthEditText.setFocusable(false);

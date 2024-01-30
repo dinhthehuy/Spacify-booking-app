@@ -1,8 +1,10 @@
 package com.example.hci_prototyp_ws23;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,6 +21,13 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         bottomNavigationView.setActiveIndicatorLabelPadding(5);
         bottomNavigationView.setItemActiveIndicatorHeight(150);
+        bottomNavigationView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setItemActiveIndicatorColor(new ColorStateList(
+                new int[][]{
+                        new int[] {android.R.attr.state_checked}
+                },
+                new int[] {ContextCompat.getColor(getApplicationContext(), R.color.white)}));
         bottomNavigationView.setItemPaddingBottom(20);
         bottomNavigationView.setItemIconSize(110);
         bottomNavigationView.setOnItemSelectedListener(item -> {

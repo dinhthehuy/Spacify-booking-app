@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,6 +58,10 @@ public class UserBookings extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.getMenu().getItem(2).setChecked(true);
+        bottomNavigationView.getMenu().getItem(0).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.home));
+        bottomNavigationView.getMenu().getItem(1).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.heart));
+        bottomNavigationView.getMenu().getItem(3).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.profile));
+        bottomNavigationView.getMenu().getItem(2).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.bed_blue_black_tint));
         toolbar.setVisibility(View.VISIBLE);
         toolbar.inflateMenu(R.menu.top_action_bar_user_bookings);
     }
