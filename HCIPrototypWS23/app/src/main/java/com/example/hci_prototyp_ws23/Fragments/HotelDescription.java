@@ -67,7 +67,6 @@ public class HotelDescription extends Fragment {
         hotelAcceptedPayments = view.findViewById(R.id.hotelPayment_tv);
         seeYourOptionsButton = view.findViewById(R.id.seeYourOptions_btn);
         databaseHelper = DatabaseHelper.getInstance(getContext());
-        item = view.findViewById(R.id.save_item);
         user = HotelDescriptionArgs.fromBundle(getArguments()).getUserArg();
         hotel = HotelDescriptionArgs.fromBundle(getArguments()).getHotelArg();
         numberOfRooms = HotelDescriptionArgs.fromBundle(getArguments()).getNumberOfRoomsArg();
@@ -93,18 +92,26 @@ public class HotelDescription extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
         toolbar.setTitle(hotel.getHotelName());
         toolbar.inflateMenu(R.menu.top_action_bar_hotel_description);
+        item = toolbar.getMenu().getItem(0);
+
+        if(databaseHelper.readSavedHotelByHotelNameAndUsername(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate))) {
+            Drawable icon = ContextCompat.getDrawable(requireContext(), R.drawable.heart_full_blue);
+            item.setIcon(icon);
+        } else {
+            Drawable icon = ContextCompat.getDrawable(requireContext(), R.drawable.heart);
+            item.setIcon(icon);
+        }
+
         toolbar.getMenu().getItem(0).setOnMenuItemClickListener(item -> {
             if(databaseHelper.readSavedHotelByHotelNameAndUsername(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate))) {
                 databaseHelper.deleteSavedHotel(user, hotel, sdf.format(checkInDate), sdf.format(checkOutDate));
                 Toast.makeText(getContext(), "Removed from your saved list", Toast.LENGTH_SHORT).show();
-                Drawable icon = item.getIcon();
-                icon.setTint(ContextCompat.getColor(requireContext(), R.color.black));
+                Drawable icon = ContextCompat.getDrawable(requireContext(), R.drawable.heart);
                 item.setIcon(icon);
             } else {
                 databaseHelper.insertSavedHotel(user, hotel, HotelDescriptionArgs.fromBundle(getArguments()).getCheckInDate(), HotelDescriptionArgs.fromBundle(getArguments()).getCheckOutDate(), numberOfRooms, adultsNumber, childrenNumber, nights * hotel.getPricePerNight() * numberOfRooms);
                 Toast.makeText(getContext(), "Added to your saved list", Toast.LENGTH_SHORT).show();
-                Drawable icon = item.getIcon();
-                icon.setTint(ContextCompat.getColor(requireContext(), R.color.primaryColor));
+                Drawable icon = ContextCompat.getDrawable(requireContext(), R.drawable.heart_full_blue);
                 item.setIcon(icon);
             }
             return true;

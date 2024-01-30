@@ -90,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     ));
 
     ArrayList<Hotel> initialHotels = new ArrayList<>(Arrays.asList(
-            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"Near bus station.", 90, "pic"),
+            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"Near bus station." +"\n" + dummyText, 90, "pic"),
             new Hotel("Azure Haven Hotel", new Address("United States", "California", "325 Serenity Lane", 90210),"Near train station." + "\n" + dummyText, 100, "pic2"),
             new Hotel("Crimson Crown Inn", new Address("United States", "New York", "112 Royal Street, Regal City", 10001),"Near airport." + "\n" + dummyText, 85, "pic6"),
             new Hotel("Mystic Oasis Resort", new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),"Near bus station and train station." + "\n" + dummyText, 90, "pic3"),
