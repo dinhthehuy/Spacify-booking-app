@@ -21,6 +21,7 @@ import com.example.hci_prototyp_ws23.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SearchResultList extends Fragment {
     View view;
@@ -58,8 +59,19 @@ public class SearchResultList extends Fragment {
         }
 
         hotels = databaseHelper.readAllHotels();
+        ArrayList<Hotel> results = new ArrayList<>();
 
-        SearchResultListAdapter searchResultListAdapter = new SearchResultListAdapter(hotels, numberOfRooms);
+        for(Hotel hotel: hotels) {
+            if(Objects.equals(hotel.getHotelAddress().getCity(), destination)) {
+                results.add(hotel);
+            }
+        }
+
+        if(results.isEmpty()) {
+            results = hotels;
+        }
+
+        SearchResultListAdapter searchResultListAdapter = new SearchResultListAdapter(results, numberOfRooms);
         recyclerView.setAdapter(searchResultListAdapter);
         searchResultListAdapter.setOnClickListener((position, hotel) -> {
             SearchResultListDirections.ActionSearchResultListToHotelDescription action = SearchResultListDirections.actionSearchResultListToHotelDescription(user, hotel, adultNumber, childrenNumber, checkInDate, checkOutDate, numberOfRooms);

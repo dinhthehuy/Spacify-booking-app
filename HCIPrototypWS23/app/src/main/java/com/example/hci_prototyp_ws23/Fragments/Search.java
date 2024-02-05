@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,8 +70,11 @@ public class Search extends Fragment {
 
         search_button.setOnClickListener(v -> {
             destination = destinationEditText.getText().toString();
-                SearchDirections.ActionSearchToSearchResultList action =
-                        SearchDirections.actionSearchToSearchResultList(destination, numberOfRooms, adultNumber, childrenNumber, user, checkInDate, checkOutDate);
+            if(roomNumberTextView == null || adultNumberTextView == null || childrenNumberTextView == null || date_textView.getText().toString().isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            SearchDirections.ActionSearchToSearchResultList action = SearchDirections.actionSearchToSearchResultList(destination, numberOfRooms, adultNumber, childrenNumber, user, checkInDate, checkOutDate);
                 NavHostFragment.findNavController(Search.this).navigate(action);
         });
 
