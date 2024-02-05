@@ -96,34 +96,92 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/booking_overview_checkIn_tv"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginBottom="3dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/booking_overview_checkOut_tv"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="3dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/booking_overview_checkIn_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/check_in"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/booking_overview_guests_tv"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="3dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/booking_overview_checkIn_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/booking_overview_total_tv"
-            android:textSize="20sp"
-            android:textStyle="bold"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/booking_overview_checkOut_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/check_out"/>
+
+            <TextView
+                android:id="@+id/booking_overview_checkOut_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/booking_overview_guests_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/guests"/>
+
+            <TextView
+                android:id="@+id/booking_overview_guests_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/booking_overview_total_tv"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/total"/>
+
+            <TextView
+                android:id="@+id/booking_overview_total_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -139,6 +197,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:orientation="horizontal"
         android:background="@drawable/rounded_slight_gray">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -150,8 +209,19 @@
             android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/plus"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

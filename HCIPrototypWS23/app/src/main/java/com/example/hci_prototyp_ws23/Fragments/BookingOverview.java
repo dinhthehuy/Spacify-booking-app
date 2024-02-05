@@ -40,6 +40,7 @@ public class BookingOverview extends Fragment {
     int adultsNumber, childrenNumber, numberOfRooms;
     double totalPrice;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    SimpleDateFormat sdf2 = new SimpleDateFormat("dd. MMM. yyyy", Locale.getDefault());
     long nights;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,10 +52,10 @@ public class BookingOverview extends Fragment {
         roomInfoButton = view.findViewById(R.id.bookingOverview_btn);
         hotelName = view.findViewById(R.id.bookingOverviewHotelName_tv);
         hotelAddress = view.findViewById(R.id.bookingOverViewHotelAddress_tv);
-        checkIn = view.findViewById(R.id.booking_overview_checkIn_tv);
-        checkOut = view.findViewById(R.id.booking_overview_checkOut_tv);
-        guests = view.findViewById(R.id.booking_overview_guests_tv);
-        total = view.findViewById(R.id.booking_overview_total_tv);
+        checkIn = view.findViewById(R.id.booking_overview_checkIn_date_tv);
+        checkOut = view.findViewById(R.id.booking_overview_checkOut_date_tv);
+        guests = view.findViewById(R.id.booking_overview_guests_value_tv);
+        total = view.findViewById(R.id.booking_overview_total_value_tv);
         hotelImageView = view.findViewById(R.id.bookingOverview_iv);
 
         user = BookingOverviewArgs.fromBundle(getArguments()).getUserArg();
@@ -87,10 +88,14 @@ public class BookingOverview extends Fragment {
         hotelImageView.setImageResource(getResources().getIdentifier(hotel.getImageURL(), "drawable", requireActivity().getPackageName()));
         hotelName.setText(hotel.getHotelName());
         hotelAddress.setText(hotel.getHotelAddress().getStreetAddress() + ", " + hotel.getHotelAddress().getCity() + ", " + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
-        checkIn.setText("Check-in date: " + checkInDate);
-        checkOut.setText("Check-out date: " + checkOutDate);
-        guests.setText("Guests: " + adultsNumber + " adults and " + childrenNumber + " children");
-        total.setText("Total: " + totalPrice + " €");
+        try {
+            checkIn.setText(sdf2.format(Objects.requireNonNull(sdf.parse(checkOutDate))));
+            checkOut.setText(sdf2.format(Objects.requireNonNull(sdf.parse(checkInDate))));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        guests.setText(adultsNumber + " adults and " + childrenNumber + " children");
+        total.setText(totalPrice + " €");
         roomInfoButton.setOnClickListener(v -> {
             BookingOverviewDirections.ActionBookingOverviewToPaymentMethod action = BookingOverviewDirections.actionBookingOverviewToPaymentMethod(user, hotel, checkInDate, checkOutDate, adultsNumber, childrenNumber, (float) totalPrice, numberOfRooms);
             NavHostFragment.findNavController(BookingOverview.this).navigate(action);

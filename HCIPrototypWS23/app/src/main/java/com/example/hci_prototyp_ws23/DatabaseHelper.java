@@ -79,23 +79,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PAYMENT_METHOD_HOTEL_NAME_COLUMN = "hotel_name";
     private static final String PAYMENT_METHOD_NAME_COLUMN = "payment_method";
     public static DatabaseHelper instance;
-    private final String dummyText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book";
+    private static final String description1 = "Mercure is a contemporary urban haven, conveniently located near major attractions and public transportation. Modern rooms, a business center, and a welcoming atmosphere make it an ideal choice for both business and leisure travelers.";
+    private static final String description2 = "Nestled in the prestigious Goethestraße, Azure Haven Hotel epitomizes luxury living. With spacious, elegantly designed suites, personalized concierge services, and proximity to high-end shopping, this hotel offers a refined experience for the discerning traveler.";
+    private static final String description3 = "Crimson Crown Inn, located on the iconic Friedrichstraße, is an intimate retreat blending historic charm with modern elegance. Unique rooms, personalized services, and proximity to cultural landmarks make it a haven for those seeking a distinctive Berlin experience.";
+    private static final String description4 = "Perfectly positioned in the business district of Potsdamer Platz, Mystic Oasis Resort offers sophisticated accommodations with state-of-the-art meeting facilities. Ideal for business travelers, it combines professionalism with contemporary comfort.";
+    private static final String description5 = "Enjoy breathtaking views of the harbor at Radiant Horizon Hotel. With stylish accommodations, waterfront dining, and a serene ambiance, this hotel offers a tranquil escape in the heart of Hamburg.";
+    private static final String description6 = "Immerse yourself in Hamburg's trendy Sternschanze district at Urban Hostel. With modern facilities, social spaces, and a vibrant atmosphere, this hostel is perfect for travelers seeking a contemporary and communal experience in the city.";
     ArrayList<Address> initialAddresses = new ArrayList<>(Arrays.asList(
-            new Address("United States", "New York", "123 Main St", 10001),
-            new Address("United States", "California", "325 Serenity Lane", 90210),
-            new Address("United States", "New York", "112 Royal Street, Regal City", 10001),
-            new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),
-            new Address("United States", "Texas", "75 Luminous Boulevard, Radiant City", 75234),
-            new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345)
+            new Address("Germany", "Frankfurt am Main", "Goethestr. 123", 60323),
+            new Address("Germany", "Frankfurt am Main", "Kaiserstr. 456", 60329),
+            new Address("Germany", "Berlin", "Friedlichstr. 234", 10117),
+            new Address("Germany", "Berlin", "Potsdamer Platz 567", 10785),
+            new Address("Germany", "Hamburg", "Hafenstr. 123", 20095),
+            new Address("Germany", "Hamburg", "Sternschanze 789", 20357)
     ));
 
     ArrayList<Hotel> initialHotels = new ArrayList<>(Arrays.asList(
-            new Hotel("Mercure", new Address("United States", "New York", "123 Main St", 10001),"Near bus station." +"\n" + dummyText, 90, "pic"),
-            new Hotel("Azure Haven Hotel", new Address("United States", "California", "325 Serenity Lane", 90210),"Near train station." + "\n" + dummyText, 100, "pic2"),
-            new Hotel("Crimson Crown Inn", new Address("United States", "New York", "112 Royal Street, Regal City", 10001),"Near airport." + "\n" + dummyText, 85, "pic6"),
-            new Hotel("Mystic Oasis Resort", new Address("United States", "Florida", "500 Enchanted Grove, Mystical Springs", 33123),"Near bus station and train station." + "\n" + dummyText, 90, "pic3"),
-            new Hotel("Radiant Horizon Hotel", new Address("United States", "Texas", "75 Luminous Boulevard, Radiant City", 75234),"Near bus station and city centre." + "\n" + dummyText, 95, "pic4"),
-            new Hotel("Alpine Haven Lodge", new Address("United States", "Los Angeles", "200 Snowfall Lane, Alpine Peaks", 80345),"Near train station." + "\n" + dummyText, 110, "pic5")
+            new Hotel("Mercure", initialAddresses.get(0),"Nearby: 70m from nearest bus stop and 90m from nearest tram station." +"\n" + description1, 90, "pic"),
+            new Hotel("Azure Haven Hotel", initialAddresses.get(1),"Nearby: 100m from nearest train station." + "\n" + description2, 100, "pic2"),
+            new Hotel("Crimson Crown Inn", initialAddresses.get(2),"Nearby: 8km from nearest airport." + "\n" + description3, 85, "pic6"),
+            new Hotel("Mystic Oasis Resort", initialAddresses.get(3),"Nearby: 50m from nearest bus stop and 100m from nearest train station." + "\n" + description4, 90, "pic3"),
+            new Hotel("Radiant Horizon Hotel", initialAddresses.get(4),"Nearby: 80m from nearest bus stop and 4km from city centre." + "\n" + description5, 95, "pic4"),
+            new Hotel("Alpine Haven Lodge", initialAddresses.get(5),"Nearby: 200m from nearest train station." + "\n" + description6, 110, "pic5")
     ));
 
     public static synchronized DatabaseHelper getInstance(Context context) {

@@ -141,7 +141,7 @@ public class HotelDescription extends Fragment {
 
         roomsAndGuestTextView.setText(roomNum + " " + adultNum + " " + childrenNum);
         totalPriceTextView.setText("Price for " + night + ": " + nights * hotel.getPricePerNight() * numberOfRooms + " €");
-        hotelAddressTextView.setText(hotel.getHotelAddress().getStreetAddress() + " " + hotel.getHotelAddress().getCity() + " " + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
+        hotelAddressTextView.setText(hotel.getHotelAddress().getStreetAddress() + ", " + hotel.getHotelAddress().getCity() + " " + hotel.getHotelAddress().getPostalCode() + ", " + hotel.getHotelAddress().getCountry());
         hotelAcceptedPayments.setText(hotel.toStringPayment());
         descriptionTextView.setText(hotel.getDescription());
     }

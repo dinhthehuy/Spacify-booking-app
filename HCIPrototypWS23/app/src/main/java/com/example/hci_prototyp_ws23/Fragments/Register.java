@@ -106,7 +106,7 @@ public class Register extends Fragment {
             final String lastName = String.valueOf(lastNameEditText.getText());
             final String mobileNumber = String.valueOf(mobileNumberEditText.getText());
             final String dateOfBirth = String.valueOf(dateOfBirthTextView.getText());
-            final String country = String.valueOf(cityEditText.getText());
+            final String country = String.valueOf(countryEditText.getText());
             final String city = String.valueOf(cityEditText.getText());
             final String streetAddress = String.valueOf(streetEditText.getText());
             final String postalCode = String.valueOf(postalCodeEditText.getText());
