@@ -15,10 +15,11 @@ Spacify is a protopye designed to implement new UI designs that help users navig
 
 
 ### Executing program
-
+* Import the project and wait until Gradle configuration finishes.
+* Run the app 
 
 ## Contributors
-Dinh The Huy
-Sohayl Kaur
-Verrell Vimalaputra
-Le Thanh Trung
+* Dinh The Huy
+* Sohayl Kaur
+* Verrell Vimalaputra
+* Le Thanh Trung
