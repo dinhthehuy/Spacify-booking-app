@@ -15,9 +15,9 @@
             android:id="@+id/register_login_now_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/already_have_an_account_login_now"
             android:layout_marginTop="30dp"
-            android:textColor="@color/gray" />
+            android:text="@string/already_have_an_account_login_now"
+            android:textColor="@color/primaryColor" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/register_username_et"

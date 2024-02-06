@@ -64,13 +64,25 @@
         android:id="@+id/registerNow_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/gray"
         android:text="@string/register_now"
+        android:textColor="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_btn"
         app:layout_constraintVertical_bias="0.094" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/spacify"
+        android:textColor="@color/primaryColor"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/loginEmail_et"
+        app:layout_constraintEnd_toEndOf="@+id/loginEmail_et"
+        app:layout_constraintStart_toStartOf="@+id/loginEmail_et"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
