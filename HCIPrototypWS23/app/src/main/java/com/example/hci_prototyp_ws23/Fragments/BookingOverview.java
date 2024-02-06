@@ -89,8 +89,8 @@ public class BookingOverview extends Fragment {
         hotelName.setText(hotel.getHotelName());
         hotelAddress.setText(hotel.getHotelAddress().getStreetAddress() + ", " + hotel.getHotelAddress().getCity() + ", " + hotel.getHotelAddress().getPostalCode() + " " + hotel.getHotelAddress().getCountry());
         try {
-            checkIn.setText(sdf2.format(Objects.requireNonNull(sdf.parse(checkOutDate))));
-            checkOut.setText(sdf2.format(Objects.requireNonNull(sdf.parse(checkInDate))));
+            checkIn.setText(sdf2.format(Objects.requireNonNull(sdf.parse(checkInDate))));
+            checkOut.setText(sdf2.format(Objects.requireNonNull(sdf.parse(checkOutDate))));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
