@@ -1,6 +1,6 @@
 # Spacify
 
-An Android prototype booking app with the aim of improving UI.
+An Android booking app prototype with the aim of improving UI.
 
 ## Description
 
