@@ -1,10 +1,12 @@
 # Spacify
 
-An android prototype booking-app with the aim of improving UI's clarity.
+An Android prototype booking app with the aim of improving UI.
 
 ## Description
 
-Spacify is a prototype designed to implement new UI designs that help users navigate easier in a hotel-booking app. The prototype has basic functions such as creating account, manage user's information, book a hotel. The data used in this prototype are only fictional and all hotels don't refer to any real businesses. 
+* Spacify is a prototype designed to implement new UI designs that help users navigate through the app easier. The prototype has basic functions such as creating account, manage user's information, book a hotel and saving hotels. 
+* Tech stack: Java, Android Studio, Gradle, Firebase Authentication, SQLite Database
+* Note: The data used in this prototype are randomly generated and all hotels don't refer to any real businesses. 
 
 ## Getting Started
 
@@ -15,7 +17,7 @@ Spacify is a prototype designed to implement new UI designs that help users navi
 
 
 ### Executing program
-* Import folder HCIPrototypWS23
+* Import folder HCIPrototypWS23 in Android Studio
 * Wait for Gradle to sync
 * Run the app 
 
