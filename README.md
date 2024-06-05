@@ -7,9 +7,9 @@
 Spacify is a prototype developed with a core focus on providing a superior User Interface (UI) and User Experience (UX) compared to existing applications in the market. The prototype has basic functions such as creating account, manage user's information, book a hotel. The data used in this prototype are only fictional and all hotels don't reference any real businesses. 
 
 ### Screenshots
-<img src="./screenshots/log_in_page.png" alt="Login" width="200"/> <img src="./screenshots/homepage.png" alt="Homepage" width="200"/> <img src="./screenshots/user_info_page.png" alt="User info" width="200"/> <img src="./screenshots/search_page.png" alt="Search" width="200"/> 
+<img src="./img/log_in_page.png" alt="Login" width="200"/> <img src="./img/homepage.png" alt="Homepage" width="200"/> <img src="./img/user_info_page.png" alt="User info" width="200"/> <img src="./img/search_page.png" alt="Search" width="200"/> 
 
-<img src="./screenshots/search_options_page.png" alt="Search options" width="200"/> <img src="./screenshots/search_results_page.png" alt="Search results" width="200"/> <img src="./screenshots/hotel_info_page.png" alt="Hotel info" width="200"/> <img src="./screenshots/payment_method_page.png" alt="Payment method" width="200"/> 
+<img src="./img/search_options_page.png" alt="Search options" width="200"/> <img src="./img/search_results_page.png" alt="Search results" width="200"/> <img src="./img/hotel_info_page.png" alt="Hotel info" width="200"/> <img src="./img/payment_method_page.png" alt="Payment method" width="200"/> 
 
 
 ## Getting Started
